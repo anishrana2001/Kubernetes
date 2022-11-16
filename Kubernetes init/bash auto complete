@@ -1,0 +1,9 @@
+
+# How to autocomplete the commands for kubernetes  ?
+
+[root@masternode1 ~]#  yum install bash-completion
+
+[root@masternode1 ~]# source  /usr/share/bash-completion/bash_completion
+
+[root@masternode1 ~]# echo 'source <(kubectl completion bash)' >>~/.bashrc
+[root@masternode1 ~]# kubectl completion bash > /etc/bash_completion.d/kubectl
