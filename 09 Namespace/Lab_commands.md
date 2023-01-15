@@ -50,7 +50,7 @@ kubectl -n operation describe ResourceQuota pods-low
  
  ### Pod creation through Yaml file
  
-**POD1**
+**Pod1**
 ```
 cat > pod-quota1.yaml
 apiVersion: v1
@@ -73,7 +73,7 @@ spec:
    
 
  
-   **Pod2**
+**Pod2**
 ```
 cat > pod-quota2.yaml
 apiVersion: v1
@@ -94,7 +94,7 @@ spec:
         cpu: "500m"
  ```
  
-  **POD 3**
+**Pod3**
 ```
 cat > pod-quota3.yaml 
 apiVersion: v1
