@@ -44,7 +44,7 @@ spec:
       pods: "2"
 ```
 ```
-kubectl describe * quota * -n operation
+kubectl describe ** quota ** -n operation
 kubectl -n operation describe ResourceQuota pods-low 
 ```
  
