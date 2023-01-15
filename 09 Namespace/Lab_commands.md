@@ -16,13 +16,16 @@ metadata:
   name: development
   labels:
     name: production
-    
-** kubectl create ns operation**
+ ```
 ```
+** kubectl create ns operation**
+ ```
 ## How to check the detailed information about the Namespace?
 
 ```
 kubectl describe ns operation
+```
+```
 kubectl get ns operation --show-labels
 ```
 
@@ -39,8 +42,9 @@ spec:
       cpu: "5"
       memory: 10Gi
       pods: "2"
-
-**kubectl describe quota -n operation**
+```
+```
+** kubectl describe quota -n operation **
 **  kubectl -n operation describe ResourceQuota pods-low ** 
 ```
  
@@ -67,9 +71,10 @@ spec:
         cpu: "500m"
    ```
    
-   ```
+
  
    **Pod2**
+```
 cat > pod-quota2.yaml
 apiVersion: v1
 kind: Pod
@@ -110,10 +115,10 @@ spec:
         cpu: "500m"
  ```
  
-
+```
 kubectl  get pod
 kubectl  get pod -n operation
-
+```
 ## How to set the namespace default?
 ```
 Kubectl config set-context --current --namespace=operation
