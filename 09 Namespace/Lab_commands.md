@@ -44,13 +44,13 @@ spec:
       pods: "2"
 ```
 ```
-kubectl describe **quota** -n operation
-kubectl -n operation describe **ResourceQuota pods-low **
+kubectl describe quota -n operation
+kubectl -n operation describe ResourceQuota pods-low
 ```
  
  ### Pod creation through Yaml file
  
-        **POD1**
+**POD1**
 ```
 cat > pod-quota1.yaml
 apiVersion: v1
@@ -94,7 +94,7 @@ spec:
         cpu: "500m"
  ```
  
-     **POD 3**
+  **POD 3**
 ```
 cat > pod-quota3.yaml 
 apiVersion: v1
