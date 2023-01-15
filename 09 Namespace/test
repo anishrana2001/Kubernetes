@@ -1,1 +1,94 @@
+** LAB  **
+kubectl get namespaces
+kubectl  get ns
 
+cat > development.yaml
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development
+  labels:
+    name: production
+```
+
+
+kubectl create ns operation
+kubectl describe ns operation
+kubectl get ns operation --show-labels
+
+cat > resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+    name: pods-low
+    namespace: operation
+spec:
+    hard:
+      cpu: "5"
+      memory: 10Gi
+      pods: "2"
+
+kubectl describe quota -n operation
+
+cat > pod-quota1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-quota1
+  namespace: operation
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+      requests:
+        memory: "500Mi"
+        cpu: "500m"
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
+
+
+cat > pod-quota2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-quota2
+  namespace: operation
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+      requests:
+        memory: "500Mi"
+        cpu: "500m"
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
+
+
+cat > pod-quota3.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-quota2
+  namespace: operation
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    resources:
+      requests:
+        memory: "500Mi"
+        cpu: "500m"
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
+		
+kubectl -n operation describe ResourceQuota pods-low
+
+
+kubectl  get pod
+kubectl  get pod -n operation
