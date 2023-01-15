@@ -44,8 +44,8 @@ spec:
       pods: "2"
 ```
 ```
-kubectl describe ** quota ** -n operation
-kubectl -n operation describe ResourceQuota pods-low 
+kubectl describe **quota** -n operation
+kubectl -n operation describe **ResourceQuota pods-low **
 ```
  
  ### Pod creation through Yaml file
