@@ -27,7 +27,7 @@ kubectl describe rs/frontend
 kubectl delete replicasets  frontend 
 ```
 
-### how to verify if replicaset is deleted?
+### How to verify if replicaset is deleted?
 ```
 kubectl get rs
 kubectl get pods
