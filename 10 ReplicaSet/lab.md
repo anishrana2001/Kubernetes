@@ -35,8 +35,17 @@ kubectl get pods
 ## If one pod is already runing with same labels?
 ```
 kubectl run rcpod  --image=gcr.io/google_samples/gb-frontend:v3 --labels=tier=frontend
+```
+```
 kubectl get pods --show-labels
+```
+```
 kubectl apply -f https://kubernetes.io/examples/controllers/frontend.yaml
+```
+```
 kubectl describe replicasets.apps/frontend | grep -i replicas:
+```
+```
 kubectl get pods --show-labels
+```
 ```
