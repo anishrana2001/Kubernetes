@@ -14,7 +14,7 @@ kubectl get pods
 ```
 ## How to delete the replicaset's pod?
 ```
-kubectl delete pod/
+kubectl delete pod/pod_name
 kubectl get pods
 ```
 ## How to check the information of replicaset?
