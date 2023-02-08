@@ -116,7 +116,7 @@ kubectl edit deployments.apps nginx-deployment
 ```
 kubectl get rs
 ```
-
+$${\color{green}Kindly\space change\space the\space ReplicaSet\space id \space and\space Pod\space id\space from\space the\space below\space command\space.}$$
 ### How to check if this edit feature is working?
 ```
 kubectl exec -it nginx-deployment-7fb96c846b-2b6rp -- env | grep -i nginx
