@@ -94,7 +94,7 @@ kubectl get pods -w
 kubectl  get rs --show-labels
 ```
 
-### How can we check if our upgrade is successful?
+###$${\color{green}rollout status}$$ How can we check if our upgrade is successful?
 ```
 kubectl $${\color{green}rollout status}$$ deployment/nginx-deployment
 ```
