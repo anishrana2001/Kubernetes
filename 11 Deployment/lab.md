@@ -99,7 +99,7 @@ kubectl rollout status deployment/nginx-deployment
 kubectl describe deployments.apps nginx-deployment | grep 1.16
 ```
 
-$${\color{green}Kindly change the ReplicaSet id and Pod id from the below command.}$$
+$${\color{green}Kindly\space change\space the\space ReplicaSet\space id \space and\space Pod\space id\space from\space the\space below\space command\space.}$$
 
 
 ```
