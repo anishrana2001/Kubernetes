@@ -98,9 +98,11 @@ kubectl rollout status deployment/nginx-deployment
 ```
 kubectl describe deployments.apps nginx-deployment | grep 1.16
 ```
+
+```json
+   // Kindly change the ReplicaSet id and Pod id from the below command.
 ```
-@@ Kindly change the RepliaSet and pods ID from below command @@
-```
+
 ```
 kubectl exec -it nginx-deployment-68fc675d59-7sdv4 -- env | grep -i nginx
 ```
