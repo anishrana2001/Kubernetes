@@ -1,5 +1,5 @@
 
-# LAB
+# LAB 1
 ## How to create Deployment?
 ### From Kubernetes.io web site
 ```
