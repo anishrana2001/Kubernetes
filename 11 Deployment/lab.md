@@ -37,9 +37,6 @@ kubectl get -n core deployments/nginx
 ```
 
 ## If we want to list the ReplicaSets created by deployment?
-```
-kubectl get rs 
-```
 
 ```
 kubectl get rs --show-labels
@@ -47,6 +44,10 @@ kubectl get rs --show-labels
 
 ```
 kubectl get rs/nginx-deployment-
+```
+### You can also list all the ReplicaSets
+```
+kubectl get rs 
 ```
 
 ### To identify the pods accquired by this deployment?
@@ -74,8 +75,8 @@ kubectl get deployments.apps nginx-deployment -o yaml
 ```
 
 ### Upgrade the container from 1.14.2 to 1.16.1
-```
-kubectl set image deployment nginx-deployment nginx=nginx:1.16.1
+```diff
+kubectl #set image# deployment nginx-deployment nginx=nginx:1.16.1
 ```
 
 ### To see the status of pods
@@ -158,7 +159,7 @@ kubectl get deployments.apps
 kubectl autoscale deployment/nginx-deployment --min=5 --max=10 --cpu-percent=70
 ```
 
-###We can also scale down the number of pods.
+### We can also scale down the number of pods.
 ```
 kubectl scale deployment/nginx-deployment --replicas=2
 
@@ -168,7 +169,7 @@ kubectl scale deployment/nginx-deployment --replicas=2
 kubectl  get deployments/nginx-deployment 
 ```
 
-###We can also scale up/down the pods by directly editing the yaml file.
+### We can also scale up/down the pods by directly editing the yaml file.
 ```
 kubectl edit deployments.apps nginx-deployment 
 ```
