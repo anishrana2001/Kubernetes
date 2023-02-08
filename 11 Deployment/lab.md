@@ -1,7 +1,7 @@
 - ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) `#f03c15`
 - ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) `#c5f015`
 - ![#1589F0](https://placehold.co/95x15/1589F0/anish.png) `Anish`
-$${\color{green}Green}$$
+{\color{green}Green}
 
 # LAB
 ## How to create Deployment?
@@ -81,7 +81,7 @@ kubectl get deployments.apps nginx-deployment -o yaml
 
 ### Upgrade the container from 1.14.2 to 1.16.1
 ```
-kubectl `#1589F0`set image deployment nginx-deployment nginx=nginx:1.16.1
+kubectl set image deployment nginx-deployment nginx=nginx:1.16.1
 ```
 
 ### To see the status of pods
@@ -94,9 +94,9 @@ kubectl get pods -w
 kubectl  get rs --show-labels
 ```
 
-$${\color{green}rollout status}$$ How can we check if our upgrade is successful?
+### How can we check if our upgrade is successful?
 ```
-kubectl $${\color{green}rollout status}$$ deployment/nginx-deployment
+kubectl rollout status deployment/nginx-deployment
 ```
 
 ```
