@@ -203,5 +203,6 @@ kubectl delete -n core deployments/nginx
 kubectl delete namespaces core --grace-period=0 --force
 kubectl delete deployment/nginx-deployment --grace-period=0 --force
 kubectl delete deployments/nginx --grace-period=0 --force
+kubectl delete deployment nginx1  --grace-period=0 --force
 ```
 
