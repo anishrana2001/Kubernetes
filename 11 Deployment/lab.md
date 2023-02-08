@@ -1,6 +1,6 @@
 - ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) `#f03c15`
 - ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) `#c5f015`
-- ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) `#1589F0`
+- ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) `Anish`
 
 # LAB
 ## How to create Deployment?
@@ -124,7 +124,7 @@ kubectl exec -it nginx-deployment-7fb96c846b-2b6rp -- env | grep -i nginx
 
 ## How to rolling  back to a previous revision?
 
-###We can also rolling back to previous revision from command line,too. 
+### We can also rolling back to previous revision from command line,too. 
 ```
 kubectl get rs
 ```
