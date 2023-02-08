@@ -7,12 +7,12 @@ kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
 ```
 ### From command line
 ```
-kubectl  create deployment  nginx  --image=nginx:1.14.2
+kubectl  create deployment web-deploy1  --image=nginx:1.14.2
 ```
 
 ## How to create Yaml file for Deployment from command?
 ```
-kubectl create deployment nginx --image=nginx:1.14.2 --dry-run=client -o yaml > deployment1.yaml
+kubectl create deployment web-deploy1 --image=nginx:1.14.2 --dry-run=client -o yaml > deployment1.yaml
 ```
 ```
 kubectl create -f deployment1.yaml
