@@ -1,9 +1,4 @@
-- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) `#f03c15`
-- ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) `#c5f015`
-- ![#1589F0](https://placehold.co/95x15/1589F0/anish.png) `Anish`
-```
-$\mathcal{\color{purple}{this \ is \ a \ paragraph} \ \color{cyan}{in \ another \ font}}$
-```
+
 # LAB
 ## How to create Deployment?
 ### From Kubernetes.io web site
@@ -82,7 +77,7 @@ kubectl get deployments.apps nginx-deployment -o yaml
 
 ### Upgrade the container from 1.14.2 to 1.16.1
 ```
-kubectl set image deployment nginx-deployment nginx=nginx:1.16.1
+kubectl **set image** deployment nginx-deployment nginx=nginx:1.16.1
 ```
 
 ### To see the status of pods
