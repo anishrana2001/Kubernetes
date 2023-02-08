@@ -77,7 +77,7 @@ kubectl get deployments.apps nginx-deployment -o yaml
 
 ### Upgrade the container from 1.14.2 to 1.16.1
 ```
-kubectl **set image** deployment nginx-deployment nginx=nginx:1.16.1
+kubectl **set image ** deployment nginx-deployment nginx=nginx:1.16.1
 ```
 
 ### To see the status of pods
