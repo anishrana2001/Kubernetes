@@ -1,7 +1,7 @@
 - ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) `#f03c15`
 - ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) `#c5f015`
 - ![#1589F0](https://placehold.co/95x15/1589F0/anish.png) `Anish`
-{\color{green}Green}
+$\mathcal{\color{purple}{this \ is \ a \ paragraph} \ \color{cyan}{in \ another \ font}}$
 
 # LAB
 ## How to create Deployment?
