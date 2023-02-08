@@ -107,7 +107,7 @@ kubectl exec -it nginx-deployment-68fc675d59-7sdv4 -- env | grep -i nginx
 ```
 
 
-### We can also edit the deployment yaml file also.
+### We can also edit the deployment yaml file, just change the nginx:1.16.1 to nginx:1.14.2
 ```
 kubectl edit deployments.apps nginx-deployment 
 ```
@@ -173,7 +173,7 @@ kubectl scale deployment/nginx-deployment --replicas=2
 kubectl  get deployments/nginx-deployment 
 ```
 
-### We can also scale up/down the pods by directly editing the yaml file.
+### We can also scale up/down the pods by directly editing the yaml file and replace 2 with 3
 ```
 kubectl edit deployments.apps nginx-deployment 
 ```
