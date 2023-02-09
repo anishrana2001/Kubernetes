@@ -1,8 +1,6 @@
 [root@master1 ~]# kubectl create namespace kdp2001
 kubectl create namespace kdpd002021
 kubectl create namespace project-tiger
-kubectl label nodes workernode1.example.com disktype=ssd
-kubectl label nodes workernode2.example.com disktype=ssd
 namespace/kdp2001 created
 namespace/kdpd002021 created
 namespace/project-tiger created
