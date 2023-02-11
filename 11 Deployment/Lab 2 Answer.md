@@ -13,8 +13,9 @@ namespace/project-tiger created
 ### Create a deployment loadbalancer with image nginx:1.14.2 and it should have 2 replicas.
 
 [root@master1 ~]# kubectl create deployment loadbalancer --image=nginx:1.14.2 --replicas=2
+``
 deployment.apps/loadbalancer created
-
+``
 [root@master1 ~]# kubectl get deployments.apps loadbalancer 
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 loadbalancer   2/2     2            2           7s
@@ -23,12 +24,14 @@ loadbalancer   2/2     2            2           7s
 ### Scale the deployment loadbalancer to 6 pods.
 
 [root@master1 ~]# kubectl scale deployment loadbalancer --replicas=6
+``
 deployment.apps/loadbalancer scaled
-
-[root@master1 ~]# kubectl get deployments.apps loadbalancer 
+``
+[root@master1 ~]# kubectl get deployments.apps loadbalancer
+``
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 loadbalancer   6/6     6            6           24s
-
+``
 ## Question 3: 
 ### Create a Deployment named deploy-important with image nginx:1.17.6-alpine. It should contain 2 containers, the first named nginx with image nginx:1.17.6-alpine and the second one named redis with image redis.
 
@@ -66,9 +69,10 @@ spec:
 ```
 
 
-[root@master1 ~]# kubectl create -f deploy-important.yaml 
+[root@master1 ~]# kubectl create -f deploy-important.yaml
+``
 deployment.apps/deploy-important created
-
+``
 
 [root@master1 ~]# kubectl get deployments.apps deploy-important 
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
