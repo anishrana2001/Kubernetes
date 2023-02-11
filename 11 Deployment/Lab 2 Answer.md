@@ -188,7 +188,8 @@ nginx  redis
 
 [root@master1 ~]kubectl -n kdp2001  create deployment nginx --image=nginx:1.13.7-alpine --replicas=5 --dry-run=client -oyaml > nginx.yaml
 [root@master1 ~]# vim nginx.yaml 
-[root@master1 ~]# cat nginx.yaml 
+[root@master1 ~]# cat nginx.yaml
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -217,7 +218,7 @@ spec:
           value: "8080"
         resources: {}
 status: {}
-
+```
 [root@master1 ~]# kubectl create -f nginx.yaml 
 deployment.apps/nginx created
 
@@ -346,6 +347,7 @@ workernode2.example.com   Ready    <none>          64d   v1.25.4   beta.kubernet
 [root@master1 ~]# vim deploy-important.yaml 
 
 [root@master1 ~]# cat deploy-important.yaml
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -373,7 +375,7 @@ spec:
         name: container2               # add the container name
       nodeSelector:                # added line
         disktype: ssd              # added line
-
+```
 [root@master1 ~]# kubectl create -f deploy-important.yaml 
 deployment.apps/deploy-important created
 
