@@ -36,8 +36,9 @@ loadbalancer   6/6     6            6           24s
 
 [root@master1 ~]# vim deploy-important.yaml 
 
-``
+
 [root@master1 ~]# cat deploy-important.yaml
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -62,7 +63,7 @@ spec:
         name: nginx
       - image: redis
         name: redis
-``
+```
 
 
 [root@master1 ~]# kubectl create -f deploy-important.yaml 
