@@ -1,6 +1,12 @@
 # La2 Questions and its solution
 ## Lab prepartion
 ```
+kubectl create namespace kdp2001
+kubectl create namespace kdpd002021
+kubectl create namespace project-tiger
+
+```
+```
 [root@master1 ~]# kubectl create namespace kdp2001
 namespace/kdp2001 created
 [root@master1 ~]# kubectl create namespace kdpd002021
