@@ -22,7 +22,6 @@ deployment.apps/loadbalancer created
 
 ```
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
-
 loadbalancer   2/2     2            2           7s
 ```
 
