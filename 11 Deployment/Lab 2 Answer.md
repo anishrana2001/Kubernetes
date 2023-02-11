@@ -174,17 +174,16 @@ nginx  redis
 ```
 ## Question 4: 
 
-### Create a new deployment for running nginx with the following parameters. 
-    Run the deploymnet in the kdp2001 namespace. The namespace has alrady been created.
-### Name the deployment nginx and configure with 5 replicas
-### Configure the pod with a container image of ifccnf/nginx:1.13.7-alpine
-### Set an environment variable of NGINX_Port=8080 and also expose that port for the container above.
+#### Create a new deployment for running nginx with the following parameters. 
+#### Run the deploymnet in the kdp2001 namespace. The namespace has alrady been created.
+#### Name the deployment nginx and configure with 5 replicas
+#### Configure the pod with a container image of ifccnf/nginx:1.13.7-alpine
+#### Set an environment variable of NGINX_Port=8080 and also expose that port for the container above.
 
-
+```
 [root@master1 ~]kubectl -n kdp2001  create deployment nginx --image=nginx:1.13.7-alpine --replicas=5 --dry-run=client -oyaml > nginx.yaml
 [root@master1 ~]# vim nginx.yaml 
 [root@master1 ~]# cat nginx.yaml
-```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -213,7 +212,7 @@ spec:
           value: "8080"
         resources: {}
 status: {}
-```
+
 [root@master1 ~]# kubectl create -f nginx.yaml 
 deployment.apps/nginx created
 
@@ -224,17 +223,16 @@ nginx   5/5     5            5           63s
 
 [root@master1 ~]# kubectl  exec -n kdp2001 pods/nginx-747b75fccc-29f8r -- env | grep NGINX_Port
 NGINX_Port=8080
-
+```
 
 ## Question 5
 
-### As a kubernetes application developer you will often find yourself needing to update a runing application. Please complete the following:
+####  As a kubernetes application developer you will often find yourself needing to update a runing application. Please complete the following:
+####  Update the web deployment in the kdpd002021 namespace with a maxSurge of 10% and a maxUnavailable of 5%
+####  Perform a rolling update of the web deployment changing the nginx image version to 1.14.2
+####  Rollback the web deployment to the previous version and it should record.
 
-### Update the web deployment in the kdpd002021 namespace with a maxSurge of 10% and a maxUnavailable of 5%
-### Perform a rolling update of the web deployment changing the nginx image version to 1.14.2
-### Rollback the web deployment to the previous version and it should record.
-
-
+```
 [root@master1 ~]# kubectl -n kdpd002021 describe deployments.apps web 
 Name:                   web
 Namespace:              kdpd002021
@@ -307,14 +305,14 @@ REVISION  CHANGE-CAUSE
 NAME             DESIRED   CURRENT   READY   AGE
 web-668c4846c5   0         0         0       2m54s
 web-76b8d9869b   1         1         1       4m37s
-
+```
 
 ## Question 6
 
-### Use Namespace project-tiger for the following. Create a Deployment named deploy-important with label id=very-important (the Pods should also have this label) and 3 replicas. It should contain two containers, the first named container1 with image nginx:1.17.6-alpine and the second one named container2 with image kubernetes/pause.
-### Use the Node selector: disktype=ssd
+#### Use Namespace project-tiger for the following. Create a Deployment named deploy-important with label id=very-important (the Pods should also have this label) and 3 replicas. It should contain two containers, the first named container1 with image nginx:1.17.6-alpine and the second one named container2 with image kubernetes/pause.
+####  Use the Node selector: disktype=ssd
 
-
+```
 [root@master1 ~]# kubectl get nodes --show-labels 
 NAME                      STATUS   ROLES           AGE   VERSION   LABELS
 master1.example.com       Ready    control-plane   64d   v1.25.4   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master1.example.com,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node.kubernetes.io/exclude-from-external-load-balancers=
@@ -342,7 +340,6 @@ workernode2.example.com   Ready    <none>          64d   v1.25.4   beta.kubernet
 [root@master1 ~]# vim deploy-important.yaml 
 
 [root@master1 ~]# cat deploy-important.yaml
-```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -370,7 +367,7 @@ spec:
         name: container2               # add the container name
       nodeSelector:                # added line
         disktype: ssd              # added line
-```
+
 [root@master1 ~]# kubectl create -f deploy-important.yaml 
 deployment.apps/deploy-important created
 
@@ -383,13 +380,13 @@ NAME                                READY   STATUS    RESTARTS   AGE   IP       
 deploy-important-7995fcd99d-56ffq   2/2     Running   0          62s   172.16.133.159   workernode1.example.com   <none>           <none>            id=very-important,pod-template-hash=7995fcd99d
 deploy-important-7995fcd99d-s7g2n   2/2     Running   0          62s   172.16.14.100    workernode2.example.com   <none>           <none>            id=very-important,pod-template-hash=7995fcd99d
 deploy-important-7995fcd99d-x75z9   2/2     Running   0          62s   172.16.14.95     workernode2.example.com   <none>           <none>            id=very-important,pod-template-hash=7995fcd99d
-
+```
 
 ## Question 7
 
-### A deployment is failing on the cluster. Locate the deployment, and fix the problem.
+####  A deployment is failing on the cluster. Locate the deployment, and fix the problem.
 
-
+```
 [root@master1 ~]# kubectl get deployments.apps -A
 NAMESPACE       NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
 default         deploy-important          1/1     1            1           3h16m
@@ -508,3 +505,4 @@ deployment.apps/testing-deploy edited
 [root@master1 ~]# kubectl get deployments.apps testing-deploy 
 NAME             READY   UP-TO-DATE   AVAILABLE   AGE
 testing-deploy   2/2     2            2           7m23s
+```
