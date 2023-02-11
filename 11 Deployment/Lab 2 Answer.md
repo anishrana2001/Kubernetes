@@ -20,9 +20,8 @@ namespace/project-tiger created
 
 ## Question 1 : 
 ### Create a deployment loadbalancer with image nginx:1.14.2 and it should have 2 replicas.
->[root@master1 ~]# kubectl create deployment loadbalancer --image=nginx:1.14.2 --replicas=2
-
->deployment.apps/loadbalancer created
+> [root@master1 ~]# kubectl create deployment loadbalancer --image=nginx:1.14.2 --replicas=2
+> deployment.apps/loadbalancer created
 
 
 [root@master1 ~]# kubectl get deployments.apps loadbalancer
