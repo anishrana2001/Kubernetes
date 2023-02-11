@@ -16,10 +16,11 @@ namespace/project-tiger created
 ``
 deployment.apps/loadbalancer created
 ``
-[root@master1 ~]# kubectl get deployments.apps loadbalancer 
+[root@master1 ~]# kubectl get deployments.apps loadbalancer
+``
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 loadbalancer   2/2     2            2           7s
-
+``
 ## Question 2: 
 ### Scale the deployment loadbalancer to 6 pods.
 
