@@ -46,7 +46,7 @@ loadbalancer   6/6     6            6           24s
 
 
 [root@master1 ~]# cat deploy-important.yaml
-```
+```yamlscript
 apiVersion: apps/v1
 kind: Deployment
 metadata:
