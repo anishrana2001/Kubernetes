@@ -3,8 +3,10 @@
 > Blockquotes
 
 Paragraphs and Line Breaks
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+loadbalancer   2/2     2            2           7s
                     
-> "Blockquotes Blockquotes", [Link](http://localhost/)。
+> "Blockquotes Blockquotes"
 ```
 kubectl create namespace kdp2001
 kubectl create namespace kdpd002021
