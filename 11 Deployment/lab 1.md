@@ -204,5 +204,9 @@ kubectl delete namespaces core --grace-period=0 --force
 kubectl delete deployment/nginx-deployment --grace-period=0 --force
 kubectl delete deployments/nginx --grace-period=0 --force
 kubectl delete deployment nginx1  --grace-period=0 --force
+kubectl delete deployments.apps/deploy-important deployments.apps/loadbalancer deployments.apps/testing-deploy --grace-period=0 --force
+kubectl delete -n kdpd002021 deployment.apps/web
+kubectl delete -n kdp2001 deployment.apps/nginx
+ kubectl delete -n project-tiger  deployment.apps/deploy-important   --grace-period=0 --force
 ```
 
