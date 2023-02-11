@@ -19,6 +19,7 @@ deployment.apps/loadbalancer created
 ``
 
 [root@master1 ~]# kubectl get deployments.apps loadbalancer
+
 ``
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 
