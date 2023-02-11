@@ -59,8 +59,9 @@ A deployment is failing on the cluster. Locate the deployment, and fix the probl
 kubectl delete namespace kdp2001   --grace-period=0 --force
 kubectl delete namespace kdpd002021  --grace-period=0 --force
 kubectl delete namespace project-tiger  --grace-period=0 --force
-kubectl label nodes workernode1.example.com disktype=ssd
-kubectl label nodes workernode2.example.com disktype=ssd
 kubectl label nodes workernode1.example.com disktype-
 kubectl label nodes workernode2.example.com disktype-
+kubectl delete deployments.apps deploy-important
+kubectl delete deployments.apps testing-deploy
+kubectl delete deployment.apps/loadbalancer
 ```
