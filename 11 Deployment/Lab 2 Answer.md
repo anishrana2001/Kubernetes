@@ -1,15 +1,16 @@
-[root@master1 ~]# kubectl create namespace kdp2001
+```
+kubectl create namespace kdp2001
 kubectl create namespace kdpd002021
 kubectl create namespace project-tiger
+```
+``
 namespace/kdp2001 created
 namespace/kdpd002021 created
 namespace/project-tiger created
-node/workernode1.example.com labeled
-node/workernode2.example.com labeled
-
+``
 
 ## Question 1 : 
-Create a deployment loadbalancer with image nginx:1.14.2 and it should have 2 replicas.
+### Create a deployment loadbalancer with image nginx:1.14.2 and it should have 2 replicas.
 
 [root@master1 ~]# kubectl create deployment loadbalancer --image=nginx:1.14.2 --replicas=2
 deployment.apps/loadbalancer created
@@ -19,7 +20,7 @@ NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 loadbalancer   2/2     2            2           7s
 
 ## Question 2: 
-Scale the deployment loadbalancer to 6 pods.
+### Scale the deployment loadbalancer to 6 pods.
 
 [root@master1 ~]# kubectl scale deployment loadbalancer --replicas=6
 deployment.apps/loadbalancer scaled
@@ -29,7 +30,7 @@ NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 loadbalancer   6/6     6            6           24s
 
 ## Question 3: 
-Create a Deployment named deploy-important with image nginx:1.17.6-alpine. It should contain 2 containers, the first named nginx with image nginx:1.17.6-alpine and the second one named redis with image redis.
+### Create a Deployment named deploy-important with image nginx:1.17.6-alpine. It should contain 2 containers, the first named nginx with image nginx:1.17.6-alpine and the second one named redis with image redis.
 
 [root@master1 ~]# kubectl create deployment deploy-important  --image=nginx:1.17.6-alpine --dry-run=client -o yaml > deploy-important.yaml
 
@@ -169,18 +170,18 @@ Events:
 [root@master1 ~]# 
 
 
-### Press the double tap, you will see the container names.
+Press the double tap, you will see the container names.
 
 [root@master1 ~]# kubectl logs pods/deploy-important-7fb555749-9mhjd 
 nginx  redis  
 
 ## Question 4: 
 
-Create a new deployment for running nginx with the following parameters.
-Run the deploymnet in the kdp2001 namespace. The namespace has alrady been created.
-Name the deployment nginx and configure with 5 replicas
-Configure the pod with a container image of ifccnf/nginx:1.13.7-alpine
-Set an environment variable of NGINX_Port=8080 and also expose that port for the container above.
+### Create a new deployment for running nginx with the following parameters. 
+### Run the deploymnet in the kdp2001 namespace. The namespace has alrady been created.
+### Name the deployment nginx and configure with 5 replicas
+### Configure the pod with a container image of ifccnf/nginx:1.13.7-alpine
+### Set an environment variable of NGINX_Port=8080 and also expose that port for the container above.
 
 
 [root@master1 ~]kubectl -n kdp2001  create deployment nginx --image=nginx:1.13.7-alpine --replicas=5 --dry-run=client -oyaml > nginx.yaml
@@ -229,11 +230,11 @@ NGINX_Port=8080
 
 ## Question 5
 
-As a kubernetes application developer you will often find yourself needing to update a runing application. Please complete the following:
+### As a kubernetes application developer you will often find yourself needing to update a runing application. Please complete the following:
 
-Update the web deployment in the kdpd002021 namespace with a maxSurge of 10% and a maxUnavailable of 5%
-Perform a rolling update of the web deployment changing the nginx image version to 1.14.2
-Rollback the web deployment to the previous version and it should record.
+### Update the web deployment in the kdpd002021 namespace with a maxSurge of 10% and a maxUnavailable of 5%
+### Perform a rolling update of the web deployment changing the nginx image version to 1.14.2
+### Rollback the web deployment to the previous version and it should record.
 
 
 [root@master1 ~]# kubectl -n kdpd002021 describe deployments.apps web 
@@ -312,8 +313,8 @@ web-76b8d9869b   1         1         1       4m37s
 
 ## Question 6
 
-Use Namespace project-tiger for the following. Create a Deployment named deploy-important with label id=very-important (the Pods should also have this label) and 3 replicas. It should contain two containers, the first named container1 with image nginx:1.17.6-alpine and the second one named container2 with image kubernetes/pause.
-Use the Node selector: disktype=ssd
+### Use Namespace project-tiger for the following. Create a Deployment named deploy-important with label id=very-important (the Pods should also have this label) and 3 replicas. It should contain two containers, the first named container1 with image nginx:1.17.6-alpine and the second one named container2 with image kubernetes/pause.
+### Use the Node selector: disktype=ssd
 
 
 [root@master1 ~]# kubectl get nodes --show-labels 
@@ -387,7 +388,7 @@ deploy-important-7995fcd99d-x75z9   2/2     Running   0          62s   172.16.14
 
 ## Question 7
 
-A deployment is failing on the cluster. Locate the deployment, and fix the problem.
+### A deployment is failing on the cluster. Locate the deployment, and fix the problem.
 
 
 [root@master1 ~]# kubectl get deployments.apps -A
