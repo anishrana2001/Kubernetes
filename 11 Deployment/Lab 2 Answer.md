@@ -1,22 +1,13 @@
-### Blockquotes
-
-> Blockquotes
-
-Paragraphs and Line Breaks
-NAME           READY   UP-TO-DATE   AVAILABLE   AGE
-loadbalancer   2/2     2            2           7s
-                    
-> "Blockquotes Blockquotes"
+# La2 Questions and its solution
+## Lab prepartion
 ```
-kubectl create namespace kdp2001
-kubectl create namespace kdpd002021
-kubectl create namespace project-tiger
-```
-``
+[root@master1 ~]# kubectl create namespace kdp2001
 namespace/kdp2001 created
+[root@master1 ~]# kubectl create namespace kdpd002021
 namespace/kdpd002021 created
+[root@master1 ~]# kubectl create namespace project-tiger
 namespace/project-tiger created
-``
+```
 
 ## Question 1 : 
 ### Create a deployment loadbalancer with image nginx:1.14.2 and it should have 2 replicas.
@@ -31,26 +22,21 @@ loadbalancer   2/2     2            2           7s
 
 ## Question 2: 
 ### Scale the deployment loadbalancer to 6 pods.
-
+```
 [root@master1 ~]# kubectl scale deployment loadbalancer --replicas=6
-``
 deployment.apps/loadbalancer scaled
-``
+
 [root@master1 ~]# kubectl get deployments.apps loadbalancer
-``
 NAME           READY   UP-TO-DATE   AVAILABLE   AGE
 loadbalancer   6/6     6            6           24s
-``
-## Question 3: 
+```
+## Question 3
 ### Create a Deployment named deploy-important with image nginx:1.17.6-alpine. It should contain 2 containers, the first named nginx with image nginx:1.17.6-alpine and the second one named redis with image redis.
-
+```
 [root@master1 ~]# kubectl create deployment deploy-important  --image=nginx:1.17.6-alpine --dry-run=client -o yaml > deploy-important.yaml
-
 [root@master1 ~]# vim deploy-important.yaml 
 
-
 [root@master1 ~]# cat deploy-important.yaml
-```yamlscript
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,13 +61,9 @@ spec:
         name: nginx
       - image: redis
         name: redis
-```
-
 
 [root@master1 ~]# kubectl create -f deploy-important.yaml
-``
 deployment.apps/deploy-important created
-``
 
 [root@master1 ~]# kubectl get deployments.apps deploy-important 
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
@@ -189,7 +171,7 @@ Press the double tap, you will see the container names.
 
 [root@master1 ~]# kubectl logs pods/deploy-important-7fb555749-9mhjd 
 nginx  redis  
-
+```
 ## Question 4: 
 
 ### Create a new deployment for running nginx with the following parameters. 
