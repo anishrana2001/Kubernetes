@@ -183,7 +183,7 @@ nginx  redis
 #### Create a new deployment for running nginx with the following parameters. 
 #### Run the deploymnet in the kdp2001 namespace. The namespace has alrady been created.
 #### Name the deployment nginx and configure with 5 replicas
-#### Configure the pod with a container image of ifccnf/nginx:1.13.7-alpine
+#### Configure the pod with a container image of nginx:1.13.7-alpine
 #### Set an environment variable of NGINX_Port=8080 and also expose that port for the container above.
 
 ```
