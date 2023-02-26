@@ -52,13 +52,16 @@ kubectl get ds
 ```
 ### If we want to see only "test1-daemonset" DaemonSet then
 ```
-kubectl get daemonsets/test1-daemonset 
-
-```
-
-```
 kubectl get daemonsets.apps 
 ```
+```
+kubectl get ds 
+```
+```
+kubectl get daemonsets/test1-daemonset 
+```
+
+
 
 ### If we want to create a DaemonSet in the namespace (core)
 
