@@ -67,7 +67,11 @@ kubectl get daemonsets/test1-daemonset
 
 ```
 kubectl create namespace core
+```
+```
 kubectl create -f test1-daemonset.yaml -n core
+```
+```
 kubectl get -n core ds/test1-daemonset
 ```
 
