@@ -1,8 +1,8 @@
 
 # LAB 1
 
-## prerequisite
 ```
+## prerequisite
 kubectl create namespace fubar
 kubectl create namespace tiger
 kubectl create namespace kdp1003
@@ -122,7 +122,7 @@ for i in {1..1000000} ; do  curl -LI http://$var_clusterIP -o /dev/null -w '%{ht
 ```
 kubectl get pods -o wide -n fubar
 ```
-#### complete the POD names by pressing the tap button.
+#### complete the POD names by pressing the tap button on 2nd Terminal.
 ```
 kubectl delete -n fubar pod/test1-
 ```
@@ -212,6 +212,12 @@ kubectl create -f my-lb-service1.yaml
 kubectl get service --namespace tiger 
 ```
 
+
+## How to create External LoadBalancer "MetalLB"?
+```
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml
+```
+
 ### How to create Address polling for MetalLB?
 
 ```
@@ -228,7 +234,14 @@ EOF
  
 ```
 
+```
+kubectl create -f ipaddresspool.yaml 
+```
 
+#### Now you will observe the External IP 
+```
+kubectl -n tiger get service/my-lb-service1 
+```
 
 
 
@@ -240,6 +253,5 @@ EOF
 kubectl delete -n core DaemonSets/test1-daemonset
 kubectl delete namespaces core --grace-period=0 --force
 kubectl delete -n  kube-system ds/fluentd-elasticsearch
-kubectl create namespace kdp1003
 ```
 
