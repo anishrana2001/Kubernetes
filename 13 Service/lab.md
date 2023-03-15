@@ -48,6 +48,14 @@ kubectl get service my-service
 ```
 kubectl get endpoints my-service
 ```
+### Now, create a deployment named nginx and see the result again.
+```
+kubectl create deployment nginx --image=nginx
+```
+```
+kubectl get endpoints my-service
+```
+
 
 ### From yaml file under namespace.
 
