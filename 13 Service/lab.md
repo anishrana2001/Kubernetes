@@ -3,6 +3,8 @@
 
 ## prerequisite
 ```
+mkdir test-service-dir1
+cd test-service-dir1
 kubectl create namespace fubar
 kubectl create namespace tiger
 kubectl create namespace kdp1003
@@ -268,14 +270,19 @@ curl http://$var1_loadbalacer
 # Clear the lab 
 
 ```
-kubectl delete -n core DaemonSets/test1-daemonset
-kubectl delete namespaces core --grace-period=0 --force
-kubectl delete -n  kube-system ds/fluentd-elasticsearch
 kubectl delete namespaces --timeout=0 --force  kdp1003
 kubectl delete namespaces --timeout=0 --force  fubar
 kubectl delete namespaces --timeout=0 --force  development
 kubectl delete namespaces --timeout=0 --force metallb-system
 kubectl delete namespaces --timeout=0 --force kdp1003
 kubectl delete namespaces --timeout=0 --force tiger
+kubectl delete service/my-service --force --timeout=0
+kubectl delete deployment.apps/nginx --force --timeout=0
+
+rm -f clusterip1.yaml
+rm -f clusterip-fubar.yaml
+rm -f my-nodeport-service.yaml
+rm -f my-lb-service1.yaml
+rm -f IPAddressPool.yaml
 ```
 
