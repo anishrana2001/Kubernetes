@@ -221,6 +221,11 @@ kubectl create -f my-lb-service1.yaml
 kubectl get service --namespace tiger 
 ```
 
+### Create deployment so that we can access the pods.
+
+```
+kubectl create deployment test1 --image=nginx --replicas=3 -n tiger
+```
 
 ## How to create External LoadBalancer "MetalLB"?
 ```
@@ -244,7 +249,7 @@ EOF
 ```
 
 ```
-kubectl create -f ipaddresspool.yaml 
+kubectl create -f IPAddressPool.yaml 
 ```
 
 #### Now you will observe the External IP 
@@ -252,9 +257,13 @@ kubectl create -f ipaddresspool.yaml
 kubectl -n tiger get service/my-lb-service1 
 ```
 
-
-
-
+```
+curl http://LoadBalancer_IP
+```
+```
+var1_loadbalacer=`kubectl -n tiger get service/my-lb-service1 | awk '{print $4}' | grep -v EXTERNAL` ; echo $var1_loadbalacer
+curl http://$var1_loadbalacer
+```
 
 # Clear the lab 
 
