@@ -1,8 +1,8 @@
 
 # LAB 1
 
-```
 ## prerequisite
+```
 kubectl create namespace fubar
 kubectl create namespace tiger
 kubectl create namespace kdp1003
@@ -240,5 +240,6 @@ EOF
 kubectl delete -n core DaemonSets/test1-daemonset
 kubectl delete namespaces core --grace-period=0 --force
 kubectl delete -n  kube-system ds/fluentd-elasticsearch
+kubectl create namespace kdp1003
 ```
 
