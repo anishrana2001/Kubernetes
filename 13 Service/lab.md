@@ -261,5 +261,11 @@ kubectl -n tiger get service/my-lb-service1
 kubectl delete -n core DaemonSets/test1-daemonset
 kubectl delete namespaces core --grace-period=0 --force
 kubectl delete -n  kube-system ds/fluentd-elasticsearch
+kubectl delete namespaces --timeout=0 --force  kdp1003
+kubectl delete namespaces --timeout=0 --force  fubar
+kubectl delete namespaces --timeout=0 --force  development
+kubectl delete namespaces --timeout=0 --force metallb-system
+kubectl delete namespaces --timeout=0 --force kdp1003
+kubectl delete namespaces --timeout=0 --force tiger
 ```
 
