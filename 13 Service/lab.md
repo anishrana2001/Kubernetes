@@ -121,12 +121,13 @@ curl -LI http://$var_clusterIP -o /dev/null -w '%{http_code}\n' -s
 ```
 
 
-### Impact on deleting the PODS from Deployment.
-#### Execute the below command on one terminal
+### Impact on deleting the PODS from Deployment. Open 2 terminals.
+#### Execute the below command on 1st terminal
 ```
 for i in {1..1000000} ; do  curl -LI http://$var_clusterIP -o /dev/null -w '%{http_code}\n' -s ; done | grep -v 200
 ```
 
+#### Execute the below command on 2nd Terminal.
 ```
 kubectl get pods -o wide -n fubar
 ```
