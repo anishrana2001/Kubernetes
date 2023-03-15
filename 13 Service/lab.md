@@ -1,8 +1,8 @@
 
 # LAB 1
 
-```
 ## prerequisite
+```
 kubectl create namespace fubar
 kubectl create namespace tiger
 kubectl create namespace kdp1003
