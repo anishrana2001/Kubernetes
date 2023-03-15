@@ -115,7 +115,7 @@ curl http://ClusterIP
 ```
 var_clusterIP=`kubectl get service/my-service -n fubar | awk '{print $3}' | grep -v CLUSTER` ; curl http://$var_clusterIP
 ```
-
+#### How to check the HTTP return code of the URL?
 ```
 curl -LI http://$var_clusterIP -o /dev/null -w '%{http_code}\n' -s
 ```
