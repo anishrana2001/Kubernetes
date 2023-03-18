@@ -98,7 +98,18 @@ spec:
   - 192.168.1.100-192.168.1.110
 EOF
 ```
+### Layer 2 configuration
 
+```
+cat <<EOF>>  l2advertise.yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+EOF
+```
+  
 ```
 kubectl create -f IPAddressPool.yaml
 ```
@@ -183,4 +194,6 @@ hello-srv      ClusterIP      10.110.117.12   <none>          80/TCP         3m5
 kubernetes     ClusterIP      10.96.0.1       <none>          443/TCP        100d
 [root@master1 data-service]# 
 ```
+### With the help of external Loadbalancer, we don't need to specify the port number.
 
+![image](https://user-images.githubusercontent.com/93471182/226123216-8c858a0c-d600-48ba-b94e-85e4f94fc93f.png)
