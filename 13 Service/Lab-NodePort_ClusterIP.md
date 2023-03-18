@@ -199,7 +199,7 @@ kubectl delete deployment.apps/backend-deployment service/hello-srv service/fron
 ## We can also club all the Yaml files into one. 
 
 ```
-cat > <<EOF>> service_project.yaml
+cat <<EOF>> service_project.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
