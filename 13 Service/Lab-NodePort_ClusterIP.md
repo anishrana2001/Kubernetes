@@ -1,5 +1,7 @@
 
+# Connect a Frontend to a Backend Using Services
 
+## Create the yaml files for Backend service, named "hello-srv".
 ```
 cat <<EOF>> hello-srv.yaml
 apiVersion: v1
@@ -16,7 +18,7 @@ spec:
     targetPort: http
 EOF
 ```
-
+## Create the yaml files for Backend Deployment.
 ```
 cat <<EOF>> backend-srv
 apiVersion: apps/v1
@@ -43,7 +45,7 @@ spec:
               containerPort: 80
 EOF
 ```
-
+## Create the yaml files for Frontend service, named "frontend-srv".
 ```
 cat <<EOF>> frontend-srv.yaml
 apiVersion: v1     
@@ -61,6 +63,8 @@ spec:
   type: NodePort
 EOF
 ```
+
+## Create the yaml files for Frontend Deployment.
 ```
 cat <<EOF>> frontend-deployment.yaml
 apiVersion: apps/v1
@@ -85,19 +89,20 @@ spec:
           image: nginx
 EOF
 ```
-
+## Create the Frontend & Backend deployments and Services.
 ```
 kubectl apply -f hello-srv.yaml -f frontend-srv.yaml -f frontend-deployment.yaml -f backend-deployment.yaml
 ```
 
+## Explore the deployments that we created.
 ```
 kubectl get deployments.apps
 ```
-
+## Explore the services that we created.
 ```
 kubectl get service -o wide
 ```
-
+## Explore the endspoints that we created.
 ```
 kubectl get endpoints
 ```
@@ -112,7 +117,7 @@ curl http://
 var_frontend_srv=`kubectl get endpoints | grep frontend | awk '{print $2}' | grep -v END` ; curl http://$var_frontend_srv
 ```
 
-### Differnet page will be open whene we curl the backend container.
+### Differnet page should be open when we curl the backend container.
 
 ```
 var_hello_srv=`kubectl get endpoints | grep hello-srv | awk '{print $2}' | grep -v END | cut -d "," -f1` ; curl http://$var_hello_srv
