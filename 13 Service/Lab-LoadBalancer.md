@@ -98,6 +98,10 @@ spec:
   - 192.168.1.100-192.168.1.110
 EOF
 ```
+  
+```
+kubectl create -f IPAddressPool.yaml
+```
 ### Layer 2 configuration
 
 ```
@@ -109,10 +113,11 @@ metadata:
   namespace: metallb-system
 EOF
 ```
-  
+
 ```
-kubectl create -f IPAddressPool.yaml
+kubectl create -f l2advertise.yaml
 ```
+
 ### Now, External LB assigned the IP address, Look at External -IP coloumn.
 ```
 [root@master1 data-service]# kubectl get service
