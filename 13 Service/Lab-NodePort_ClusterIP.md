@@ -167,21 +167,36 @@ VM_IP:PORT_NUMBER
 ``
 [root@master1 data-service]# ifconfig enp0s3
 enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+
         inet 192.168.1.31  netmask 255.255.255.0  broadcast 192.168.1.255
+        
         inet6 fe80::a00:27ff:fe22:8301  prefixlen 64  scopeid 0x20<link>
+        
         inet6 2401:4900:1f37:7a51:a00:27ff:fe22:8301  prefixlen 64  scopeid 0x0<global>
+        
         ether 08:00:27:22:83:01  txqueuelen 1000  (Ethernet)
+        
         RX packets 366032  bytes 61540961 (58.6 MiB)
+        
         RX errors 0  dropped 0  overruns 0  frame 0
+        
         TX packets 346383  bytes 131707705 (125.6 MiB)
+        
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        
 
 [root@master1 data-service]# kubectl get service -o wide
+
 NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE    SELECTOR
+
 frontend-srv   NodePort    10.107.80.14   <none>        80:30761/TCP   86m    app=hello,tier=frontend
+
 hello-srv      ClusterIP   10.106.1.195   <none>        80/TCP         86m    app=hello,tier=backend
+
 kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP        100d   <none>
+
 [root@master1 data-service]# 
+
 
 
 ![image](https://user-images.githubusercontent.com/93471182/226115530-a55bd22a-d6e6-46a0-a760-d19a5b60e3ff.png)
