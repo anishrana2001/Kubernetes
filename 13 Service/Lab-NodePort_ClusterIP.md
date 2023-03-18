@@ -182,7 +182,8 @@ frontend-srv   NodePort    10.107.80.14   <none>        80:30761/TCP   86m    ap
 hello-srv      ClusterIP   10.106.1.195   <none>        80/TCP         86m    app=hello,tier=backend
 kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP        100d   <none>
 [root@master1 data-service]# 
+```
 
 ![image](https://user-images.githubusercontent.com/93471182/226115530-a55bd22a-d6e6-46a0-a760-d19a5b60e3ff.png)
-```
+
 
