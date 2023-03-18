@@ -215,7 +215,6 @@ spec:
       labels:
         app: hello
         tier: backend
-        track: stable
     spec:
       containers:
         - name: backend-container
