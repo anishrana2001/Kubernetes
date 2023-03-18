@@ -186,4 +186,7 @@ kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP        100d   <n
 
 ![image](https://user-images.githubusercontent.com/93471182/226115530-a55bd22a-d6e6-46a0-a760-d19a5b60e3ff.png)
 
-
+## Clear the Lab.
+```
+kubectl delete deployment.apps/backend-srv service/hello-srv service/frontend-srv deployment.apps/frontend-deployment
+```
