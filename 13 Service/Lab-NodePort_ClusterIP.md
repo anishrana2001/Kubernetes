@@ -52,6 +52,7 @@ spec:
 EOF
 ```
 ## Create the yaml files for Frontend service, named "frontend-srv".
+### Type: NodePort --->
 ```
 cat <<EOF>> frontend-srv.yaml
 apiVersion: v1     
@@ -82,7 +83,6 @@ spec:
     matchLabels:
       app: hello
       tier: frontend
-      track: stable
   replicas: 1
   template:
     metadata:
