@@ -1,6 +1,12 @@
 
 # Connect a Frontend to a Backend Using Services
 
+## Create a directory.
+```
+mkdir  /data-service
+cd /data-service
+```
+
 ## Create the yaml files for Backend service, named "hello-srv".
 ```
 cat <<EOF>> hello-srv.yaml
@@ -167,7 +173,7 @@ VM_IP:PORT_NUMBER
 ```
 [root@master1 data-service]# ifconfig enp0s3
 enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.1.31  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet **192.168.1.31**  netmask 255.255.255.0  broadcast 192.168.1.255
         inet6 fe80::a00:27ff:fe22:8301  prefixlen 64  scopeid 0x20<link>
         inet6 2401:4900:1f37:7a51:a00:27ff:fe22:8301  prefixlen 64  scopeid 0x0<global>
         ether 08:00:27:22:83:01  txqueuelen 1000  (Ethernet)
@@ -178,7 +184,7 @@ enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 [root@master1 data-service]# kubectl get service -o wide
 NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE    SELECTOR
-frontend-srv   NodePort    10.107.80.14   <none>        80:30761/TCP   86m    app=hello,tier=frontend
+frontend-srv   NodePort    10.107.80.14   <none>        80:**30761**/TCP   86m    app=hello,tier=frontend
 hello-srv      ClusterIP   10.106.1.195   <none>        80/TCP         86m    app=hello,tier=backend
 kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP        100d   <none>
 [root@master1 data-service]# 
@@ -188,5 +194,106 @@ kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP        100d   <n
 
 ## Clear the Lab.
 ```
-kubectl delete deployment.apps/backend-srv service/hello-srv service/frontend-srv deployment.apps/frontend-deployment
+kubectl delete deployment.apps/backend-deployment service/hello-srv service/frontend-srv deployment.apps/frontend-deployment
 ```
+## We can also club all the Yaml files into one. 
+
+```
+cat > <<EOF>> service_project.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: backend
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - name: backend-container
+          image: "gcr.io/google-samples/hello-go-gke:1.0"
+          ports:
+            - name: http
+              containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-srv
+spec:
+  selector:
+    app: hello
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-srv
+spec:
+  selector:
+    app: hello
+    tier: frontend
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 80
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: frontend
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+EOF
+```
+```
+kubectl apply -f service_project.yaml
+```
+## Explore the deployments that we created.
+```
+kubectl get deployments.apps
+```
+## Explore the services that we created.
+```
+kubectl get service -o wide
+```
+## Explore the endspoints that we created.
+```
+kubectl get endpoints
+```
+
+
+## Clear the Lab once again.
+```
+kubectl delete deployment.apps/backend-deployment service/hello-srv service/frontend-srv deployment.apps/frontend-deployment
+cd /data-service
+rm -f hello-srv.yaml frontend-deployment.yaml frontend-srv.yaml backend-deployment.yaml service_project.yaml
+```
+
