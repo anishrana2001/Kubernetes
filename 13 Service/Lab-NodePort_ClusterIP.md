@@ -259,7 +259,6 @@ spec:
     matchLabels:
       app: hello
       tier: frontend
-      track: stable
   replicas: 1
   template:
     metadata:
