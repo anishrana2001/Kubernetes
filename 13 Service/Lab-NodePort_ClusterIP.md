@@ -156,6 +156,7 @@ EOF
 nginx -help
 nginx -s reload
 exit
+exit
 
 ```
 
