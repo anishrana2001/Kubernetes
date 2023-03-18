@@ -123,7 +123,8 @@ var_frontend_srv=`kubectl get endpoints | grep frontend | awk '{print $2}' | gre
 var_hello_srv=`kubectl get endpoints | grep hello-srv | awk '{print $2}' | grep -v END | cut -d "," -f1` ; curl http://$var_hello_srv
 ```
 
-### Login to Frontend Container 
+## Login to Frontend Container 
+### Now, we are going to modify the Frontend container to forward the traffic to backend service.
 ```
 kubectl exec -it frontend-deployment-8cc58b98f-js4m5 -- /bin/bash
 cd /etc/nginx/conf.d/
@@ -150,8 +151,16 @@ exit
 ```
 
 
-### Now, check the frontend container
+## Now, check the frontend container.
+### This time, when we curl the frontent container, we should get the response from the backend container.
 
 ```
 var_frontend_srv=`kubectl get endpoints | grep frontend | awk '{print $2}' | grep -v END` ; curl http://$var_frontend_srv
+```
+## Check the VM IPs 
+```
+ifconfig
+kubectl get service -o wide
+
+VM_IP:PORT_NUMBER
 ```
