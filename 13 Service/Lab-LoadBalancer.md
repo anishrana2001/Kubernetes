@@ -197,3 +197,11 @@ kubernetes     ClusterIP      10.96.0.1       <none>          443/TCP        100
 ### With the help of external Loadbalancer, we don't need to specify the port number.
 
 ![image](https://user-images.githubusercontent.com/93471182/226123216-8c858a0c-d600-48ba-b94e-85e4f94fc93f.png)
+
+
+## Clear the Lab
+
+```
+kubectl delete deployment.apps/backend-deployment service/hello-srv service/frontend-srv deployment.apps/frontend-deployment namespaces/metallb-system --force --timeout=0
+```
+
