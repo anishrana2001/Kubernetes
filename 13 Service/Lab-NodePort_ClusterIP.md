@@ -133,7 +133,10 @@ var_hello_srv=`kubectl get endpoints | grep hello-srv | awk '{print $2}' | grep 
 ### Now, we are going to modify the Frontend container to forward the traffic to backend service.
 ```
 kubectl exec -it frontend-deployment-8cc58b98f-js4m5 -- /bin/bash
+bash
 cd /etc/nginx/conf.d/
+mv default.conf /tmp/
+
 cat <<EOF>> frontend.conf
 # The identifier Backend is internal to nginx, and used to name this specific upstream
 upstream Backend {
