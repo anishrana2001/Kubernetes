@@ -30,7 +30,7 @@ cat <<EOF>> backend-srv
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-srv
+  name: backend-deployment
 spec:
   selector:
     matchLabels:
@@ -200,7 +200,8 @@ kubernetes     ClusterIP   10.96.0.1      <none>        443/TCP        100d   <n
 ```
 kubectl delete deployment.apps/backend-deployment service/hello-srv service/frontend-srv deployment.apps/frontend-deployment
 ```
-## We can also club all the Yaml files into one. 
+
+# We can also club all the Yaml files into one. 
 
 ```
 cat <<EOF>> service_project.yaml
