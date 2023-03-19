@@ -344,12 +344,15 @@ pod "test1" deleted
 # Clear the lab 
 
 ```
+kubectl delete deployment.apps/nginx --force --timeout=0
+kubectl delete deployment.apps/test1 -n fubar --force --timeout=0
+kubectl delete deployment.apps/test1-deploy -n kdp1003 --force --timeout=0
+kubectl delete deployment.apps/test1 -n tiger --force --timeout=0
 kubectl delete namespaces  kdp1003 --timeout=0 --force 
 kubectl delete namespaces fubar --timeout=0 --force 
 kubectl delete namespaces metallb-system --timeout=0 --force 
 kubectl delete namespaces --timeout=0 --force tiger
 kubectl delete service/my-service --force --timeout=0
-kubectl delete deployment.apps/nginx --force --timeout=0
 kubectl delete service/my-service-external created --force --timeout=0
 
 rm -f /root/test-service-dir1/clusterip1.yaml
@@ -359,5 +362,6 @@ rm -f /root/test-service-dir1/my-lb-service1.yaml
 rm -f /root/test-service-dir1/IPAddressPool.yaml
 rm -f /root/test-service-dir1/l2advertise.yaml
 rm -f /root/test-service-dir1/external.yaml
+rmdir /root/test-service-dir1/
 ```
 
