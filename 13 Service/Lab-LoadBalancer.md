@@ -33,7 +33,7 @@ metadata:
   name: hello-srv
 spec:
   selector:
-    app: hellokubec
+    app: hello
     tier: backend
   ports:
   - protocol: TCP
@@ -85,6 +85,21 @@ kubectl apply -f service_project.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml
 ```
 
+### Layer 2 configuration
+
+```
+cat <<EOF>>  l2advertise.yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+EOF
+```
+
+```
+kubectl create -f l2advertise.yaml
+```
 ### Configure the IP range for MetalLB.
 ```
 cat <<EOF>> IPAddressPool.yaml
@@ -102,23 +117,12 @@ EOF
 ```
 kubectl create -f IPAddressPool.yaml
 ```
-### Layer 2 configuration
 
-```
-cat <<EOF>>  l2advertise.yaml
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: example
-  namespace: metallb-system
-EOF
-```
-
-```
-kubectl create -f l2advertise.yaml
-```
 
 ### Now, External LB assigned the IP address, Look at External -IP coloumn.
+```
+kubectl get service
+```
 ```
 [root@master1 data-service]# kubectl get service
 NAME           TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
