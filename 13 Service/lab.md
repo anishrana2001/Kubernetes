@@ -345,12 +345,11 @@ kubectl get service
 ```
 
 ```
-[root@master1 ~]# kubectl get service
-NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP                              PORT(S)        AGE
-frontend-srv            LoadBalancer   10.97.40.240    192.168.1.100                            80:31675/TCP   163m
-hello-srv               ClusterIP      10.102.52.221   <none>                                   80/TCP         163m
-kubernetes              ClusterIP      10.96.0.1       <none>                                   443/TCP        101d
-my-service-external     ExternalName   <none>          frontend-srv.default.svc.cluster.local   <none>         7s
+[root@master1 test-service-dir1]# kubectl get service
+NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                            PORT(S)   AGE
+kubernetes            ClusterIP      10.96.0.1        <none>                                 443/TCP   101d
+my-service            ClusterIP      10.103.179.137   <none>                                 80/TCP    16m
+my-service-external   ExternalName   <none>           my-service.default.svc.cluster.local   <none>    4s
 ```
 
 ### 4.4  frontend-srv  will be resolve if we do nsloookup my-service-external
