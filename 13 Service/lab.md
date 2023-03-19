@@ -233,6 +233,19 @@ kubectl create deployment test1 --image=nginx --replicas=3 -n tiger
 ```
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml
 ```
+### L2 layer configuration for MetalLB.
+```
+cat <<EOF>>  l2advertise.yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+EOF
+```
+```
+kubectl create -f l2advertise.yaml
+```
 
 ### How to create Address polling for MetalLB?
 
@@ -274,7 +287,7 @@ cat <<EOF>> external.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: my-service-external
 spec:
   type: ExternalName
   externalName: frontend-srv.default.svc.cluster.local
@@ -293,27 +306,28 @@ kubectl get service
 
 ```
 [root@master1 ~]# kubectl get service
-NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                              PORT(S)        AGE
-frontend-srv   LoadBalancer   10.97.40.240    192.168.1.100                            80:31675/TCP   163m
-hello-srv      ClusterIP      10.102.52.221   <none>                                   80/TCP         163m
-kubernetes     ClusterIP      10.96.0.1       <none>                                   443/TCP        101d
-my-service     ExternalName   <none>          frontend-srv.default.svc.cluster.local   <none>         7s
+NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP                              PORT(S)        AGE
+frontend-srv            LoadBalancer   10.97.40.240    192.168.1.100                            80:31675/TCP   163m
+hello-srv               ClusterIP      10.102.52.221   <none>                                   80/TCP         163m
+kubernetes              ClusterIP      10.96.0.1       <none>                                   443/TCP        101d
+my-service-external     ExternalName   <none>          frontend-srv.default.svc.cluster.local   <none>         7s
 ```
 
 ###  CNAME Record is created.
 ```
-kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service.default.svc.cluster.local
+kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service-external.default.svc.cluster.local
 ```
 
 ```
-[root@master1 ~]# kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service.default.svc.cluster.local
+[root@master1 ~]# kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service-external.default.svc.cluster.local
 Server:    (null)
 Address 1: ::1 localhost
 Address 2: 127.0.0.1 localhost
 
-Name:      my-service.default.svc.cluster.local
+Name:      my-service-external.default.svc.cluster.local
 Address 1: 10.97.40.240 frontend-srv.default.svc.cluster.local
 ```
+
 
 # Clear the lab 
 
@@ -326,7 +340,7 @@ kubectl delete namespaces --timeout=0 --force kdp1003
 kubectl delete namespaces --timeout=0 --force tiger
 kubectl delete service/my-service --force --timeout=0
 kubectl delete deployment.apps/nginx --force --timeout=0
-kubectl delete service/my-service created --force --timeout=0
+kubectl delete service/my-service-external created --force --timeout=0
 
 rm -f test-service-dir1/clusterip1.yaml
 rm -f test-service-dir1/clusterip-fubar.yaml
