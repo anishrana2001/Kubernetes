@@ -266,6 +266,54 @@ curl http://LoadBalancer_IP
 var1_loadbalacer=`kubectl -n tiger get service/my-lb-service1 | awk '{print $4}' | grep -v EXTERNAL` ; echo $var1_loadbalacer
 curl http://$var1_loadbalacer
 ```
+## Type ExternalName 
+
+### Yaml file for ExternalName
+```
+cat <<EOF>> external.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  type: ExternalName
+  externalName: frontend-srv.default.svc.cluster.local
+EOF
+```
+
+### Creating ExternalName name from Yaml file.
+```
+kubectl create -f external.yaml 
+```
+
+###  List the services.
+```
+kubectl get service
+```
+
+```
+[root@master1 ~]# kubectl get service
+NAME           TYPE           CLUSTER-IP      EXTERNAL-IP                              PORT(S)        AGE
+frontend-srv   LoadBalancer   10.97.40.240    192.168.1.100                            80:31675/TCP   163m
+hello-srv      ClusterIP      10.102.52.221   <none>                                   80/TCP         163m
+kubernetes     ClusterIP      10.96.0.1       <none>                                   443/TCP        101d
+my-service     ExternalName   <none>          frontend-srv.default.svc.cluster.local   <none>         7s
+```
+
+###  CNAME Record is created.
+```
+kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service.default.svc.cluster.local
+```
+
+```
+[root@master1 ~]# kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service.default.svc.cluster.local
+Server:    (null)
+Address 1: ::1 localhost
+Address 2: 127.0.0.1 localhost
+
+Name:      my-service.default.svc.cluster.local
+Address 1: 10.97.40.240 frontend-srv.default.svc.cluster.local
+```
 
 # Clear the lab 
 
@@ -278,11 +326,13 @@ kubectl delete namespaces --timeout=0 --force kdp1003
 kubectl delete namespaces --timeout=0 --force tiger
 kubectl delete service/my-service --force --timeout=0
 kubectl delete deployment.apps/nginx --force --timeout=0
+kubectl delete service/my-service created --force --timeout=0
 
-rm -f clusterip1.yaml
-rm -f clusterip-fubar.yaml
-rm -f my-nodeport-service.yaml
-rm -f my-lb-service1.yaml
-rm -f IPAddressPool.yaml
+rm -f test-service-dir1/clusterip1.yaml
+rm -f test-service-dir1/clusterip-fubar.yaml
+rm -f test-service-dir1/my-nodeport-service.yaml
+rm -f test-service-dir1/my-lb-service1.yaml
+rm -f test-service-dir1/IPAddressPool.yaml
+rm -f test-service-dir1/external.yaml
 ```
 
