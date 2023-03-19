@@ -306,6 +306,8 @@ kubectl create -f IPAddressPool.yaml
 ### 3.5.6 Now, you will observe the External IP 
 ```
 kubectl -n tiger get service/my-lb-service1 
+
+
 ```
 ### 3.5.7 You can able to access the External IP address.
 ```
