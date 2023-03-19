@@ -183,6 +183,10 @@ kubectl -n fubar describe service/my-nodeport-service
 ```
 ClusterIP=`kubectl -n fubar get service/my-nodeport-service | awk '{print $3}' | grep -v CLUSTER`; curl http://$ClusterIP
 ```
+### 2.4.1 We can also access the POD web page from our Node_IP:port_number
+
+![image](https://user-images.githubusercontent.com/93471182/226165066-a6ecadcb-a88c-4c67-9e8a-493ff323d0f2.png)
+
 
 ###  2.5 NodePort service from Command line
 #### Create a Deployment test1-deploy under kdp1003 namespace with image nginx and should have 3 replicas. Expose the individual pods via a NodePort on the node on which they are scheduled.
