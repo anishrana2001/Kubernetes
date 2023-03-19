@@ -189,17 +189,39 @@ ClusterIP=`kubectl -n fubar get service/my-nodeport-service | awk '{print $3}' |
 
 
 ###  2.5 NodePort service from Command line
-#### Create a Deployment test1-deploy under kdp1003 namespace with image nginx and should have 3 replicas. Expose the individual pods via a NodePort on the node on which they are scheduled.
+#### 2.5.1 Create a Deployment test1-deploy under kdp1003 namespace with image nginx and should have 3 replicas. Expose the individual pods via a NodePort on the node on which they are scheduled.
 ```
 kubectl -n kdp1003 create deployment test1-deploy --image=nginx
 ```
+
+#### 2.5.2 Exopse the service directly to deployment.
 ```
 kubectl -n kdp1003 expose deployment test1-deploy --name=test1-deploy-svc  --port=80 --target-port=80 --protocol=TCP --type=NodePort
 ```
+
+#### 2.5.3 Explore all the objects under kdp1003
 ```
 kubectl -n kdp1003 get all
 ```
 
+```
+[root@master1 test-service-dir1]# kubectl -n kdp1003 get all
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/test1-deploy-6d8b567b96-t8g2b   1/1     Running   0          10s
+
+NAME                       TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+service/test1-deploy-svc   NodePort   10.105.165.87   <none>        80:32121/TCP   4s
+
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/test1-deploy   1/1     1            1           10s
+
+NAME                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/test1-deploy-6d8b567b96   1         1         1       10s
+
+```
+#### 2.5.4 Access the POD web page from Laptop browser.
+
+![image](https://user-images.githubusercontent.com/93471182/226165255-c1067f18-6b94-4aa9-9dad-ae8028c6c75b.png)
 
 
 ## 3 How to create LoadBalancer?
@@ -352,13 +374,13 @@ kubectl delete deployment.apps/nginx --force --timeout=0
 kubectl delete deployment.apps/test1 -n fubar --force --timeout=0
 kubectl delete deployment.apps/test1-deploy -n kdp1003 --force --timeout=0
 kubectl delete deployment.apps/test1 -n tiger --force --timeout=0
+kubectl delete service/my-service --force --timeout=0
+kubectl delete service/test1-deploy-svc kdp1003 --force --timeout=0
+kubectl delete service/my-service-external created --force --timeout=0
 kubectl delete namespaces  kdp1003 --timeout=0 --force 
 kubectl delete namespaces fubar --timeout=0 --force 
 kubectl delete namespaces metallb-system --timeout=0 --force 
 kubectl delete namespaces --timeout=0 --force tiger
-kubectl delete service/my-service --force --timeout=0
-kubectl delete service/my-service-external created --force --timeout=0
-
 rm -f /root/test-service-dir1/clusterip1.yaml
 rm -f /root/test-service-dir1/clusterip-fubar.yaml
 rm -f /root/test-service-dir1/my-nodeport-service.yaml
