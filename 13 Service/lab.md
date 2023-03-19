@@ -3,8 +3,8 @@
 
 ## prerequisite
 ```
-mkdir test-service-dir1
-cd test-service-dir1
+mkdir /root/test-service-dir1
+cd /root/test-service-dir1
 kubectl create namespace fubar
 kubectl create namespace tiger
 kubectl create namespace kdp1003
@@ -332,22 +332,20 @@ pod "test1" deleted
 # Clear the lab 
 
 ```
-kubectl delete namespaces --timeout=0 --force  kdp1003
-kubectl delete namespaces --timeout=0 --force  fubar
-kubectl delete namespaces --timeout=0 --force  development
-kubectl delete namespaces --timeout=0 --force metallb-system
-kubectl delete namespaces --timeout=0 --force kdp1003
+kubectl delete namespaces  kdp1003 --timeout=0 --force 
+kubectl delete namespaces fubar --timeout=0 --force 
+kubectl delete namespaces metallb-system --timeout=0 --force 
 kubectl delete namespaces --timeout=0 --force tiger
 kubectl delete service/my-service --force --timeout=0
 kubectl delete deployment.apps/nginx --force --timeout=0
 kubectl delete service/my-service-external created --force --timeout=0
 
-rm -f test-service-dir1/clusterip1.yaml
-rm -f test-service-dir1/clusterip-fubar.yaml
-rm -f test-service-dir1/my-nodeport-service.yaml
-rm -f test-service-dir1/my-lb-service1.yaml
-rm -f test-service-dir1/IPAddressPool.yaml
-rm -f test-service-dir1/l2advertise.yaml
-rm -f test-service-dir1/external.yaml
+rm -f /root/test-service-dir1/clusterip1.yaml
+rm -f /root/test-service-dir1/clusterip-fubar.yaml
+rm -f /root/test-service-dir1/my-nodeport-service.yaml
+rm -f /root/test-service-dir1/my-lb-service1.yaml
+rm -f /root/test-service-dir1/IPAddressPool.yaml
+rm -f /root/test-service-dir1/l2advertise.yaml
+rm -f /root/test-service-dir1/external.yaml
 ```
 
