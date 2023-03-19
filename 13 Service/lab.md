@@ -371,6 +371,7 @@ pod "test1" deleted
 # Clear the lab 
 
 ```
+cd ..
 kubectl delete deployment.apps/nginx --force --timeout=0
 kubectl delete deployment.apps/test1 -n fubar --force --timeout=0
 kubectl delete deployment.apps/test1-deploy -n kdp1003 --force --timeout=0
