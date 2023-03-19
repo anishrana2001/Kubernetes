@@ -84,6 +84,30 @@ kubectl apply -f service_project.yaml
 ```
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml
 ```
+### The above Yaml file will create 1 deployment (controller), 1 DaemonSet (speaker), ClusterIP service,
+```
+kubectl  -n metallb-system get all
+```
+```
+[root@master1 ~]# kubectl  -n metallb-system get all
+NAME                              READY   STATUS    RESTARTS   AGE
+pod/controller-844979dcdc-vnzr7   1/1     Running   0          6m12s
+pod/speaker-2b8f4                 1/1     Running   0          6m12s
+pod/speaker-fl9bb                 1/1     Running   0          6m12s
+pod/speaker-z984n                 1/1     Running   0          6m12s
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/webhook-service   ClusterIP   10.107.24.215   <none>        443/TCP   6m12s
+
+NAME                     DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+daemonset.apps/speaker   3         3         3       3            3           kubernetes.io/os=linux   6m12s
+
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/controller   1/1     1            1           6m12s
+
+NAME                                    DESIRED   CURRENT   READY   AGE
+replicaset.apps/controller-844979dcdc   1         1         1       6m12s
+```
 
 ### Layer 2 configuration
 
