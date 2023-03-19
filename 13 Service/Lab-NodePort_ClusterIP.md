@@ -297,6 +297,8 @@ kubectl get endpoints
 ```
 kubectl delete deployment.apps/backend-deployment service/hello-srv service/frontend-srv deployment.apps/frontend-deployment
 cd /data-service
-rm -f hello-srv.yaml frontend-deployment.yaml frontend-srv.yaml backend-deployment.yaml service_project.yaml
+rm -f /data-service/frontendser.yaml /data-service/service_project.yaml /data-service/IPAddressPool.yaml /data-service/l2advertise.yaml
+cd ..
+rmdir /data-service
 ```
 
