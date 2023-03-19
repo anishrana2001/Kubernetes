@@ -333,6 +333,7 @@ rm -f test-service-dir1/clusterip-fubar.yaml
 rm -f test-service-dir1/my-nodeport-service.yaml
 rm -f test-service-dir1/my-lb-service1.yaml
 rm -f test-service-dir1/IPAddressPool.yaml
+rm -f test-service-dir1/l2advertise.yaml
 rm -f test-service-dir1/external.yaml
 ```
 
