@@ -290,7 +290,7 @@ metadata:
   name: my-service-external
 spec:
   type: ExternalName
-  externalName: frontend-srv.default.svc.cluster.local
+  externalName: my-service.default.svc.cluster.local
 EOF
 ```
 
@@ -315,17 +315,17 @@ my-service-external     ExternalName   <none>          frontend-srv.default.svc.
 
 ###  CNAME Record is created.
 ```
-kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service-external.default.svc.cluster.local
+kubectl run --rm -it test1 --image=gcr.io/google-samples/hello-go-gke:1.0  -- nslookup my-service-external.default.svc.cluster.local
 ```
 
 ```
-[root@master1 ~]# kubectl exec -it backend-deployment-664dcf7b6f-kgskw -- nslookup my-service-external.default.svc.cluster.local
-Server:    (null)
+[root@master1 test-service-dir1]# kubectl run --rm -it test1 --image=gcr.io/google-samples/hello-go-gke:1.0  -- nslookup my-service-external.default.svc.cluster.local
 Address 1: ::1 localhost
 Address 2: 127.0.0.1 localhost
 
 Name:      my-service-external.default.svc.cluster.local
-Address 1: 10.97.40.240 frontend-srv.default.svc.cluster.local
+Address 1: 10.103.138.72 my-service.default.svc.cluster.local
+pod "test1" deleted
 ```
 
 
