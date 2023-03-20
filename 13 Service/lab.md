@@ -191,7 +191,7 @@ ClusterIP=`kubectl -n fubar get service/my-nodeport-service | awk '{print $3}' |
 ###  2.5 NodePort service from Command line
 #### 2.5.1 Create a Deployment test1-deploy under kdp1003 namespace with image nginx and should have 3 replicas. Expose the individual pods via a NodePort on the node on which they are scheduled.
 ```
-kubectl -n kdp1003 create deployment test1-deploy --image=nginx
+kubectl -n kdp1003 create deployment test1-deploy --image=nginx --replicas=3
 ```
 
 #### 2.5.2 Exopse the service directly to deployment.
