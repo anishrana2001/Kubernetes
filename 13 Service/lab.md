@@ -383,6 +383,7 @@ kubectl delete namespaces  kdp1003 --timeout=0 --force
 kubectl delete namespaces fubar --timeout=0 --force 
 kubectl delete namespaces metallb-system --timeout=0 --force 
 kubectl delete namespaces --timeout=0 --force tiger
+kubectl delete service/my-service-external
 rm -f /root/test-service-dir1/clusterip1.yaml
 rm -f /root/test-service-dir1/clusterip-fubar.yaml
 rm -f /root/test-service-dir1/my-nodeport-service.yaml
