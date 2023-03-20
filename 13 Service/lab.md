@@ -346,10 +346,10 @@ kubectl get service
 
 ```
 [root@master1 test-service-dir1]# kubectl get service
-NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                            PORT(S)   AGE
-kubernetes            ClusterIP      10.96.0.1        <none>                                 443/TCP   101d
-my-service            ClusterIP      10.103.179.137   <none>                                 80/TCP    16m
-my-service-external   ExternalName   <none>           my-service.default.svc.cluster.local   <none>    4s
+NAME                  TYPE           CLUSTER-IP     EXTERNAL-IP                            PORT(S)   AGE
+kubernetes            ClusterIP      10.96.0.1      <none>                                 443/TCP   102d
+my-service            ClusterIP      10.96.128.60   <none>                                 80/TCP    35m
+my-service-external   ExternalName   <none>         my-service.default.svc.cluster.local   <none>    5m30s
 ```
 
 ### 4.4  frontend-srv  will be resolve if we do nsloookup my-service-external
@@ -359,12 +359,16 @@ kubectl run --rm -it test1 --image=gcr.io/google-samples/hello-go-gke:1.0  -- ns
 
 ```
 [root@master1 test-service-dir1]# kubectl run --rm -it test1 --image=gcr.io/google-samples/hello-go-gke:1.0  -- nslookup my-service-external.default.svc.cluster.local
+If you don't see a command prompt, try pressing enter.
+warning: couldn't attach to pod/test1, falling back to streaming logs: unable to upgrade connection: container test1 not found in pod test1_default
+Server:    (null)
 Address 1: ::1 localhost
 Address 2: 127.0.0.1 localhost
 
 Name:      my-service-external.default.svc.cluster.local
-Address 1: 10.103.138.72 my-service.default.svc.cluster.local
+Address 1: 10.96.128.60 my-service.default.svc.cluster.local
 pod "test1" deleted
+[root@master1 test-service-dir1]# 
 ```
 
 
