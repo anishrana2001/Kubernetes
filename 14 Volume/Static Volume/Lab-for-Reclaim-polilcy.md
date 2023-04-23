@@ -102,4 +102,5 @@ persistentvolume/nfs-pv   3Gi        RWX            Retain           Released   
 ## Clear the LAB
 ```
 kubectl delete -f PersistentVolumeClaim.yaml -f PersistentVolume.yaml
+rm -f PersistentVolumeClaim.yaml PersistentVolume.yaml
 ```
