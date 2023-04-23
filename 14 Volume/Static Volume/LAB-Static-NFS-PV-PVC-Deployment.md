@@ -119,5 +119,12 @@ root@static-deployment1-88b7d5d8c-m7ztz:/# cd /var/www/html/
 root@static-deployment1-88b7d5d8c-m7ztz:/var/www/html# cat static-file1.txt 
 1st line update from static-nfs-pod
 2nd line update from NFS server
-root@static-deployment1-88b7d5d8c-m7ztz:/var/www/html# 
+root@static-deployment1-88b7d5d8c-m7ztz:/var/www/html# exit
+```
+
+## clear the lab
+```
+kubectl delete -f deployment.yaml -f PersistentVolumeClaim.yaml -f PersistentVolume.yaml
+[root@server1 nfsshare]# rm -f static-file1.txt 
+[root@server1 nfsshare]#
 ```
