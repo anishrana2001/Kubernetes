@@ -125,6 +125,7 @@ root@static-deployment1-88b7d5d8c-m7ztz:/var/www/html# exit
 ## clear the lab
 ```
 kubectl delete -f deployment.yaml -f PersistentVolumeClaim.yaml -f PersistentVolume.yaml
+rm -f PersistentVolumeClaim.yaml deployment.yaml PersistentVolume.yaml
 [root@server1 nfsshare]# rm -f static-file1.txt 
 [root@server1 nfsshare]#
 ```
