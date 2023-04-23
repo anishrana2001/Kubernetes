@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-pod1
+  namespace: core
+spec:
+  containers:
+  - image: nginx
+    name: emptydir-container1
