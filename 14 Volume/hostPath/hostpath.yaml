@@ -1,6 +1,3 @@
-# POD yaml file for hostPath
-
-```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -15,4 +12,3 @@ spec:
   containers:
   - image: nginx
     name: hostpath-container2
-```
