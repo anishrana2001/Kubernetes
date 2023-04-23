@@ -1,0 +1,18 @@
+# POD yaml file for hostPath
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod2
+  namespace: core
+spec:
+  volumes:
+  - name: vol1-hostpath
+    hostPath:
+      path: /home/nfssharedata
+     type: DirectoryOrCreate
+  containers:
+  - image: nginx
+    name: hostpath-container2
+```
