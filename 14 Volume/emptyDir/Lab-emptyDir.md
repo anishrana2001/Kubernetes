@@ -183,6 +183,10 @@ drwxr-x---  5 root root 71 Apr 23 08:11 5ee04802-b89f-408b-a5b3-9d40ae7ce359
 [root@workernode2 ~]#
 ```
 
+## Clear the lab 
+```
+kubectl delete -f pod-emptyDir.yaml
+```
 
 
 
