@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stat-deployment
+  namespace: default
+  labels:
+    app: static-nfs-volume
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: static-nfs-volume
+  template:
+    metadata:
+      labels:
+        app: static-nfs-volume
+    spec:
+     - name: static-nfs-vol-container
+       image: nginx
+       volumeMounts:
+       - mountPath: "/var/www/html"
+         name: mypd
