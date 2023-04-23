@@ -122,12 +122,12 @@ pod "hostpath-pod2" deleted
 ```
 
 ## I can still access the file
-```
+``
 [root@workernode2 ~]# cat /home/nfssharedata/file1.txt 
 Line udpated from container
 2nd line updated from workernode2
 [root@workernode2 ~]# 
-```
+``
 
 ## Create the POD againa & check if I can access to file "file1.txt"
 
