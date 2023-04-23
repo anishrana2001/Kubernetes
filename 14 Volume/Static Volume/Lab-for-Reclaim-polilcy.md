@@ -99,3 +99,7 @@ NAME                      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     
 persistentvolume/nfs-pv   3Gi        RWX            Retain           Released   default/task-pv-claim   nfs                     2m8s
 ```
 
+## Clear the LAB
+```
+kubectl delete -f PersistentVolumeClaim.yaml -f PersistentVolume.yaml
+```
