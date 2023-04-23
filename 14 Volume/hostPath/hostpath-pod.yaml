@@ -8,7 +8,13 @@ spec:
   - name: vol1-hostpath
     hostPath:
       path: /home/nfssharedata
-     type: DirectoryOrCreate
+      type: DirectoryOrCreate
   containers:
   - image: nginx
     name: hostpath-container2
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: core
+  
