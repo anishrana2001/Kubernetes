@@ -1,6 +1,4 @@
-# emptyDir POD Yaml file
 
-```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -17,4 +15,3 @@ spec:
     volumeMounts:
     - mountPath: /cache
       name: vol1-emptydir
-```
