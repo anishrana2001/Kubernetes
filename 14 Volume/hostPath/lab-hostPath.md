@@ -64,7 +64,7 @@ tmpfs           1.1G     0  1.1G   0% /proc/scsi
 tmpfs           1.1G     0  1.1G   0% /sys/firmware
 ```
 
-## Create the file in the container
+## Create the file under volume director in the container.
 ```
 root@hostpath-pod2:/# cd /vol1/
 
@@ -78,7 +78,7 @@ Line udpated from container
 root@hostpath-pod2:/vol1# 
 ```
 
-## Check the workernode
+## Check the pod on which workernode it is created.
 ```
 [root@master1 volume]# kubectl -n core get pods -o wide
 NAME            READY   STATUS    RESTARTS   AGE   IP             NODE                      NOMINATED NODE   READINESS GATES
@@ -89,7 +89,7 @@ hostpath-pod2   1/1     Running   0          23m   172.16.14.84   workernode2.ex
 ## Go to the directory on this workernode2 and update the file1.txt
 
 ```
-[root@workernode2 ~]# ls -l /home/nfssharedata/
+[root@**workernode2** ~]# ls -l /home/nfssharedata/
 total 4
 -rw-r--r-- 1 root root 28 Apr 23 11:30 file1.txt
 
