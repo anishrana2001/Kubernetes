@@ -1,8 +1,73 @@
 # LAB for NFS Static Volume
 
 ## Create the PV, PVC and Deployment.
+```yaml
+cat <<EOF>> LAB-Static-NFS-PV-PVC-Deployment.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: nfs-pv
+spec:
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 3Gi
+  volumeMode: Filesystem
+  nfs:
+    path: /home/nfsshare
+    server: 192.168.1.34   # NFS server IP address
+  storageClassName: nfs
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-deployment1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-deployment1
+  template:
+    metadata:
+      labels:
+        app: static-deployment1
+    spec:
+      containers:
+        - name: static-nfs-container1
+          image: nginx
+          volumeMounts:
+            - name: static-nfs-volume
+              mountPath: "/var/www/html"
+      volumes:
+        - name: static-nfs-volume
+          persistentVolumeClaim: 
+            claimName: task-pv-claim
+EOF
 ```
-kubectl apply -f deployment.yaml -f PersistentVolumeClaim.yaml -f PersistentVolume.yaml
+## Apply the yaml file.
+```
+kubectl apply -f LAB-Static-NFS-PV-PVC-Deployment.yaml
+```
+## Check the status of PV and PVC
+```
+kubectl get pv,pvc
 ```
 ```
 [root@master1 volume]# kubectl get pv,pvc
@@ -14,6 +79,9 @@ persistentvolumeclaim/task-pv-claim   Bound    nfs-pv   3Gi        RWX          
 
 ```
 
+```
+ kubectl get pods
+ ```
 ```
 [root@master1 volume]# kubectl get pods
 NAME                                 READY   STATUS    RESTARTS   AGE
