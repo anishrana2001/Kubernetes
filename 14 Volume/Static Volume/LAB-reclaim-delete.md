@@ -10,7 +10,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  persistentVolumeReclaimPolicy: Delete   #### Data will be deleted.
+  persistentVolumeReclaimPolicy: Delete   #### Data will be deleted??
   capacity:
     storage: 3Gi
   volumeMode: Filesystem
@@ -171,4 +171,8 @@ kubectl delete pv nfs-pv
 ```
 kubectl delete -f reclaim-policy-Delete.yaml
 rm -f reclaim-policy-Delete.yaml
+```
+### Remove the file from NFS server
+```
+ rm -f relaim-delete.txt
 ```
