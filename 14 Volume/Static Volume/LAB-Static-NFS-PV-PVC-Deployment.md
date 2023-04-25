@@ -110,7 +110,9 @@ root@static-deployment1-88b7d5d8c-7n7k8:/# cd /var/www/html/
 root@static-deployment1-88b7d5d8c-7n7k8:/var/www/html#
 ```
 
-## Create the file in the pod.
+
+
+## Create a file inside the pod.
 
 ```
 root@static-deployment1-88b7d5d8c-7r9rt:/var/www/html# ls -ltr
