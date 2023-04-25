@@ -168,8 +168,38 @@ persistentvolume/pvc-21f33b59-7ab9-4605-ab7f-6dd4c786d4ed   1Mi        RWX      
 NAME                               STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 persistentvolumeclaim/test-claim   Bound    pvc-21f33b59-7ab9-4605-ab7f-6dd4c786d4ed   1Mi        RWX            nfs-client     2m37s
 ```
+## Check the NFS server, you must observe one new directory under /home/nfsshare.
+
+```
+[root@server1 nfsshare]# ls -ltr
+total 0
+drwxrwxrwx. 2 root root 6 Apr 25 22:02 default-test-claim-pvc-4ef753ab-a57a-41d5-aaf7-2eb1dda02df3
+[root@server1 nfsshare]#
+
+[root@server1 nfsshare]# cd default-test-claim-pvc-4ef753ab-a57a-41d5-aaf7-2eb1dda02df3/
+
+[root@server1 default-test-claim-pvc-4ef753ab-a57a-41d5-aaf7-2eb1dda02df3]# ls -ltr
+total 0
+
+[root@server1 default-test-claim-pvc-4ef753ab-a57a-41d5-aaf7-2eb1dda02df3]# echo "hi" > file.txt
+
+[root@server1 default-test-claim-pvc-4ef753ab-a57a-41d5-aaf7-2eb1dda02df3]# cat file.txt 
+hi
 
 
+```
+
+## Now, delete the PVC, it should remove this newly created directory.
+```
+kubectl delete pvc/test-claim 
+```
+```
+[root@server1 ~]# cd /home/nfsshare/
+[root@server1 nfsshare]# ls -ltr
+total 0
+```
+
+## It means that, by default reclaim policy is delete and PV will get this value from StorageClass. 
 ## Clear the Lab
 ```
 kubectl delete -f dynamic-volume.yaml
