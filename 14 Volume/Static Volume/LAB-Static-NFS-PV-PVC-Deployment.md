@@ -69,14 +69,14 @@ kubectl apply -f LAB-Static-NFS-PV-PVC-Deployment.yaml
 ```
 kubectl get pv,pvc
 ```
-``
+```
 [root@master1 volume]# kubectl get pv,pvc
 NAME                      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS   REASON   AGE
 persistentvolume/nfs-pv   3Gi        RWX            **Retain**           Bound    default/task-pv-claim   nfs                     33s
 
 NAME                                  STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 persistentvolumeclaim/task-pv-claim   Bound    nfs-pv   3Gi        RWX            nfs            34s
-``
+```
 
 ```
  kubectl get pods
