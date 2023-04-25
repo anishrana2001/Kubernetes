@@ -87,19 +87,19 @@ persistentvolumeclaim/task-pv-claim   Bound    nfs-pv   3Gi        RWX          
 NAME                                 READY   STATUS    RESTARTS   AGE
 static-deployment1-88b7d5d8c-7r9rt   0/1     Running   0          26m
 ```
-```
+<pre>
 root@static-deployment1-88b7d5d8c-7r9rt:/# df -h
 Filesystem                   Size  Used Avail Use% Mounted on
 overlay                       14G  6.1G  8.0G  44% /
 tmpfs                         64M     0   64M   0% /dev
 shm                           64M     0   64M   0% /dev/shm
 /dev/sda2                     14G  6.1G  8.0G  44% /etc/hosts
-192.168.1.34:/home/nfsshare   15G  4.8G   11G  32% /var/www/html   >>>>>>>
+192.168.1.34:/home/nfsshare   15G  4.8G   11G  32% **/var/www/html **  >>>>>>>
 tmpfs                        2.1G   12K  2.1G   1% /run/secrets/kubernetes.io/serviceaccount
 tmpfs                        1.1G     0  1.1G   0% /proc/acpi
 tmpfs                        1.1G     0  1.1G   0% /proc/scsi
 tmpfs                        1.1G     0  1.1G   0% /sys/firmware
-```
+</pre>
 
 ```
 [root@master1 volume]# kubectl exec -it pods/static-deployment1-88b7d5d8c-7r9rt -- /bin/bash
