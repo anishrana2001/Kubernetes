@@ -116,7 +116,7 @@ root@hostpath-pod2:/vol1#
 
 ## Now, delete the pod and check the file1.txt on workernode2
 ```
-[root@master1 volume]# kubectl delete -f hostpath-pod.yaml 
+[root@master1 volume]#  kubectl delete -f hostPath-pod.yaml 
 namespace "core" deleted
 pod "hostpath-pod2" deleted
 [root@master1 volume]#
