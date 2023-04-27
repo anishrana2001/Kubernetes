@@ -24,7 +24,7 @@ spec:
     volumeMounts:
     - mountPath: /vol1
       name: vol1-hostpath
-    EOF
+EOF
 ```
 
 ## create pod through yaml file
@@ -52,6 +52,7 @@ kubectl -n core exec -it pods/hostpath-pod2 -- /bin/bash
 ## Verify the volume
 
 ```
+[root@master1 volume]#  kubectl -n core exec -it pods/hostpath-pod2 -- /bin/bash
 root@hostpath-pod2:/# df -h
 Filesystem      Size  Used Avail Use% Mounted on
 overlay          14G  6.1G  8.0G  44% /
@@ -71,9 +72,9 @@ root@hostpath-pod2:/# cd /vol1/
 root@hostpath-pod2:/vol1# ls -ltr
 total 0
 
-root@hostpath-pod2:/vol1# echo "Line udpated from container" > file1.txt
+root@hostpath-pod2:/vol1# echo "Line udpated from pod" > hostpath.txt
 
-root@hostpath-pod2:/vol1# cat file1.txt 
+root@hostpath-pod2:/vol1# cat hostpath.txt 
 Line udpated from container
 root@hostpath-pod2:/vol1# 
 ```
@@ -91,14 +92,14 @@ hostpath-pod2   1/1     Running   0          23m   172.16.14.84   workernode2.ex
 ```
 [root@**workernode2** ~]# ls -l /home/nfssharedata/
 total 4
--rw-r--r-- 1 root root 28 Apr 23 11:30 file1.txt
+-rw-r--r-- 1 root root 28 Apr 23 11:30 hostpath.txt
 
-[root@workernode2 ~]# cat /home/nfssharedata/file1.txt 
+[root@workernode2 ~]# cat /home/nfssharedata/hostpath.txt 
 Line udpated from container
 
-[root@workernode2 ~]# echo "2nd line updated from workernode2" >> /home/nfssharedata/file1.txt 
+[root@workernode2 ~]# echo "2nd line updated from workernode2" >> /home/nfssharedata/hostpath.txt 
 
-[root@workernode2 ~]# cat /home/nfssharedata/file1.txt 
+[root@workernode2 ~]# cat /home/nfssharedata/hostpath.txt 
 Line udpated from container
 2nd line updated from workernode2
 [root@workernode2 ~]# 
@@ -107,7 +108,7 @@ Line udpated from container
 ## Check the udpate file in the container
 
 ```
-root@hostpath-pod2:/vol1# cat file1.txt 
+root@hostpath-pod2:/vol1# cat hostpath.txt 
 Line udpated from container
 2nd line updated from workernode2
 root@hostpath-pod2:/vol1#
@@ -123,7 +124,7 @@ pod "hostpath-pod2" deleted
 
 ## I can still access the file
 ```
-[root@workernode2 ~]# cat /home/nfssharedata/file1.txt 
+[root@workernode2 ~]# cat /home/nfssharedata/hostpath.txt 
 Line udpated from container
 2nd line updated from workernode2
 [root@workernode2 ~]# 
@@ -139,7 +140,7 @@ pod/hostpath-pod2 created
 [root@master1 volume]# kubectl -n core exec -it pods/hostpath-pod2 -- /bin/bash
 root@hostpath-pod2:/# cd /vol1/
 
-root@hostpath-pod2:/vol1# cat file1.txt 
+root@hostpath-pod2:/vol1# cat hostpath.txt 
 Line udpated from container
 2nd line updated from workernode2
 root@hostpath-pod2:/vol1# 
