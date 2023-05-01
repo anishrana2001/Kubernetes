@@ -149,5 +149,5 @@ root@hostpath-pod2:/vol1#
 ## Clear the lab
 ### We have already deleted the pod, so that we can check if file is exsist on the server or not.
 ```
-rm -f hostPath-pod.yaml 
+rm -f hostPath-pod.yaml
 ```
