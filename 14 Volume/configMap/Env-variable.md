@@ -35,7 +35,7 @@ spec:
         - configMapRef:
             name: example-configmap
 EOF
-
+```
 ### Create the objects from yaml file.
 ```
 kubectl apply -f configmap-env.yaml
