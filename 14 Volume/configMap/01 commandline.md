@@ -11,7 +11,7 @@ kind: Deployment
 metadata:
   name: env-deploy1
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: env-deploy1
