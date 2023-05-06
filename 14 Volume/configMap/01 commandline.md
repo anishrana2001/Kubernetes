@@ -47,7 +47,6 @@ kubectl exec -it $(kubectl get pods | grep env-deploy1 | grep Running | awk '{pr
 ```
 kubectl delete deployments.apps env-deploy1
 kubectl delete configmap command-configmap
-kubectl delete configmaps command-configmap
 rm -f command-env.yaml
 ```
 
