@@ -98,12 +98,12 @@ example-configmap1   3      2m55s
 ```
 ### Login into one pod and check the environment variables. 
 ```
-kubectl -n core  exec -it $(kubectl -n core get pods | grep "volume-deploy" | awk '{print $1}' | head -n 1) -- env
+kubectl -n core  exec -it $(kubectl -n core get pods | grep "nginx" | awk '{print $1}' | head -n 1) -- env
 ```
 
 ### You will not observe key-values in the environment.
 ```
-[root@master1 volume]# kubectl -n core  exec -it $(kubectl -n core get pods | grep "volume-deploy" | awk '{print $1}' | head -n 1) -- env
+[root@master1 volume]# kubectl -n core  exec -it $(kubectl -n core get pods | grep "nginx" | awk '{print $1}' | head -n 1) -- env
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=volume-deploy-66df575d5b-25qvm
 NGINX_VERSION=1.23.4
@@ -123,11 +123,11 @@ HOME=/root
 
 ### You will observe, 3 files created under /etc/config/ direcotry.
 ```
-kubectl -n core  exec -it $(kubectl -n core get pods | grep "volume-deploy" | awk '{print $1}' | head -n 1) -- ls -ltr /etc/config
+kubectl -n core  exec -it $(kubectl -n core get pods | grep "nginx" | awk '{print $1}' | head -n 1) -- ls -ltr /etc/config
 ```
 ### command output for your references.
 ```
-[root@master1 volume]# kubectl -n core  exec -it $(kubectl -n core get pods | grep "volume-deploy" | awk '{print $1}' | head -n 1) -- ls -ltr /etc/config
+[root@master1 volume]# kubectl -n core  exec -it $(kubectl -n core get pods | grep "nginx" | awk '{print $1}' | head -n 1) -- ls -ltr /etc/config
 total 0
 lrwxrwxrwx 1 root root 15 May  5 17:28 language -> ..data/language
 lrwxrwxrwx 1 root root 19 May  5 17:28 environments -> ..data/environments
@@ -136,11 +136,11 @@ lrwxrwxrwx 1 root root 17 May  5 17:28 NGINX_PORT -> ..data/NGINX_PORT
 
 ### We can also open this file by using cat command.
 ```
-kubectl -n core  exec -it $(kubectl -n core get pods | grep "volume-deploy" | awk '{print $1}' | head -n 1) -- cat /etc/config/language ; echo
+kubectl -n core  exec -it $(kubectl -n core get pods | grep "nginx" | awk '{print $1}' | head -n 1) -- cat /etc/config/language ; echo
 ```
 ### command output for your references.
 ```
-[root@master1 volume]# kubectl -n core  exec -it $(kubectl -n core get pods | grep "volume-deploy" | awk '{print $1}' | head -n 1) -- cat /etc/config/language ; echo
+[root@master1 volume]# kubectl -n core  exec -it $(kubectl -n core get pods | grep "nginx" | awk '{print $1}' | head -n 1) -- cat /etc/config/language ; echo
 english
 ```
 
