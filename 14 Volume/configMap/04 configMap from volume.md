@@ -1,8 +1,12 @@
 ## How to insert the configMap from volume?
 
+## Create the namespace
+```
+kubectl create namespace core
+```
 ### yaml file for configMap and deployment.
 ```
-cat configmap-volume.yaml
+cat <<EOF>>configmap-volume.yaml
 kind: ConfigMap 
 apiVersion: v1 
 metadata:
