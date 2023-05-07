@@ -35,6 +35,11 @@ spec:
 EOF
 ```
 
+## Create the object from above yaml file.
+```
+ kubectl apply -f env-file-deploy.yaml
+ ```
+
 ### Checking the environment variables of the container.
 ```
 kubectl   exec -it $(kubectl  get pods | grep "env-deploy1" | awk '{print $1}' | head -n 1) -- env
