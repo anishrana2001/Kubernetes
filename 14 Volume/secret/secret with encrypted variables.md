@@ -133,6 +133,7 @@ kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod2) --
 ```
 
 ### For your references.
+```
 [root@master1 volume]# kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod2) -- env ; echo
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 HOSTNAME=secret-env-pod2
@@ -154,7 +155,7 @@ KUBERNETES_SERVICE_PORT=443
 KUBERNETES_SERVICE_PORT_HTTPS=443
 TERM=xterm
 HOME=/root
-
+```
 
 ## Now, edit the secret and check if our container is updated ?
 ```
@@ -166,6 +167,8 @@ kubectl -n tiger  edit secrets prod-db-secret2
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod2) -- env | grep SECRET
 ```
+
+```
 [root@master1 volume]# echo -n Mysql789 | base64 
 TXlzcWw3ODk=
 [root@master1 volume]# kubectl -n tiger  edit secrets prod-db-secret2 
@@ -174,7 +177,7 @@ secret/prod-db-secret2 edited
 SECRET_USERNAME=database
 SECRET_PASSWORD=Mysql123
 [root@master1 volume]# 
-
+```
 ## We have to delete the exsisting POD then again create the pods to get the modified values.
 
 ```
