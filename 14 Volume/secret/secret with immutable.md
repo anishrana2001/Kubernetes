@@ -1,3 +1,4 @@
+<span style="color:blue">some *blue* text</span>.
 # LAB for secret with **immutable**   
 ## Encrypt the variables
 ```
