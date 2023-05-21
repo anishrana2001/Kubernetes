@@ -9,11 +9,16 @@ echo -n Mysql123 | base64
 
 ### For your references. 
 
-[root@master1 volume]# echo -n database | base64 
+[root@master1 volume]# echo -n database | base64
+
 ZGF0YWJhc2U=
+
 [root@master1 volume]# echo -n Mysql123 | base64 
+
 TXlzcWwxMjM=
+
 [root@master1 volume]# 
+
 
 
 ## How to create Namespace from Yaml file?
