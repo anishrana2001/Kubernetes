@@ -1,5 +1,12 @@
 # LAB for secret with encrypted variables.   
 
+## Encrypt the variables 
+```
+echo -n database | base64
+```
+``` 
+echo -n Mysql123 | base64
+```
 ### For your references. 
 ```
 [root@master1 volume]# echo -n database | base64 
