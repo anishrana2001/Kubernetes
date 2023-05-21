@@ -1,14 +1,4 @@
-<font color='red'>test blue color font</font>
-
-a[href='red'] {
-    color: red;
-    pointer-events: none;
-    cursor: default;
-    text-decoration: none;
-}
-<a href="red">Look, ma! Red!</a>
-
-# LAB for secret with **immutable**   
+# LAB for secret with **immutable**:
 ## Encrypt the variables
 ```
 echo -n database | base64
