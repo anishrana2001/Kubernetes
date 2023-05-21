@@ -8,6 +8,7 @@ echo -n Mysql123 | base64
 ```
 
 ### For your references. 
+
 [root@master1 volume]# echo -n database | base64 
 ZGF0YWJhc2U=
 [root@master1 volume]# echo -n Mysql123 | base64 
@@ -32,7 +33,7 @@ kubectl create -f tiger.yaml
 ## Create a secret
 ### Step 1: Create a secret under tiger namespace with encrypted data (base64).
 
-```
+```yaml
 cat <<EOF>>prod-db-secret3.yaml
 apiVersion: v1 
 kind: Secret 
@@ -62,7 +63,7 @@ kubectl -n tiger get secrets prod-db-secret3
 ## 1. POD consuming secret by volume.
 
 ### Step 1: Creating a POD under namespace **tiger** and insert the variables from **volume**.
-```
+```yaml
 cat <<EOF>>secret-volume-pod3.yaml
 apiVersion: v1
 kind: Pod
@@ -134,10 +135,10 @@ error: Edit cancelled, no valid changes were saved.
 
 ## Clear the Lab
 ```
-kubectl delete -n tiger pods/secret-env-pod3 pods/secret-volume-pod3
-kubectl delete secrets -n tiger prod-db-secret3 
-rm -f prod-db-secret3.yaml secret-volume-pod3.yaml secret-env-pod3.yaml
-kubectl get all -n tiger
+kubectl delete -n tiger pods/secret-volume-pod3 secrets/prod-db-secret3
+kubectl delete namespaces tiger
+rm -f prod-db-secret3.yaml secret-volume-pod3.yaml  tiger.yaml
+ls -ltr
 ```
 
    
