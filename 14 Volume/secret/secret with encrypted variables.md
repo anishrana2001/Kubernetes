@@ -1,12 +1,13 @@
 # LAB for secret with encrypted variables.   
 
 ### For your references. 
+```
 [root@master1 volume]# echo -n  database | base64 
 ZGF0YWJhc2U=
 [root@master1 volume]# echo -n Mysql123 | base64 
 TXlzcWwxMjM=
 [root@master1 volume]# 
-
+```
 
 ## How to create Namespace from Yaml file?
 ```yaml 
@@ -22,7 +23,7 @@ kubectl create -f tiger.yaml
 ```
 ### Create a secret under tiger namespace with encrypted data (base64).
 
-```
+```yaml
 cat <<EOF>>prod-db-secret2.yaml
 apiVersion: v1 
 kind: Secret 
@@ -53,7 +54,7 @@ kubectl -n tiger get secrets prod-db-secret2
 
 
 ## Creating a POD under namespace tiger and insert the variables from volume.
-```
+```yaml
 cat <<EOF>>secret-volume-pod2.yaml
 apiVersion: v1
 kind: Pod
@@ -96,7 +97,7 @@ kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod2)
 ```
 
 ## Creating a POD under "tiger" namespace by using ENV option for using secret.
-```
+```yaml
 cat <<EOF>>secret-env-pod2.yaml	  
 apiVersion: v1 
 kind: Pod 
@@ -191,6 +192,7 @@ kubectl create -f secret-env-pod2.yaml
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod2) -- env | grep SECRET
 ```
+```
 ## For your references.
 [root@master1 volume]# kubectl delete -n tiger pods secret-env-pod2
 pod "secret-env-pod2" deleted
@@ -199,7 +201,7 @@ pod/secret-env-pod2 created
 [root@master1 volume]# kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod2) -- env | grep SECRET
 SECRET_USERNAME=database
 SECRET_PASSWORD=Mysql789
-
+```
 ## Clear the Lab
 ```
 kubectl delete -n tiger pods/secret-env-pod2 pods/secret-volume-pod2
