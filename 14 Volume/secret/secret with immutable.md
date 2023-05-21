@@ -105,71 +105,15 @@ kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod3)
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod3) -- cat /etc/foo/password ; echo
 ```
-## 2. POD consuming secret by env option.
-### Creating a POD under "tiger" namespace by using **ENV** option for using secret.
-```yaml
-cat <<EOF>>secret-env-pod3.yaml	  
-apiVersion: v1 
-kind: Pod 
-metadata: 
-  name: secret-env-pod3
-  namespace: tiger
-spec: 
-  containers: 
-  - name: secret-env-pod3
-    image: redis 
-    env: 
-      - name: SECRET_USERNAME 
-        valueFrom: 
-          secretKeyRef: 
-            name: prod-db-secret3
-            key: username 
-      - name: SECRET_PASSWORD 
-        valueFrom: 
-          secretKeyRef: 
-            name: prod-db-secret3
-            key: password
-EOF
+### Let's check the current encrypted value of password.
+
+```
+kubectl get -n tiger secrets prod-db-secret3 -o yaml
 ```
 ```
-kubectl create -f secret-env-pod3.yaml
-```
-### List the POD under tiger namespace.
-```
-kubectl get pods -n tiger
+echo -n Mysql123 | base64
 ```
 
-### Chekc the POD
-
-#### Login into the POD and check if the environment varibales are available at container level?.
-```
-kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod3) -- env ; echo
-```
-
-### For your references.
-```
-[root@master1 volume]# kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod3) -- env ; echo
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-HOSTNAME=secret-env-pod3
-GOSU_VERSION=1.16
-REDIS_VERSION=7.0.11
-REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.11.tar.gz
-REDIS_DOWNLOAD_SHA=ce250d1fba042c613de38a15d40889b78f7cb6d5461a27e35017ba39b07221e3
-############################
-SECRET_USERNAME=database
-SECRET_PASSWORD=Mysql123
-#############################
-KUBERNETES_PORT=tcp://10.96.0.1:443
-KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
-KUBERNETES_PORT_443_TCP_PROTO=tcp
-KUBERNETES_PORT_443_TCP_PORT=443
-KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
-KUBERNETES_SERVICE_HOST=10.96.0.1
-KUBERNETES_SERVICE_PORT=443
-KUBERNETES_SERVICE_PORT_HTTPS=443
-TERM=xterm
-HOME=/root
-```
 
 ## Now, edit the secret. 
 ```
@@ -178,7 +122,15 @@ echo -n Mysql789 | base64
 ```
 kubectl -n tiger  edit secrets prod-db-secret3
 ```
+### For your references.
 
+```
+[root@master1 volume]# kubectl -n tiger  edit secrets prod-db-secret3
+error: secrets "prod-db-secret3" is invalid
+A copy of your changes has been stored to "/tmp/kubectl-edit-1752694574.yaml"
+error: Edit cancelled, no valid changes were saved.
+[root@master1 volume]# 
+```
 
 ## Clear the Lab
 ```
