@@ -1,22 +1,22 @@
-# LAB for secret with encrypted variables.   
-
-## Encrypt the variables 
+# LAB for secret with **immutable**   
+## Encrypt the variables
 ```
 echo -n database | base64
 ```
 ``` 
 echo -n Mysql123 | base64
 ```
+
 ### For your references. 
-```
 [root@master1 volume]# echo -n database | base64 
 ZGF0YWJhc2U=
 [root@master1 volume]# echo -n Mysql123 | base64 
 TXlzcWwxMjM=
 [root@master1 volume]# 
-```
+
 
 ## How to create Namespace from Yaml file?
+Step 1: 
 ```yaml 
 cat <<EOF>>tiger.yaml
 apiVersion: v1
@@ -25,12 +25,14 @@ metadata:
   name: tiger
 EOF
 ```
+Step 2:
 ```
 kubectl create -f tiger.yaml
 ```
-### Create a secret under tiger namespace with encrypted data (base64).
+## Create a secret
+### Step 1: Create a secret under tiger namespace with encrypted data (base64).
 
-```yaml
+```
 cat <<EOF>>prod-db-secret3.yaml
 apiVersion: v1 
 kind: Secret 
@@ -44,25 +46,23 @@ data:
 immutable: true
 EOF
 ```
-### Create a secret by using kubectl apply option.
+### Step 2: Create a secret by using kubectl apply option.
 ```
 kubectl apply -f prod-db-secret3.yaml
 ```
-
-### Discribe the secret.
+## How to get more details of this secret?
+### Step 1: With the help of Discribe coommand.
 ```
 kubectl describe secrets -n tiger prod-db-secret3
 ```
-
+### Step 2: With the help of "get" sub command.
 ```
 kubectl -n tiger get secrets prod-db-secret3
 ```
+## 1. POD consuming secret by volume.
 
-
-
-
-## Creating a POD under namespace tiger and insert the variables from volume.
-```yaml
+### Step 1: Creating a POD under namespace **tiger** and insert the variables from **volume**.
+```
 cat <<EOF>>secret-volume-pod3.yaml
 apiVersion: v1
 kind: Pod
@@ -84,27 +84,29 @@ spec:
       optional: true
 EOF
 ```
-### Create the POD
+### Step 2: Create the POD
 ```
 kubectl apply -f secret-volume-pod3.yaml
 ```
 ```
 kubectl get pods -n tiger
 ```
+### Chekc the POD
 
-## Login into the POD and check the files are created under "/etc/foo"
+#### Login into the POD and check the files are created under "/etc/foo" directory.
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod3) -- ls -ltr /etc/foo/ ; echo
 ```
-
+#### use the command "cat" to list the content of username file.
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod3) -- cat /etc/foo/username ; echo
 ```
+#### use the command "cat" to list the content of password file.
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod3) -- cat /etc/foo/password ; echo
 ```
-
-## Creating a POD under "tiger" namespace by using ENV option for using secret.
+## 2. POD consuming secret by env option.
+### Creating a POD under "tiger" namespace by using **ENV** option for using secret.
 ```yaml
 cat <<EOF>>secret-env-pod3.yaml	  
 apiVersion: v1 
@@ -132,11 +134,14 @@ EOF
 ```
 kubectl create -f secret-env-pod3.yaml
 ```
-
+### List the POD under tiger namespace.
 ```
 kubectl get pods -n tiger
 ```
 
+### Chekc the POD
+
+#### Login into the POD and check if the environment varibales are available at container level?.
 ```
 kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod3) -- env ; echo
 ```
@@ -166,15 +171,12 @@ TERM=xterm
 HOME=/root
 ```
 
-## Now, edit the secret and check if it is allowed ?
+## Now, edit the secret. 
 ```
 echo -n Mysql789 | base64 
 ```
 ```
 kubectl -n tiger  edit secrets prod-db-secret3
-```
-```
-kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-env-pod3) -- env | grep SECRET
 ```
 
 
@@ -185,3 +187,5 @@ kubectl delete secrets -n tiger prod-db-secret3
 rm -f prod-db-secret3.yaml secret-volume-pod3.yaml secret-env-pod3.yaml
 kubectl get all -n tiger
 ```
+
+   
