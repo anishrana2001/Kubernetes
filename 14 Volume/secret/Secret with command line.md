@@ -33,7 +33,7 @@ Step 2:
 kubectl create -f tiger.yaml
 ```
 ## Create a secret
-### Step 1: Create a secret under tiger namespace by command line.
+### Step 1: Create a secret under "tiger" namespace by command line.
 
 ```
 kubectl -n tiger create secret generic prod-db-secret4 --from-literal=username='database' --from-literal=password='Mysql123'
