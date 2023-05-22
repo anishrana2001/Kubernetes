@@ -96,11 +96,68 @@ kubectl -n tiger exec -it $(kubectl get pods -n tiger | grep secret-volume-pod4)
 ```
 
 
+# Question:
+
+You are tasked to create a secret and consume the secret in a pod using envireonment variables as follows
+- Create a secret name app-secret1 with a key/value pair.  key30/value4
+- Start an Nginx POD named nginx-secret1 using container image Nginx, and add an environment a variable exposing the value of the secret key key30 using BEST_VARIABLE1 as the name of the envireonment variable inside the pod. 
+
+Solution:
+
+google: https://kubernetes.io/
+click on documentation
+search secret
+```
+kubectl create secret generic app-secret1 --from-literal=key30=value4
+```
+
+```yaml
+cat <<EOF>>q2-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-secret1
+spec:
+  containers:
+  - name: mycontainer
+    image: nginx
+    env:
+      - name: BEST_VARIABLE1
+        valueFrom:
+          secretKeyRef:
+            name: app-secret1
+            key: key30
+  restartPolicy: Never
+  EOF
+```
+
+```
+kubectl create -f q2-pod.yaml
+```
+
+```
+kubectl get pods
+```
+
+## Check the variable
+```
+kubectl exec -it nginx-secret1 -- env | grep BEST_VARIABLE1
+```
+
+
 ## Clear the Lab
 ```
 kubectl delete -n tiger pods/secret-volume-pod4 secrets/prod-db-secret4 --force --grace-period=0
 kubectl delete namespaces tiger --force --grace-period=0
 rm -f secret-volume-pod4.yaml  tiger.yaml
+ls -ltr
+```
+
+## Delete the question lab.
+```
+kubectl delete -f q2-pod.yaml
+kubectl delete secrets app-secret1
+rm -f q2-pod.yaml
 ls -ltr
 ```
 
