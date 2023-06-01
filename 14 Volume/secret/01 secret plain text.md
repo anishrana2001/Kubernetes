@@ -21,7 +21,7 @@ metadata:
     name: prod-db-secret1
     namespace: tiger
 type: Opaque 
-data: 
+stringData: 
    username: database
    password: Mysql123
 EOF
@@ -133,8 +133,8 @@ REDIS_VERSION=7.0.11
 REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.0.11.tar.gz
 REDIS_DOWNLOAD_SHA=ce250d1fba042c613de38a15d40889b78f7cb6d5461a27e35017ba39b07221e3
 #####################################
-SECRET_USERNAME=u�Zm�   ######### encrypted
-SECRET_PASSWORD=3+*�]�  ######### encrypted
+SECRET_USERNAME=database
+SECRET_PASSWORD=Mysql123
 ###################################
 KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
 KUBERNETES_SERVICE_HOST=10.96.0.1
