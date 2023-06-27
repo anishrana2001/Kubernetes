@@ -105,8 +105,11 @@ kubectl create -f ops-rb-readonly-01.yaml
 ## How to check if **raja** user has the privileges?
 
 [root@master1 rbac1]# kubectl auth can-i **list pods** --namespace core --as raja
+
 **yes**
+
 [root@master1 rbac1]# kubectl auth can-i **list secret** --namespace core --as raja
+
 **no**
 
 ## How to clear the lab
