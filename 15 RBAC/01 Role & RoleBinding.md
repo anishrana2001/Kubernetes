@@ -57,7 +57,7 @@ kubectl auth can-i list secrets --namespace core --as dev
 [root@master1 rbac1]# kubectl auth can-i  **list secrets** --namespace core --as **dev**
 
 **yes**
-[root@master1 rbac1]#
+
 
 [root@master1 rbac1]# kubectl auth can-i **list secrets** --namespace core --as **raja**
 
