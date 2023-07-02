@@ -1,5 +1,15 @@
 Role and RoleBinding.
 
+# First, you need to check if RBAC is enabled or not at cluster lelvel. For me it is enabled by default. 
+
+```
+cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i RBAC
+```
+
+```
+[root@master1 rbac]# cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i RBAC
+    - --authorization-mode=Node,RBAC
+```
 ```
 kubectl create namespace core 
 ```
