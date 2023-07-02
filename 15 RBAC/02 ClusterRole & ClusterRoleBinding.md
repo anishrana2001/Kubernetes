@@ -70,7 +70,7 @@ kubectl describe clusterrolebindings.rbac.authorization.k8s.io readwrite-crb1
 kubectl get clusterrolebindings.rbac.authorization.k8s.io readwrite-crb1
 ```
 
-### How to check if user $\color[rgb]{1,0,1} ashok $ has rights to create deployment?
+### How to check if user $\color[rgb]{1,0,1} ashok$ has rights to create deployment?
 ```
 kubectl auth can-i create daemonsets --namespace app-team1 --as ashok
 ```
@@ -87,4 +87,3 @@ kubectl delete clusterrole/admin-cr clusterrolebindings/readwrite-crb1
 
 
 
-$\color[rgb]{1,0,1} hello$
