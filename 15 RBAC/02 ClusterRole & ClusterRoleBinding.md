@@ -1,6 +1,6 @@
 # Cluster and ClusterRoleBinding
 
-## How to check default ClusterRole in the Kubernetes Cluster?
+## How to check $\color[rgb]{1,0,1} default ClusterRole$ in the Kubernetes Cluster?
 ```
 kubectl get clusterrole
 ```
@@ -54,7 +54,7 @@ EOF
 kubectl apply -f admin-crb-1.yaml
 ```
 
-## How to check ClusterRole is created sucessfully?
+## How to check ClusterRole is created successfully?
 ```
 kubectl describe clusterrole/admin-cr 
 ```
@@ -62,7 +62,7 @@ kubectl describe clusterrole/admin-cr
 kubectl get  clusterrole/admin-cr 
 ```
 
-## How to check ClusterRoleBinding is created sucessfully?
+## How to check ClusterRoleBinding is created successfully?
 ```
 kubectl describe clusterrolebindings.rbac.authorization.k8s.io readwrite-crb1
 ```
@@ -70,7 +70,7 @@ kubectl describe clusterrolebindings.rbac.authorization.k8s.io readwrite-crb1
 kubectl get clusterrolebindings.rbac.authorization.k8s.io readwrite-crb1
 ```
 
-### How to check if user **"ashok"** has rights to create deployment?
+### How to check if user $\color[rgb]{1,0,1} ashok $ has rights to create deployment?
 ```
 kubectl auth can-i create daemonsets --namespace app-team1 --as ashok
 ```
