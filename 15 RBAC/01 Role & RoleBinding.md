@@ -183,11 +183,11 @@ kubectl create -n app-team1 rolebinding deploy-b --role=deployment-role --user=r
 ```
 #### We can describe the object rolebinding. 
 ```
-kubectl describe rolebindings.rbac.authorization.k8s.io/deploy-b
+kubectl -n app-team1 describe rolebindings.rbac.authorization.k8s.io/deploy-b
 ```
 #### We can also describe the Role object.
 ```
-kubectl describe role deployment-role
+kubectl -n app-team1 describe role deployment-role
 ```
 #### We can also check if user raja has the privileges to create deployment or not.
 ```
