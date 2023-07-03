@@ -8,7 +8,7 @@
 
 ```
 openssl genrsa -out raja.key 2048
-````
+```
 #### Above command generate the 2048 Bit RSA private key and save it on the file raja.key.
 
 ### Step 2.  Create a certificate signing request (CSR)
