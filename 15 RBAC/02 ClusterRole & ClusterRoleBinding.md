@@ -103,9 +103,9 @@ kubectl delete clusterrole/admin-cr clusterrolebindings/readwrite-crb1
 ### Bind the new ClusterRole deployment-app-clusterrole to the new ServiceAccount cicd-app, limited to the namespace app-team1.
 
 ### **Solution:**
-ClusterRole = deployment-app-clusterrole
-ServiceAccount = cicd-app
-namespace = app-team1
+### ClusterRole = deployment-app-clusterrole
+### ServiceAccount = cicd-app
+### namespace = app-team1
 
 ### Create ClusterRole $\color[rgb]{1,0,1} (deployment-app-clusterrole)$ with verb (create) and allow resources ($\color[rgb]{1,0,1} Deployment,StatefulSet,DaemonSet$)
 ```
