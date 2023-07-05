@@ -87,3 +87,47 @@ kubectl delete clusterrole/admin-cr clusterrolebindings/readwrite-crb1
 
 
 
+
+
+
+
+## Question 1: Context - k8s
+### You have been asked to create a new ClusterRole for a deployment pipeline and bind it to a specific ServiceAccount scoped to a specific namespace.
+
+### Task -
+### Create a new ClusterRole named $\color[rgb]{1,0,1} deployment-app-clusterrole$, which only allows to $\color[rgb]{1,0,1} create$ the following resource types:
+### Deployment
+### Stateful Set
+### DaemonSet
+### Create a new ServiceAccount named $\color[rgb]{1,0,1} cicd-app$ in the existing namespace $\color[rgb]{1,0,1} app-team1$.
+### Bind the new ClusterRole deployment-app-clusterrole to the new ServiceAccount cicd-app, limited to the namespace app-team1.
+
+### **Solution:**
+ClusterRole = deployment-app-clusterrole
+ServiceAccount = cicd-app
+namespace = app-team1
+
+### Create ClusterRole $\color[rgb]{1,0,1} (deployment-app-clusterrole)$ with verb (create) and allow resources ($\color[rgb]{1,0,1} Deployment,StatefulSet,DaemonSet$)
+```
+kubectl create clusterrole deployment-app-clusterrole --verb=create --resource=Deployment,StatefulSet,DaemonSet
+```
+### Create service account ($\color[rgb]{1,0,1} cicd-app$ under namespace $\color[rgb]{1,0,1} app-team1$
+```
+kubectl create serviceaccount cicd-app -n app-team1
+```
+### Now, create ClusterRoleBinding and Bind with ClusterRole $\color[rgb]{1,0,1} deployment-app-clusterrole$ and allow System user i.e serviceaccount.
+
+```
+kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cici-token
+```
+### Describe the ClusterRole & check the values.
+```
+kubectl describe clusterrole deployment-app-clusterrole
+```
+
+### Describe the ClusterRoleBinding & check the values.
+```
+kubectl describe clusterrolebindings.rbac.authorization.k8s.io/deploy-b
+```
+### Its time to check, if service account user has the rights to create deloyment?
+kubectl auth can-i create  Deployment --as system:serviceaccount:app-team1:cicd-app --namespace=app-team1
