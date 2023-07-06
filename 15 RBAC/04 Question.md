@@ -40,10 +40,11 @@ kubectl create namespace app-config
 kubectl create configmap another-config --from-literal=key30=redcolour -n app-config
 ```
 
+#### In order to create Role, we can open the Kubernetes web page.
 
-https://kubernetes.io
+#### https://kubernetes.io
 
-Documentation --> Search -> Role
+#### Documentation --> Search -> Role
 ```
 cat <<EOF>> qustion1.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -71,7 +72,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 EOF
 ```
-
+#### For creating configmap , we can copy the yaml file from Kubernetes web page.
 #### https://kubernetes.io
 
 #### Documentation --> Search -> volumes -> configmap
@@ -84,8 +85,8 @@ metadata:
   name: nginx-configmap
   namespace: app-config
 spec:
-  nodeSelector:
-    disktype: ssd
+  nodeSelector:        ## NodeSelector 
+    disktype: ssd       ## NodeSelector disktype: ssd
   containers:
     - name: test
       image: nginx
