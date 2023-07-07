@@ -147,3 +147,7 @@ kubectl config use-context suraj-context
 ```
 kubectl auth can-i create configmaps
 ```
+## How to switch back to Admin user?
+```
+kubectl config use-context kubernetes-admin@kubernetes
+```
