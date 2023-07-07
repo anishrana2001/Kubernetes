@@ -100,6 +100,7 @@ spec:
         items:
           - key: key30
             path: key30
+EOF
 ```
 
 ```
