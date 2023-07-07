@@ -20,7 +20,8 @@
 #### nodeselector = disktype=ssd
 
 
-
+```
+mkdir /root/rbac/
 ```
 kubectl get nodes --show-labels
 ```
@@ -201,4 +202,9 @@ kubectl config view
 cd /root/rbac
 rm -f suraj.*
 ```
-
+### Delete the namespace and file that we created.
+```
+cd /root/rbac
+rm -rf question1.yaml pods.yaml
+kubectl delete namespaces app-config --grace-period=0 --force
+```
