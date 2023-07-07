@@ -23,6 +23,7 @@
 ```
 mkdir /root/rbac/
 ```
+```
 kubectl get nodes --show-labels
 ```
 ```
