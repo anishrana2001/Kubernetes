@@ -85,13 +85,22 @@ kubectl get clusterrole,clusterrolebindings.rbac.authorization.k8s.io | grep adm
 kubectl delete clusterrole/admin-cr clusterrolebindings/readwrite-crb1
 ```
 
+## OR
+```
+kubectl delete -f admin-cr.yaml -f admin-crb-1.yaml
+```
+
+### Remove the fiels that we created earlier.
+```
+rm -rf admin-cr.yaml admin-crb-1.yaml
+```
 
 
 
 
 
 
-## Question 1: Context - k8s
+## Question 1: use context-k8s
 ### You have been asked to create a new ClusterRole for a deployment pipeline and bind it to a specific ServiceAccount scoped to a specific namespace.
 
 ### Task -
