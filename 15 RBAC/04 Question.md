@@ -1,6 +1,6 @@
 ## Question : 
 
-## You have asked to create a role $\color[rgb]{1,0,1}config-role$, which allow only user $\color[rgb]{1,0,1}raja$ to create only ConfigMap on $\color[rgb]{1,0,1}app-config$ namespace. Consume this ConfigMap in a pod using a volume mount. Please complete the following.
+## You have asked to create a role $\color[rgb]{1,0,1}config-role$, which allow only user $\color[rgb]{1,0,1}suraj$ to create only ConfigMap on $\color[rgb]{1,0,1}app-config$ namespace. Consume this ConfigMap in a pod using a volume mount. Please complete the following.
 ### - Create a ConfigMAP named $\color[rgb]{1,0,1}another-config$ containing the key/value pair, $\color[rgb]{1,0,1}key30/redcolour$ .
 ### - Start a pod named $\color[rgb]{1,0,1}nginx-configmap$ containing a single container using the $\color[rgb]{1,0,1}nginx$ image and mount the key you just created into the pod under directory $\color[rgb]{1,0,1}/some/path$
 ### - This pod must be created only those nodes which has label $\color[rgb]{1,0,1}disktype=ssd$
@@ -10,7 +10,7 @@
 #### Role    =  config-role
 #### verb    = create
 #### resource = ConfigMap
-#### user   = raja
+#### user   = suraj
 
 #### Pod name  = nginx-configmap
 #### configMap = another-config
@@ -64,7 +64,7 @@ metadata:
   namespace: app-config
 subjects:
 - kind: User
-  name: raja
+  name: suraj
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
@@ -112,9 +112,38 @@ kubectl create -f pods.yaml
 kubectl get pods -n app-config 
 ```
 ```
-kubectl auth can-i create configmaps --as raja --namespace app-config
+kubectl auth can-i create configmaps --as suraj --namespace app-config
 ```
 ```
-kubectl auth can-i create configmaps --as raja 
+kubectl auth can-i create configmaps --as suraj 
 ```
 
+## Now, create a system user suraj and also create a certificate for him. 
+
+```
+openssl genrsa -out suraj.key 2048
+```
+```
+openssl req -new -key suraj.key -out suraj.csr -subj "/CN=suraj/O=dev/O=example.org"
+```
+```
+openssl x509 -req -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -days 730 -in suraj.csr -out suraj.crt
+```
+```
+kubectl config set-credentials suraj --client-certificate=/root/rbac/suraj.crt --client-key=/root/rbac/suraj.key --embed-certs=true
+```
+```
+kubectl config get-contexts
+```
+```
+kubectl config set-context suraj-context --cluster=kubernetes  --namespace=core --user=suraj 
+```
+```
+kubectl config get-contexts
+```
+```
+kubectl config use-context suraj-context
+```
+```
+kubectl auth can-i create configmaps
+```
