@@ -34,13 +34,13 @@ openssl req -new -key raja.key -out raja.csr -subj "/CN=raja/O=dev/O=example.org
 #### By default, CA path would be "/etc/kubernetes/pki/"
 ```
 openssl x509 -req -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -days 730 -in raja.csr -out raja.crt
-
-In the above command, 
-CA certificate is "/etc/kubernetes/pki/ca.crt"
-CAkey is "/etc/kubernetes/pki/ca.key"
-CSR = raja.csr
-CA will generate the certificate file in "raja.crt"
 ```
+#### In the above command, 
+#### CA certificate is "/etc/kubernetes/pki/ca.crt"
+#### CAkey is "/etc/kubernetes/pki/ca.key"
+#### CSR = raja.csr
+#### CA will generate the certificate file in "raja.crt"
+
 
 #### Check the Kubernetes config file 
 ```
