@@ -137,7 +137,7 @@ kubectl config set-credentials suraj --client-certificate=/root/rbac/suraj.crt -
 kubectl config get-contexts
 ```
 ```
-kubectl config set-context suraj-context --cluster=kubernetes  --namespace=core --user=suraj 
+kubectl config set-context suraj-context --cluster=kubernetes  --namespace=app-config --user=suraj 
 ```
 ```
 kubectl config get-contexts
@@ -152,3 +152,48 @@ kubectl auth can-i create configmaps
 ```
 kubectl config use-context kubernetes-admin@kubernetes
 ```
+## How to delete Role & RoleBinding?
+
+### First check the role and rolebinding.
+```
+kubectl -n app-config get role/config-role rolebindings.rbac.authorization.k8s.io/deploy-b
+```
+### After examine the names, we can delete it by executing below command.
+```
+kubectl delete -n app-config role/config-role rolebindings.rbac.authorization.k8s.io/deploy-b
+```
+
+## How to delete context?
+
+### Identify if you are on correct context.
+
+kubectl config current-context 
+
+### List all the contexts.
+```
+kubectl config get-contexts
+```
+### Check the current config.
+```
+kubectl config view
+```
+
+### Now, delete the context.
+```
+kubectl config delete-context suraj-context 
+```
+```
+kubectl config delete-user suraj
+```
+
+### Post Check the current config.
+```
+kubectl config view
+```
+
+### Delete all the certificates.
+```
+cd /root/rbac
+rm -f suraj.*
+```
+
