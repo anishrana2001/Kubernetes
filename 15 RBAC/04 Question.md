@@ -46,7 +46,7 @@ kubectl create configmap another-config --from-literal=key30=redcolour -n app-co
 
 #### Documentation --> Search -> Role
 ```
-cat <<EOF>> qustion1.yaml
+cat <<EOF>> question1.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -103,7 +103,7 @@ spec:
 ```
 
 ```
-kubectl create -f qustion1.yaml 
+kubectl create -f question1.yaml 
 ```
 ```
 kubectl create -f pods.yaml 
