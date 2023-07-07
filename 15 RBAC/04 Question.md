@@ -163,6 +163,11 @@ kubectl -n app-config get role/config-role rolebindings.rbac.authorization.k8s.i
 kubectl delete -n app-config role/config-role rolebindings.rbac.authorization.k8s.io/deploy-b
 ```
 
+### How to delete the configmaps.
+```
+kubectl delete -n app-config configmap another-config
+```
+
 ## How to delete context?
 
 ### Identify if you are on correct context.
