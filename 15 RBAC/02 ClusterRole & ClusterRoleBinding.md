@@ -131,7 +131,7 @@ kubectl create serviceaccount cicd-app -n app-team1
 ### Now, create ClusterRoleBinding and Bind with ClusterRole $\color[rgb]{1,0,1} deployment-app-clusterrole$ and allow System user i.e serviceaccount.
 
 ```
-kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cici-token -n app-team
+kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cicd-app -n app-team1
 ```
 ### Describe the ClusterRole & check the values.
 ```
@@ -143,4 +143,6 @@ kubectl describe clusterrole deployment-app-clusterrole
 kubectl describe clusterrolebindings.rbac.authorization.k8s.io/deploy-b
 ```
 ### Its time to check, if service account user has the rights to create deloyment?
+```
 kubectl auth can-i create  Deployment --as system:serviceaccount:app-team1:cicd-app --namespace=app-team1
+```
