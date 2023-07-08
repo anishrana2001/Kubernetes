@@ -149,7 +149,7 @@ kubectl create -f ops-rb-readonly-01.yaml
 
 ## How to clear the lab
 ```
-kubectl delete -f dev-role1.yaml -f dev-rb-readwrite-01.yaml -f ops-rbac1.yaml -f ops-rb-readonly-01.yaml
+ kubectl delete -f  dev-role1.yaml -f dev-rb-readwrite-01.yaml -f ops-role1.yaml -f ops-rb-readonly-01.yaml
 kubectl delete namespaces core
 ```
 
