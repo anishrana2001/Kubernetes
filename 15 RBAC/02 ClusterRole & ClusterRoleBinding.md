@@ -127,7 +127,7 @@ kubectl create serviceaccount cicd-app -n app-team1
 ### Now, create ClusterRoleBinding and Bind with ClusterRole $\color[rgb]{1,0,1} deployment-app-clusterrole$ and allow System user i.e serviceaccount.
 
 ```
-kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cici-token
+kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cici-token -n app-team
 ```
 ### Describe the ClusterRole & check the values.
 ```
