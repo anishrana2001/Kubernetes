@@ -128,7 +128,14 @@ kubectl create clusterrole deployment-app-clusterrole --verb=create --resource=D
 ```
 kubectl create serviceaccount cicd-app -n app-team1
 ```
-### Now, create ClusterRoleBinding and Bind with ClusterRole $\color[rgb]{1,0,1} deployment-app-clusterrole$ and allow System user i.e serviceaccount.
+### In question, it is asked to give access to specific namespace, thus, it is indirectly asking to create rolebinding instead of ClusterRoleBinding.
+### So, create rolebinding and Bind with ClusterRole $\color[rgb]{1,0,1} deployment-app-clusterrole$ and allow System user i.e serviceaccount.
+```
+kubectl create rolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cicd-app -n app-team1
+```
+
+#### You can also create ClusterRoleBinding and Bind with ClusterRole $\color[rgb]{1,0,1} deployment-app-clusterrole$ and allow System user i.e serviceaccount but at the end you have to use "-n app-team1" 
+#### I am not sure if this is the right thing, anyway it also works :-) 
 
 ```
 kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterrole --serviceaccount=app-team1:cicd-app -n app-team1
@@ -138,9 +145,9 @@ kubectl create clusterrolebinding deploy-b --clusterrole=deployment-app-clusterr
 kubectl describe clusterrole deployment-app-clusterrole
 ```
 
-### Describe the ClusterRoleBinding & check the values.
+### Describe theRoleBinding & check the values.
 ```
-kubectl describe clusterrolebindings.rbac.authorization.k8s.io/deploy-b
+kubectl describe rolebindings.rbac.authorization.k8s.io/deploy-b
 ```
 ### Its time to check, if service account user has the rights to create deloyment?
 ```
