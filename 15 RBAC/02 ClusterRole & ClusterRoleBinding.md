@@ -147,7 +147,7 @@ kubectl describe clusterrole deployment-app-clusterrole
 
 ### Describe theRoleBinding & check the values.
 ```
-kubectl describe rolebindings.rbac.authorization.k8s.io/deploy-b
+kubectl describe rolebindings.rbac.authorization.k8s.io/deploy-b -n app-team1
 ```
 ### Its time to check, if service account user has the rights to create deloyment?
 ```
