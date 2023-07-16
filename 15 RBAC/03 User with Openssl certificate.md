@@ -87,26 +87,8 @@ kubectl config use-context raja-context
 kubectl config current-context 
 ```
 
-#### Multiple way to check if user has privileges to access the resources
-```
-kubectl --context=raja-context get pods
-```
-```
-kubectl get pods -n core
-```
-```
-kubectl get pods 
-```
 #### Change the context to Admin again.
 ```
 kubectl config use-context kubernetes-admin@kubernetes
 ```
-```
-kubectl get pods -n core --as raja
-```
-```
-kubectl auth can-i list pods --namespace core --as raja
-```
-```
-kubectl auth can-i list secrets --namespace core --as raja
-```
+
