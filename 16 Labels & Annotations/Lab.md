@@ -3,7 +3,7 @@
 ## How check the label for object?
 ### Create a pod for testing.
 ```
-kubectl run label-pod --image=nginx 
+kubectl run nginx-Pod --image=nginx 
 ```
 ```
 kubectl get pods nginx-Pod --show-labels
@@ -18,7 +18,6 @@ kubectl get pods nginx-Pod --show-labels
 ## How to update the labels on existing pods?
 ```
 kubectl label pods nginx-Pod release=canary --overwrite
-```
 ```
 kubectl get pods nginx-Pod --show-labels
 ```
@@ -62,22 +61,28 @@ kubectl create -f label-deploy.yaml
 ```
 
 ```
-kubectl get pods --show-labels
+kubectl get deploy --show-labels
 ```
+```
+kubectl get deploy –l release=stable
+```
+### You can also check the pods
 ```
 kubectl get pods –l release=stable
 ```
 ```
-kubectl get pods -l release=stable --output=wide
+kubectl get deploy -l release=stable --output=wide
 ```
 ```
 kubectl get pods -l -n A
 ```
+
+### How to delete the labels from object?
 ```
-kubectl label nginx-pod release-
+kubectl label nginx-Pod release-
 ```
 ```
-kubectl get pods --show-labels
+kubectl get pods nginx-Pod --show-labels
 ```
 
 ## How to add the label on nodes?
