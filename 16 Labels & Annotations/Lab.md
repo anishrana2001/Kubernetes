@@ -19,6 +19,7 @@ kubectl get pods nginx-pod --show-labels
 ```
 kubectl label pods nginx-pod release=canary --overwrite
 ```
+```
 kubectl get pods nginx-pod --show-labels
 ```
 ```
