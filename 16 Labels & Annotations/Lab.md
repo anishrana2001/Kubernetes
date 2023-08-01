@@ -224,6 +224,11 @@ kubectl get  deployments.apps nginx    -o=json | jq .metadata.annotations
 ```
 kubectl annotate deployments.apps nginx application-
 ```
+#### OR we can use "kubectl patch" commnad but to demo this command, I have to add annotation again.
+```
+kubectl   annotate   deployment nginx "application=Nginx-web-server"
+```
+#### Now, use kubectl Patch command.
 ```
 kubectl patch deployments/nginx --type=json -p='[{"op": "remove", "path": "/metadata/annotations/application"}]'
 ```
