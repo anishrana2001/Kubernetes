@@ -23,7 +23,7 @@ kubectl label pods nginx-pod release=canary --overwrite
 kubectl get pods nginx-pod --show-labels
 ```
 ```
-kubectl get deploy -l "environment=production"
+kubectl get deploy -l "release=canary"
 ```
 ## How to add the label on manifest file?
 ```
@@ -65,11 +65,11 @@ kubectl create -f label-deploy.yaml
 kubectl get deploy --show-labels
 ```
 ```
-kubectl get deploy –l release=stable
+kubectl get deploy -l release=stable
 ```
 ### You can also check the pods
 ```
-kubectl get pods –l release=stable
+kubectl get pods -l release=stable
 ```
 ```
 kubectl get deploy -l release=stable --output=wide
