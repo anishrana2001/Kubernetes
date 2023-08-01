@@ -75,12 +75,12 @@ kubectl get pods -l release=stable
 kubectl get deploy -l release=stable --output=wide
 ```
 ```
-kubectl get pods -l -n A
+kubectl get pods -l partition=customerA -n A
 ```
 
 ### How to delete the labels from object?
 ```
-kubectl label nginx-pod release-
+kubectl label pods nginx-pod release-
 ```
 ```
 kubectl get pods nginx-pod --show-labels
@@ -127,6 +127,44 @@ kubectl create -f nodepod.yaml
 ```
 ```
 kubectl get pods --output=wide
+```
+
+## How to delete the pods on the basis of labels?
+```
+kubectl delete  pod -l "env=test"
+```
+
+## How to delete the labels from Node?
+### First check the labels
+```
+kubectl get nodes --show-labels
+```
+### Now, delete the label "disktype"
+```
+kubectl label nodes workernode1.example.com disktype-
+```
+### Check the labels of Node worker1
+```
+kubectl get nodes --show-labels
+```
+
+## How to delete the deployment on the basis of labels?
+### Chekc the lables first.
+```
+kubectl get all --show-labels
+```
+### Delete the deploy by useing "-l"
+```
+kubectl delete deployments.apps -l "partition=customerA"
+```
+### Check again
+```
+kubectl get all --show-labels
+```
+## Clear the lab
+```
+kubectl delete pods nginx-pod
+rm -f label-deploy.yaml nodepod.yaml
 ```
 
 # Annotations
