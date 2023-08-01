@@ -246,3 +246,8 @@ kubectl patch deployments/nginx --type=json -p='[{"op": "remove", "path": "/spec
 ```
 kubectl get  deployments.apps nginx -o=json | jq  .spec.template.metadata.annotations
 ```
+### How to clear the lab?
+```
+kubectl delete deployments.apps nginx
+kubectl delete pod/webpod
+```
