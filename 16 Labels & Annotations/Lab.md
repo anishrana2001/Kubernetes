@@ -23,7 +23,7 @@ kubectl label pods nginx-pod release=canary --overwrite
 kubectl get pods nginx-pod --show-labels
 ```
 ```
-kubectl get deploy -l "release=canary"
+kubectl get pods -l "release=canary"
 ```
 ## How to add the label on manifest file?
 ```
@@ -75,7 +75,7 @@ kubectl get pods -l release=stable
 kubectl get deploy -l release=stable --output=wide
 ```
 ```
-kubectl get pods -l partition=customerA -n A
+kubectl get pods -l partition=customerA -A
 ```
 
 ### How to delete the labels from object?
