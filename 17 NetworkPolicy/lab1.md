@@ -81,10 +81,17 @@ kubectl exec -it -n orange pods/orange-pod1 -- service nginx reload
 kubectl -n orange get all --show-labels -owide
 ```
 
+```
+kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP
+```
 
 ### You can also able to connect to this port from core pods/orange-pod1
 ```
 kubectl -n core exec -it pods/core-pod1 -- curl http://172.16.14.114:9000
+```
+
+```
+kubectl -n core exec -it pods/core-pod1 -- curl http://$(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
 ```
 
 ```
