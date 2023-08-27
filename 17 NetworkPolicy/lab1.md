@@ -439,7 +439,7 @@ kubectl -n project-app exec -it backend0 -- curl $(kubectl -n project-app get po
 kubectl -n project-app exec -it backend0 -- curl $(kubectl -n project-app get pod/nginx -o wide | awk '{print $6}' | grep -v IP):9090
 ```
 ```
-kubectl -n project-app exec -it backend0 -- curl $(kubectl -n project-app get pod/toolbox -o wide | awk '{print $6}' | grep -v IP):3333
+kubectl -n project-app exec -it backend0 -- curl --connect-timeout 3 $(kubectl -n project-app get pod/toolbox -o wide | awk '{print $6}' | grep -v IP):3333
 ```
 
 # How to clear the lab?
