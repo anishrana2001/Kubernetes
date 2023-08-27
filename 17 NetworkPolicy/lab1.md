@@ -33,7 +33,8 @@ kubectl -n core run --image=nginx --labels "app=core" core-pod1
 ```
 kubectl -n core run --image=nginx --labels "app=core" core-pod2
 ```
- 
+
+### Now, create a nginx configuration file and open the port 9000 instead of 80
 ```
 cat <<EOF>> orange-pod1.conf
 server {
@@ -51,16 +52,23 @@ server {
 }
 EOF
 ```
+### Copy this configuration file on the container.
 
+### Syntax of below command would be 
+### kubectl -n namespace cp localhost_file_path Pod_name:Container_path -c container name
+```
+kubectl -n orange cp orange-pod1.conf orange-pod1:/etc/nginx/conf.d/ -c orange-pod1
+```
+
+
+### Create one new file that will be used as Nginx web page with customize message "Orange-pod1 web server is up on port 9000"
 ```
 cat <<EOF>> orange-pod1-index.html
 Orange-pod1 web server is up on port 9000
 EOF
 ```
 
-```
-kubectl -n orange cp orange-pod1.conf orange-pod1:/etc/nginx/conf.d/ -c orange-pod1
-```
+### Copy this Webpage file (Index file) in the container.
 ```
 kubectl -n orange cp orange-pod1-index.html orange-pod1:/usr/share/nginx/html/ -c orange-pod1
 ```
@@ -127,15 +135,10 @@ kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 ## We can also create 1 more pod on Orange NS and allow port 2222 and check if core namespace pods can access it ?
 
 ```
-cat <<EOF>> orange-pod1-index.html
-orange-pod1 web server is up on port 9000
-EOF
-```
-```
-```
 kubectl -n orange run --image=nginx --labels "app=orange" orange-pod2
 ```
 
+### Now, create a nginx configuration file and open the port 2222 instead of 80
 cat <<EOF>> orange-pod2.conf
 server {
     listen       2222;
@@ -152,7 +155,7 @@ server {
 }
 EOF
 ```
-
+### Create a file that will be used as Nginx web page with customize message "Orange-pod2 web server is up on port 2222"
 ```
 cat <<EOF>> orange-pod2-index.html
 Orange-pod2 web server is up on port 2222
