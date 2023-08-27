@@ -236,15 +236,7 @@ rm -f abc-name.yaml orange-pod1.conf orange-pod1-index.html orange-pod2-index.ht
 
 ## Let's create the setup on our lab. Also, it would be helpful to you to setup your own lap for exam preparation.
 
-```
-kubectl create namespace project-app
-```
-```
-kubectl -n project-app run --image=nginx --labels "app=frontent" frontent
-```
-
-
-
+### Create a nginx configuration file for frontend pod - listen on port 8080 and Index.html file would be frontent-index.html
 ```
 cat <<EOF>> frontent.conf
 server {
@@ -262,12 +254,14 @@ server {
 }
 EOF
 ```
-
+### Index.html file would be frontend-index.html for frontend pop.
 ```
 cat <<EOF>> frontent-index.html
 frontent web server is up on port 8080
 EOF
 ```
+
+### Create a nginx configuration file for nginx pod - listen on port 8080 and Index.html file would be nginx-index.html
 ```
 cat <<EOF>> nginx.conf
 server {
@@ -285,13 +279,13 @@ server {
 }
 EOF
 ```
-
+### Index.html file would be frontend-index.html for nginx pop.
 ```
 cat <<EOF>> nginx-index.html
 nginx web server is up on port 9090
 EOF
 ```
-
+### Create a nginx configuration file for toolbox pod - listen on port 8080 and Index.html file would be toolbox-index.html
 ```
 cat <<EOF>> toolbox.conf
 server {
@@ -309,55 +303,71 @@ server {
 }
 EOF
 ```
+
+### Index.html file would be frontend-index.html for toolbox pop.
 ```
 cat <<EOF>> toolbox-index.html
 toolbox web server is up on port 3333
 EOF
 ```
+
+### Create a namespace project-app
 ```
 kubectl create namespace project-app
 ```
+### Create a pod with name frontent under namespace "project-app", with labels "app=frontent" and using nginx image.
 ```
 kubectl -n project-app run --image=nginx --labels "app=frontent" frontent
 ```
+### Create a pod with name nginx under namespace "project-app", with labels "app=nginx" and using nginx image.
 ```
 kubectl -n project-app run --image=nginx --labels "app=nginx" nginx
 ```
+### Create a pod with name toolbox under namespace "project-app", with labels "app=toolbox" and using nginx image.
 ```
 kubectl -n project-app run --image=nginx --labels "app=toolbox" toolbox
 ```
+### Create a pod with name backend0 under namespace "project-app", with labels "app=backend0" and using nginx image.
 ```
 kubectl -n project-app run --image=nginx --labels "app=backend" backend0
 ```
+### We can check the pod status, labels and its IP @
 ```
 kubectl get pods -n project-app --show-labels -o wide
 ```
-
+### Copy the frontend configuration file in the container under "/etc/nginx/conf.d/" directory.
 ```
 kubectl -n project-app cp frontent.conf frontent:/etc/nginx/conf.d/ -c frontent
 ```
+### Copy the frontent-index.html in the container under "/usr/share/nginx/html/" directory.
 ```
 kubectl -n project-app cp frontent-index.html frontent:/usr/share/nginx/html/ -c frontent
 ```
+### After any modification in the configuration file, we have to reload the nginx service.
 ```
 kubectl exec -it -n project-app pods/frontent -- service nginx reload
 ```
-
+### Copy the nginx configuration file in the container under "/etc/nginx/conf.d/" directory.
 ```
 kubectl -n project-app cp nginx.conf nginx:/etc/nginx/conf.d/ -c nginx
 ```
+### Copy the nginx-index.html in the container under "/usr/share/nginx/html/" directory.
 ```
 kubectl -n project-app cp nginx-index.html nginx:/usr/share/nginx/html/ -c nginx
 ```
+### After any modification in the configuration file, we have to reload the nginx service.
 ```
 kubectl exec -it -n project-app pods/nginx -- service nginx reload
 ```
+### Copy the toolbox configuration file in the container under "/etc/nginx/conf.d/" directory.
 ```
 kubectl -n project-app cp toolbox.conf toolbox:/etc/nginx/conf.d/ -c toolbox
 ```
+### Copy the toolbox-index.html in the container under "/usr/share/nginx/html/" directory.
 ```
 kubectl -n project-app cp toolbox-index.html toolbox:/usr/share/nginx/html/ -c toolbox
 ```
+### After any modification in the configuration file, we have to reload the nginx service.
 ```
 kubectl exec -it -n project-app pods/toolbox -- service nginx reload
 ```
