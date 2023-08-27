@@ -205,9 +205,9 @@ kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n
 kubectl -n core exec -it core-pod1 -- curl --connect-timeout 3  $(kubectl -n orange get all --show-labels -owide | awk '/pod2/  {print $6}' | grep -v IP):2222
 ```
 
-### Infact, you should also not able to connect to orange-pod2 from orange-pod1.
+### Infact, you should also not able to connect to orange-pod1 from orange-pod2.
 ```
-kubectl -n orange exec -it orange-pod1 -- curl --connect-timeout 3  $(kubectl -n orange get all --show-labels -owide | awk '/pod2/  {print $6}' | grep -v IP):2222
+kubectl -n orange exec -it orange-pod2 -- curl --connect-timeout 3  $(kubectl -n orange get all --show-labels -owide | awk '/pod1/  {print $6}' | grep -v IP):9000
 ```
 
 
