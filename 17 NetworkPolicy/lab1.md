@@ -52,6 +52,11 @@ server {
 EOF
 ```
 
+```
+cat <<EOF>> orange-pod1-index.html
+Orange-pod1 web server is up on port 9000
+EOF
+```
 
 ```
 kubectl -n orange cp orange-pod1.conf orange-pod1:/etc/nginx/conf.d/ -c orange-pod1
@@ -150,7 +155,7 @@ EOF
 
 ```
 cat <<EOF>> orange-pod2-index.html
-db2 web server is up on port 2222
+Orange-pod2 web server is up on port 2222
 EOF
 ```
 
