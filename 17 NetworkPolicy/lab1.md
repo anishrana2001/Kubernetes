@@ -3,7 +3,7 @@
 ## Ensure that the new NetworkPolicy allows Pods in namespace core to connect to port 9000 of Pods in namespace orange.
 ## Further ensure that the new NetworkPolicy:
 ## ✑ does not allow access to Pods, which don't listen on port 9000
-## ✑ does not allow access from Pods, which are not in namespace 
+## ✑ does not allow access from Pods, which are not in namespace core.
 
 
 # Solution: 
@@ -14,7 +14,7 @@
 
 ```
 kubectl create namespace orange 
-kubectl create namespace core
+kubectl create namespace coreaa
 ```
 
 
@@ -197,7 +197,7 @@ kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 ``
 
 ```
-kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
+kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n orange get all --show-labels -owide | awk '/pod1/ {print $6}' | grep -v IP):9000
 ```
 ### But, you should not able to connnect to port 2222 from pods which are running on core namespace.
 
