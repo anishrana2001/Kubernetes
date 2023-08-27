@@ -191,7 +191,7 @@ kubectl apply -f abc-name.yaml
 kubectl describe -n orange netpol/abc-name
 ```
 
-### You should able to connect to Orange port on port 9000
+### You should able to connect to orange pod on port 9000
 ``
 kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 ``
