@@ -135,7 +135,7 @@ kubectl apply -f abc-name.yaml
 kubectl describe -n orange netpol/abc-name
 ```
 
-
+### You should able to connect to Orange port on port 9000
 ``
 kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 ``
@@ -151,6 +151,7 @@ kubectl -n orange run --image=nginx --labels "app=orange" orange-pod2
 ```
 
 ### Now, create a nginx configuration file and open the port 2222 instead of 80
+```
 cat <<EOF>> orange-pod2.conf
 server {
     listen       2222;
