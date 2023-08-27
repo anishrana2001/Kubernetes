@@ -199,6 +199,16 @@ kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 ```
 kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
 ```
+### But, you should not able to connnect to port 2222 from pods which are running on core namespace.
+
+```
+kubectl -n core exec -it core-pod1 -- curl --connect-timeout 3  $(kubectl -n orange get all --show-labels -owide | awk '/pod2/  {print $6}' | grep -v IP):2222
+```
+
+### Infact, you should also not able to connect to orange-pod2 from orange-pod1.
+```
+kubectl -n orange exec -it orange-pod1 -- curl --connect-timeout 3  $(kubectl -n orange get all --show-labels -owide | awk '/pod2/  {print $6}' | grep -v IP):2222
+```
 
 
 
@@ -206,7 +216,7 @@ kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n
 # How to clear the lab for question 1?
 ```
 kubectl -n orange delete pods/orange-pod1 pods/orange-pod2 
-kubectl -n core delete pods/core-pod1 pods/core-pod2
+kubectl -n core delete pods/core-pod1 
 kubectl delete -f abc-name.yaml
 kubectl delete namespaces/orange namespaces/core
 rm -f abc-name.yaml orange-pod1.conf orange-pod1-index.html orange-pod2-index.html orange-pod2.conf
