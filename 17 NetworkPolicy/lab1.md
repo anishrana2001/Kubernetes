@@ -86,9 +86,9 @@ kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP
 ```
 
 ### You can also able to connect to this port from core pods/orange-pod1
-```
+``
 kubectl -n core exec -it pods/core-pod1 -- curl http://172.16.14.114:9000
-```
+``
 
 ```
 kubectl -n core exec -it pods/core-pod1 -- curl http://$(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
@@ -97,7 +97,9 @@ kubectl -n core exec -it pods/core-pod1 -- curl http://$(kubectl -n orange get a
 ```
 kubectl get ns/orange --show-labels
 ```
-
+```
+kubectl get ns/core --show-labels
+```
 
 ### Now, lets create the NetworkPolicy.
 
@@ -134,9 +136,13 @@ kubectl describe -n orange netpol/abc-name
 ```
 
 
-```
+``
 kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 
+``
+
+```
+kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
 ```
 
 ## We can also create 1 more pod on Orange NS and allow port 2222 and check if core namespace pods can access it ?
