@@ -138,7 +138,6 @@ kubectl describe -n orange netpol/abc-name
 
 ``
 kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
-
 ``
 
 ```
