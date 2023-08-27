@@ -19,20 +19,19 @@ kubectl create namespace core
 
 
 
-### Let's create 3 pods, 2 on core namespace and 1 on orange namespace.
+### Let's create 3 pods, 1 on core namespace and 2 on orange namespace.
 
 ```
 kubectl -n orange run --image=nginx --labels "app=orange" orange-pod1
+```
+```
+kubectl -n orange run --image=nginx --labels "app=orange" orange-pod2
 ```
 
 ```
 kubectl -n core run --image=nginx --labels "app=core" core-pod1
 ```
 
-
-```
-kubectl -n core run --image=nginx --labels "app=core" core-pod2
-```
 
 ### Now, create a nginx configuration file and open the port 9000 instead of 80
 ```
@@ -76,6 +75,48 @@ kubectl -n orange cp orange-pod1-index.html orange-pod1:/usr/share/nginx/html/ -
 kubectl exec -it -n orange pods/orange-pod1 -- service nginx reload
 ```
 
+### Samething, we will do for 2nd pod on Orange Namespace.
+### Create  pod on Orange NS and allow port 2222 and check if core namespace pods can access it at the end?
+
+```
+kubectl -n orange run --image=nginx --labels "app=orange" orange-pod2
+```
+
+### Now, create a nginx configuration file and open the port 2222 instead of 80
+```
+cat <<EOF>> orange-pod2.conf
+server {
+    listen       2222;
+    listen  [::]:2222;
+    server_name  localhost;
+    location / {
+        root   /usr/share/nginx/html;
+        index  orange-pod2-index.html index.htm;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+EOF
+```
+### Create a file that will be used as Nginx web page with customize message "Orange-pod2 web server is up on port 2222"
+```
+cat <<EOF>> orange-pod2-index.html
+Orange-pod2 web server is up on port 2222
+EOF
+```
+
+
+```
+kubectl -n orange cp orange-pod2.conf orange-pod2:/etc/nginx/conf.d/ -c orange-pod2
+```
+```
+kubectl -n orange cp orange-pod2-index.html orange-pod2:/usr/share/nginx/html/ -c orange-pod2
+```
+```
+kubectl exec -it -n orange pods/orange-pod2 -- service nginx reload
+```
 
 ```
 kubectl -n orange get all --show-labels -owide
@@ -85,21 +126,36 @@ kubectl -n orange get all --show-labels -owide
 kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP
 ```
 
-### You can also able to connect to this port from core pods/orange-pod1
-``
-kubectl -n core exec -it pods/core-pod1 -- curl http://172.16.14.114:9000
-``
-
 ```
-kubectl -n core exec -it pods/core-pod1 -- curl http://$(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
+kubectl -n orange get all --show-labels -owide | awk '/pod1/  {print $6}' | grep -v IP
 ```
 
+
+### You must able to from "orange-pod1" to "orange-pod2" or vise-versa.
+### From orange-pod2 to orange-pod1:
 ```
-kubectl get ns/orange --show-labels
+kubectl -n orange exec -it orange-pod2 -- curl http://$(kubectl -n orange get all --show-labels -owide | awk '/pod1/  {print $6}' | grep -v IP):9000
 ```
+
+### From orange-pod1 to orange-pod2:
+
 ```
-kubectl get ns/core --show-labels
+kubectl -n orange exec -it orange-pod1 -- curl http://$(kubectl -n orange get all --show-labels -owide | awk '/pod2/  {print $6}' | grep -v IP):2222
 ```
+
+
+### Pods which are running on "orange" namespace can be accessiable from the core namespaces. Let's verify it. 
+### From core namespace to orange-pod1 on port 9000
+```
+kubectl -n core exec -it core-pod1 -- curl $(kubectl -n orange get all --show-labels -owide | awk '/pod1/  {print $6}' | grep -v IP):9000
+```
+### From core namespace to orange-pod2 on port 2222
+```
+kubectl -n core exec -it core-pod1 -- curl $(kubectl -n orange get all --show-labels -owide |  awk '/pod2/  {print $6}' | grep -v IP):2222
+```
+
+## Now, we have created the lab setup and its time to solve the question.
+
 
 ### Now, lets create the NetworkPolicy.
 
@@ -144,60 +200,7 @@ kubectl -n core exec -it pods/core-pod1 -- curl orange-pod1_IP:9000
 kubectl -n core exec -it pods/core-pod1 -- curl --connect-timeout 3 $(kubectl -n orange get all --show-labels -owide | awk '{print $6}' | grep -v IP):9000
 ```
 
-## We can also create 1 more pod on Orange NS and allow port 2222 and check if core namespace pods can access it ?
 
-```
-kubectl -n orange run --image=nginx --labels "app=orange" orange-pod2
-```
-
-### Now, create a nginx configuration file and open the port 2222 instead of 80
-```
-cat <<EOF>> orange-pod2.conf
-server {
-    listen       2222;
-    listen  [::]:2222;
-    server_name  localhost;
-    location / {
-        root   /usr/share/nginx/html;
-        index  orange-pod2-index.html index.htm;
-    }
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
-}
-EOF
-```
-### Create a file that will be used as Nginx web page with customize message "Orange-pod2 web server is up on port 2222"
-```
-cat <<EOF>> orange-pod2-index.html
-Orange-pod2 web server is up on port 2222
-EOF
-```
-
-
-```
-kubectl -n orange cp orange-pod2.conf orange-pod2:/etc/nginx/conf.d/ -c orange-pod2
-```
-```
-kubectl -n orange cp orange-pod2-index.html orange-pod2:/usr/share/nginx/html/ -c orange-pod2
-```
-```
-kubectl exec -it -n orange pods/orange-pod2 -- service nginx reload
-```
-
-### You must able to connect on port 9000 from orange-pod2
-```
-kubectl -n orange exec -it pods/orange-pod2 -- curl http://orange-pod1_IP:9000
-```
-### 2222 port is also accessable from core namespace.
-```
-kubectl -n core exec -it pods/core-pod1 -- curl http://orange-pod1_IP:2222
-```
-
-```
-kubectl -n core exec -it pods/core-pod1 -- curl http://orange-pod1_IP:2222
-```
 
 
 # How to clear the lab for question 1?
