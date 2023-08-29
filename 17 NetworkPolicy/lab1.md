@@ -378,17 +378,15 @@ kubectl get pods -n project-app --show-labels -o wide
 kubectl -n project-app exec -it  frontent -- curl  172.16.133.178:8080
 ```
 ```
-kubectl -n project-app exec -it  nginx -- curl  $(kubectl -n project-app get pod/nginx -o wide | awk '{print $6}' | grep -v IP):9090
+kubectl -n project-app exec -it  backend0 -- curl  $(kubectl -n project-app get pod/nginx -o wide | awk '{print $6}' | grep -v IP):9090
 ```
 ```
-kubectl -n project-app exec -it toolbox -- curl  $(kubectl -n project-app get pod/toolbox -o wide | awk '{print $6}' | grep -v IP):3333
+kubectl -n project-app exec -it backend0 -- curl  $(kubectl -n project-app get pod/toolbox -o wide | awk '{print $6}' | grep -v IP):3333
 ```
 ```
 kubectl -n project-app exec -it backend0 -- curl $(kubectl -n project-app get pod/nginx -o wide | awk '{print $6}' | grep -v IP):9090
 ```
-```
-kubectl -n project-app exec -it backend0 -- curl $(kubectl -n project-app get pod/toolbox -o wide | awk '{print $6}' | grep -v IP):3333
-```
+
 ```
 cat <<EOF>> npbackup.yaml
 apiVersion: networking.k8s.io/v1
