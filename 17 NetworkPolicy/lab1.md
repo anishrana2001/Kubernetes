@@ -131,7 +131,7 @@ kubectl -n orange get all --show-labels -owide | awk '/pod1/  {print $6}' | grep
 ```
 
 
-### You must able to from "orange-pod1" to "orange-pod2" or vise-versa.
+### You must able to connect from "orange-pod1" to "orange-pod2" or vise-versa.
 ### From orange-pod2 to orange-pod1:
 ```
 kubectl -n orange exec -it orange-pod2 -- curl http://$(kubectl -n orange get all --show-labels -owide | awk '/pod1/  {print $6}' | grep -v IP):9000
