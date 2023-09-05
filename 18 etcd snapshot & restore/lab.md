@@ -52,6 +52,7 @@ cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
 ```
 
 [root@master1 ~]# sed -i 's=/var/lib/etcd=/var/lib/etcd-backup=' /etc/kubernetes/manifests/etcd.yaml 
+
 [root@master1 ~]# cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
 
     - --data-dir=/var/lib/etcd-backup
