@@ -37,6 +37,7 @@ cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
 ```
 
 [root@master1 ~]# cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
+
     - --data-dir=/var/lib/etcd
     - mountPath: /var/lib/etcd
       path: /var/lib/etcd
