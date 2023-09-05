@@ -72,9 +72,9 @@ No resources found in default namespace.
 ```
 kubectl get pods -A | grep etcd
 ```
-``
+
 [root@master1 ~]# kubectl get pods -A | grep etcd
-``
+
 ``
 kube-system   etcd-master1.example.com                           0/1            Pending           0                15s
 ``
