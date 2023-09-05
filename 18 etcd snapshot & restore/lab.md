@@ -63,9 +63,9 @@ cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
 ```
 kubectl get pods
 ```
-``
+
 [root@master1 ~]# kubectl get pods
-``
+
 ``
 No resources found in default namespace.
 ``
