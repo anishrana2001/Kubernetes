@@ -63,19 +63,21 @@ cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
 ```
 kubectl get pods
 ```
-
+``
 [root@master1 ~]# kubectl get pods
-
+``
+``
 No resources found in default namespace.
-
+``
 ```
 kubectl get pods -A | grep etcd
 ```
-
+``
 [root@master1 ~]# kubectl get pods -A | grep etcd
-
+``
+``
 kube-system   etcd-master1.example.com                           0/1            Pending           0                15s
-
+``
 
 ```
 kubectl -n kube-system get pods/etcd-master1.example.com -o yaml > etc.yaml
