@@ -190,3 +190,4 @@ sed -i 's=/var/lib/etcd-backup=/var/lib/etcd=' /etc/kubernetes/manifests/etcd.ya
 rm -rf /var/lib/etcd-snapshot.db
 rm -rvf /var/lib/etcd-backup
 ```
+.
