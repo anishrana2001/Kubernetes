@@ -93,9 +93,10 @@ ls -ld /var/lib/etcd
 ls -ld /var/lib/etcd-backup
 ```
 
-## Now, we have changed the directory "--data-dir", thus we have to change the ownership of this directory also. 
+## Now, we have changed the directory "--data-dir", thus we have to change the ownership of this directory also. This step only applicable where we have standalone etcd server.
 
 sudo chown -R etcd:etcd /var/lib/etcd-backup
+
 sudo systemctl start etcd
 
 
