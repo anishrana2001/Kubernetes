@@ -188,4 +188,5 @@ snapshot restore /var/lib/etcd-snapshot.db   \
 kubectl delete pods/pre-check-pod
 rm -rvf /var/lib/etcd-backup
 sed -i 's=/var/lib/etcd-backup=/var/lib/etcd=' /etc/kubernetes/manifests/etcd.yaml
+rm -rf /var/lib/etcd-snapshot.db
 ```
