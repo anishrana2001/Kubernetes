@@ -1,6 +1,6 @@
 # LAB for taking snapshot
 
-# Question: Create a snapshot of the existing etcd instance running at https://127.0.0.1:2379, saving the snapshot to /var/lib/etcd-snapshot.db.
+## Question: Create a snapshot of the existing etcd instance running at https://127.0.0.1:2379, saving the snapshot to /var/lib/etcd-snapshot.db.
 ## Next, restore an existing, previous snapshot located at /var/lib/etcd-snapshot-previous.db.
 
 ## Solution, this time using etcd static pod yaml file "/etc/kubernetes/manifests/etcd.yaml"
