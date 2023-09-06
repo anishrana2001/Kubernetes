@@ -107,7 +107,7 @@ sudo systemctl start etcd
 kubectl get pods
 ```
 
-### Why we are observing these pods?
+### Why we are observing these 2 pods?
 ### We have restored the snapshot but in the ETCD static pod yaml file, data-dir is still the old one. Let's confirm it.
 
 ```
@@ -134,15 +134,6 @@ sed -i 's=/var/lib/etcd=/var/lib/etcd-backup=' /etc/kubernetes/manifests/etcd.ya
 ```
 cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
 ```
-
-[root@master1 ~]# sed -i 's=/var/lib/etcd=/var/lib/etcd-backup=' /etc/kubernetes/manifests/etcd.yaml 
-
-[root@master1 ~]# cat /etc/kubernetes/manifests/etcd.yaml | grep /var/lib/etcd
-
-    - --data-dir=/var/lib/etcd-backup
-    - mountPath: /var/lib/etcd-backup
-      path: /var/lib/etcd-backup
-
 
 ### If we execute this command "kubectl get pods", it take sometime. 
 ```
