@@ -31,6 +31,9 @@ sudo mv etcd* /usr/local/bin/
 cd ~
 ```
 ```
+ export PATH=/usr/local/bin:$PATH
+```
+```
 etcdctl version
 
 ```
