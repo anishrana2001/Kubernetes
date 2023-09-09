@@ -30,6 +30,7 @@ sudo mv etcd* /usr/local/bin/
 ```
 cd ~
 ```
+```
 etcdctl version
 
 ```
