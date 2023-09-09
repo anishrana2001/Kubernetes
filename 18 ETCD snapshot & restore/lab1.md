@@ -10,6 +10,30 @@ kubectl run pre-check-pod --image=nginx
 ```
 kubectl get pods
 ```
+## How to install the ETCD packages?
+
+```
+etcdctl version
+```
+```
+curl -s https://api.github.com/repos/etcd-io/etcd/releases/latest | grep browser_download_url  | grep linux-amd64  | cut -d '"' -f 4  | wget -qi -
+```
+```
+tar xvf etcd-v*.tar.gz 
+```
+```
+cd etcd-*/
+```
+```
+sudo mv etcd* /usr/local/bin/ 
+```
+```
+cd ~
+```
+etcdctl version
+
+```
+
 
 
 ##  Let's take the snapshot, now.
