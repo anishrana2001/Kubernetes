@@ -218,4 +218,9 @@ sed -i 's=/var/lib/etcd-backup=/var/lib/etcd=' /etc/kubernetes/manifests/etcd.ya
 rm -rf /var/lib/etcd-snapshot.db
 rm -rvf /var/lib/etcd-backup
 ```
-.
+
+## Please, manually delete this pod. The reason, behind is that it take time to run the etcd pods after restore the snapshot. 
+```
+kubectl delete pods/pre-check-pod
+```
+
