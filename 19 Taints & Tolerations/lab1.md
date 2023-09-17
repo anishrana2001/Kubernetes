@@ -10,7 +10,11 @@ cd taint
 
 ### First, check the node name.
 ```
-kubectl get nodes
+[root@master1 ~]# kubectl get nodes
+NAME                      STATUS   ROLES           AGE    VERSION
+master1.example.com       Ready    control-plane   283d   v1.25.4
+workernode1.example.com   Ready    <none>          283d   v1.25.4
+workernode2.example.com   Ready    <none>          283d   v1.25.4
 ```
 
 ### We want to add taints on "workernode1" node. key=prod, value=green, effect=NoSchedule
@@ -201,7 +205,7 @@ kubectl apply -f taint-match-and-operator-exists.yaml
 kubectl get pods -owide
 ```
 
-##  Taint not match but operator "Equal" match
+##  Taint not match but effect: "NoSchedule" matches for operator "Equal"
 ### Node workernode1.example.com  "prod=green:NoSchedule"
 ```
 cat <<EOF>> taint-not-match-but-operator-equal-match.yaml
@@ -231,7 +235,7 @@ kubectl apply -f taint-not-match-but-operator-equal-match.yaml
 kubectl get pods -owide
 ```
 
-##  Taint not match but operator "Exists" matchl, this time with "Exists" operator.
+##  Taint "key" not match but effect NoSchedule matches with operator "Exists", this time with "Exists" operator.
 ### Node workernode1.example.com  "prod=green:NoSchedule"
 ```
 cat <<EOF>> taint-not-match-but-operator-exists-match.yaml
@@ -246,11 +250,9 @@ spec:
     - name: nginx
       image: nginx
   tolerations:
-    - key: "prod"
-      operator: "Equal"
-      effect: "NoExecute"
-      value: "green"
-
+    - key: "prod1"
+      operator: "Exists"
+      effect: "NoSchedule"
 EOF
 ```
 ```
@@ -264,8 +266,8 @@ kubectl get pods -owide
 
 ### What we learnt that if taints values not match in pod configuraiton file then pod will not schedule on tainted node. But these pods can be schedule on non-tainted nodes.
 
-##  Taint match but this time, operator "Equal" not matches.
-### Node workernode1.example.com  "prod=green:NoSchedule"
+##  Taint match but this time, but effect: NoExecute not match, with operator "Equal".
+### Tainted Node workernode1.example.com ; "prod=green:NoSchedule"
 ```
 cat <<EOF>> taint-match-but-operator-equal-not-match.yaml
 apiVersion: v1
@@ -293,7 +295,7 @@ kubectl apply -f taint-match-but-operator-equal-not-match.yaml
 kubectl get pods -owide --sort-by=.metadata.creationTimestamp
 ```
 
-##  Taint match but operator "Exists" not match
+##  Taint match but effect: NoExecute not match, with operator "Exists"
 ### Node workernode1.example.com  "prod=green:NoSchedule"
 
 ```
