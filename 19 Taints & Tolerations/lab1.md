@@ -10,12 +10,19 @@ cd taint
 
 ### First, check the node name.
 ```
-[root@master1 ~]# kubectl get nodes
-NAME                      STATUS   ROLES           AGE    VERSION
-master1.example.com       Ready    control-plane   283d   v1.25.4
-workernode1.example.com   Ready    <none>          283d   v1.25.4
-workernode2.example.com   Ready    <none>          283d   v1.25.4
+kubectl get nodes
 ```
+
+[root@master1 ~]# kubectl get nodes
+
+NAME                      STATUS   ROLES           AGE    VERSION
+
+master1.example.com       Ready    control-plane   283d   v1.25.4
+
+workernode1.example.com   Ready    <none>          283d   v1.25.4
+
+workernode2.example.com   Ready    <none>          283d   v1.25.4
+
 
 ### We want to add taints on "workernode1" node. key=prod, value=green, effect=NoSchedule
 ```
