@@ -74,7 +74,7 @@ kubectl get pods -owide
 ```
 kubectl taint node workernode2.example.com prod=green:NoExecute
 ```
-### Check the taints on workernode1.
+### Check the taints on workernode2.
 ```
 kubectl describe nodes workernode2.example.com | grep -i taints
 ```
