@@ -1,9 +1,9 @@
-1. How to find the DNS pod in Kubernetes cluster?
-2. DNS Deployment configuration file.
-3. How PODs and Services are resoling in Kubernetes cluster?
-4. Resolving the pods and services from inside the pods.
-5. Resolving the records of other namespace's pods.
-6. How to login into the DNS POD?
+# 1. How to find the DNS pod in Kubernetes cluster?
+# 2. DNS Deployment configuration file.
+# 3. How PODs and Services are resoling in Kubernetes cluster?
+# 4. Resolving the pods and services from inside the pods.
+# 5. Resolving the records of other namespace's pods.
+# 6. How to login into the DNS POD?
 
 
 
@@ -31,14 +31,17 @@ kubectl -n kube-system get configmap coredns -oyaml
 ```
 kubectl -n kube-system get po -o wide | grep coredns
 ```
+curl http://kube-dns-POD-IP:8080/health ; echo
 ```
-curl http://172.16.68.38:8080/health ; echo
+kubectl -n kube-system get pods -owide | grep core
+
+```
+OR
+```
+kubectl get pods/$(kubectl -n kube-system get pods | grep core | head -1 | awk '{print $1}') -n kube-system -o=jsonpath="{range .items[*]}{.status.podIP}" ; echo
 ```
 ```
-kubectl get pods/coredns-565d847f94-m4pjz -n kube-system -o=jsonpath="{range .items[*]}{.status.podIP
-```
-```
-curl http://$(kubectl get pods/coredns-565d847f94-m4pjz -n kube-system -o=jsonpath="{range .items[*]}{.status.podIP}"):8080/health ; echo
+curl http://$(kubectl get pods/$(kubectl -n kube-system get pods | grep core | head -1 | awk '{print $1}') -n kube-system -o=jsonpath="{range .items[*]}{.status.podIP}"):8080/health ; echo
 ```
 
 
@@ -61,8 +64,9 @@ kubectl -n kube-system get po -o wide | grep coredns
 ```
 kubectl get service -n kube-system 
 ```
+### Let's try to resolve the Deployment's POD name.
 ```
-dig @10.96.0.10 +short  POD_NAME
+dig @10.96.0.10 +short  front-end_POD_NAME
 ```
 ```
 dig @10.96.0.10  -x  +short POD_IP
@@ -74,7 +78,7 @@ dig @10.96.0.10 +short POD-IP-with-hypen.core.pod.cluster.local
 kubectl -n core get service
 ```
 ```
-dig @10.96.0.10   +short -x 10.100.177.112
+dig @10.96.0.10   +short -x IP_ADD_CLUSTER_IP_Service
 ```
 ```
 dig @10.96.0.10   +short front-end-svc.core.svc.cluster.local.
@@ -82,26 +86,39 @@ dig @10.96.0.10   +short front-end-svc.core.svc.cluster.local.
 
 
 ## 4. Resolving the pods and services from inside the pods.
+
 ```
-kubectl -n core exec  -it front-end-c446cd7f4-hqxtn -- /bin/bash
+kubectl -n core get pods -o wide
+```
+```
+kubectl -n core exec  -it $(kubectl -n core get pods | grep front | awk '{print $1}' | head -n 1) -- /bin/bash
 ```
 ```
 apt-get update && apt-get install -y iputils-ping dnsutils
 ```
+### Exit from the pod and execute below command again.
+
 ```
-dig 172-16-133-166.core.pod.cluster.local +short
+kubectl -n core get pods -o wide
 ```
 ```
-dig 172-16-14-71.core.pod.cluster.local +short
+kubectl -n core exec  -it $(kubectl -n core get pods | grep front | awk '{print $1}' | head -n 1) -- /bin/bash
+```
+
+```
+dig POD1-IP.core.pod.cluster.local +short
 ```
 ```
-dig -x  172.16.14.71    +short
+dig POD2-IP.core.pod.cluster.local +short
+```
+```
+dig -x  POD2_IP    +short
 ```
 ```
 dig front-end-svc.core.svc.cluster.local +short
 ```
 ```
-dig -x 10.100.177.112 +short
+dig -x SERVICE_IP_CLUSTER +short
 ```
 
 ## 5. Resolving the records of other namespace's pods.
