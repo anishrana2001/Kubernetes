@@ -1,9 +1,10 @@
-# 1. How to find the DNS pod in Kubernetes cluster?
-# 2. DNS Deployment configuration file.
-# 3. How PODs and Services are resoling in Kubernetes cluster?
-# 4. Resolving the pods and services from inside the pods.
-# 5. Resolving the records of other namespace's pods.
-# 6. How to login into the DNS POD?
+# TOPIC
+### 1. How to find the DNS pod in Kubernetes cluster?
+### 2. DNS Deployment configuration file.
+### 3. How PODs and Services are resoling in Kubernetes cluster?
+### 4. Resolving the pods and services from inside the pods.
+### 5. Resolving the records of other namespace's pods.
+### 6. How to login into the DNS POD?
 
 
 
