@@ -47,7 +47,7 @@ curl http://$(kubectl get pods/$(kubectl -n kube-system get pods | grep core | h
 ```
 
 
-## 3. How PODs and Services are resoling in Kubernetes cluster?
+## 3. How PODs and Services are resolving in Kubernetes cluster?
 ```
 kubectl create namespace core
 ```
