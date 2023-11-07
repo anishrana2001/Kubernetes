@@ -6,7 +6,8 @@
 ### 5. Resolving the records of other namespace's pods.
 ### 6. How to login into the DNS POD?
 
-
+#
+#
 
 ## 1. How to find the DNS pod in Kubernetes cluster?
 ```
@@ -70,7 +71,7 @@ kubectl get service -n kube-system
 dig @10.96.0.10 +short  front-end_POD_NAME
 ```
 ```
-dig @10.96.0.10  -x  +short POD_IP
+dig @10.96.0.10 +short -x  POD_IP
 ```
 ```
 dig @10.96.0.10 +short POD-IP-with-hypen.core.pod.cluster.local
@@ -79,10 +80,10 @@ dig @10.96.0.10 +short POD-IP-with-hypen.core.pod.cluster.local
 kubectl -n core get service
 ```
 ```
-dig @10.96.0.10   +short -x IP_ADD_CLUSTER_IP_Service
+dig @10.96.0.10 +short -x IP_ADD_CLUSTER_IP_Service
 ```
 ```
-dig @10.96.0.10   +short front-end-svc.core.svc.cluster.local.
+dig @10.96.0.10 +short front-end-svc.core.svc.cluster.local.
 ```
 
 
@@ -107,19 +108,19 @@ kubectl -n core exec  -it $(kubectl -n core get pods | grep front | awk '{print 
 ```
 
 ```
-dig POD1-IP.core.pod.cluster.local +short
+dig +short POD1-IP.core.pod.cluster.local 
 ```
 ```
-dig POD2-IP.core.pod.cluster.local +short
+dig +short POD2-IP.core.pod.cluster.local 
 ```
 ```
-dig -x  POD2_IP    +short
+dig +short -x POD2_IP    
 ```
 ```
-dig front-end-svc.core.svc.cluster.local +short
+dig +short front-end-svc.core.svc.cluster.local 
 ```
 ```
-dig -x SERVICE_IP_CLUSTER +short
+dig +short -x SERVICE_IP_CLUSTER 
 ```
 
 ## 5. Resolving the records of other namespace's pods.
