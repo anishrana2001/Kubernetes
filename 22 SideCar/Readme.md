@@ -17,6 +17,8 @@
 
 ### Google--> Kubernetes.io --> Search --> Logging Architecture
 
+### First create a deployment from command line, because in the Kubernetes.io website, there is an example for POD.
+
 ```yaml
 [root@master1 ~]# kubectl create deployment deployment-007 --image=busybox:1.28 -o yaml --dry-run=client
 apiVersion: apps/v1
@@ -45,6 +47,47 @@ spec:
 status: {}
 [root@master1 ~]# 
 ```
-
+### Now, append the values as per below print screen. For more details, please watch my video on Youtube sidecar.
 ![image](https://github.com/anishrana2001/Kubernetes/assets/93471182/4565623f-0dd6-4a7a-a104-1204dd6d92c5)
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: deployment-007
+  name: deployment-007
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-007
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: deployment-007
+    spec:
+      containers:
+      - image: busybox:1.28
+        name: web-one
+        resources: {}
+        args: [/bin/sh, -c, 'while true; do echo "i luv cncf" >> /tmp/log/input.log; sleep 10; done']
+        volumeMounts:
+        - name: varlog
+          mountPath: /tmp/log
+      - image: busybox:1.28
+        name: sidecar-two
+        resources: {}
+        args: [/bin/sh, -c, 'tail -n+1 -F /tmp/log/input.log']
+        volumeMounts:
+        - name: varlog
+          mountPath: /tmp/log
+      volumes:
+      - name: varlog
+        emptyDir: {}
+```
+
 
