@@ -3,7 +3,8 @@
 # 2. command (exec)
 # 3. TCP (tcpSocket)
 # 4. gRPC 
-
+#
+#
 
 ## 1. HTTP (httpGet)
 
@@ -48,9 +49,6 @@ kubectl create configmap healthz --from-file=healthz
 ```
 ```
 kubectl create configmap nginx-conf --from-file=default.conf
-```
-```
-kubectl apply -f liveness-http.yaml 
 ```
 
 ### Create a pod yaml file.
@@ -121,6 +119,8 @@ service nginx stop
 NAME            READY   STATUS             RESTARTS        AGE
 liveness-http   1/1     Running            3 (59s ago)     137m
 ```
+#
+#
 
 ## 2. command (exec)   
 
@@ -187,6 +187,8 @@ NAME            READY   STATUS    RESTARTS        AGE
 liveness-exec   1/1     Running   1 (25s ago)     100s
 ```
 
+#
+#
 
 ## 3. TCP (tcpSocket)
 ### A third type of liveness probe uses a TCP socket. With this configuration, the kubelet will attempt to open a socket to your container on the specified port. If it can establish a connection, it means that container is healthy, if not then container is not healthy.
@@ -246,7 +248,8 @@ NAME           READY   STATUS    RESTARTS     AGE
 liveness-tcp   1/1     Running   1 (4s ago)   115s
 [root@master1 data]#
 ```
-
+#
+#
 ## 4. gRPC 
 
 ### Official link of gRPC is "https://github.com/grpc/grpc/blob/master/doc/health-checking.md"
