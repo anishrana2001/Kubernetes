@@ -9,7 +9,7 @@
 
 ## Create a NGINX configuration file on local host (master node).
 
-```yaml
+```
 cat <<EOF>> default.conf 
 server {
     listen       80;
@@ -106,7 +106,7 @@ kubectl describe pods/liveness-http
 ```
 
 ## Use the "-w" (watch) option to see the progress of this pod. Actually, we are going to stop the nginx service and will observe the behaviour of this pod. It should restart the pod again. 
-## Now, open the 2nd terminal and login in this pod.
+## Now, open the 2nd terminal and login into this pod.
 ```
 kubectl exec -it liveness-http -- /bin/bash
 ```
@@ -116,6 +116,10 @@ service nginx stop
 ```
 ## In the first terminal, we should see that our pod must restart. IF this is the case then we have done the lab for liveness HTTP probs successfully .
 
-
+```
+[root@master1 data]# kubectl get pods
+NAME            READY   STATUS             RESTARTS        AGE
+liveness-http   1/1     Running            3 (59s ago)     137m
+```
 
 
