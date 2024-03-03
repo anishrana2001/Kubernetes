@@ -242,17 +242,25 @@ kubectl create -f readiness-tcp.yaml
 ```
 ### Check the status of this pod. Please notice the "RESTART" column. It should be 0.
 ```
-[root@master1 data]# kubectl get pods/readiness-tcp 
-NAME           READY   STATUS    RESTARTS   AGE
-readiness-tcp   1/1     Running   0          105s
+kubectl get pods/readiness-tcp
 ```
 ### Stop the NGINX service once. We should see that our pod will be restarted and working again.
 ```
-[root@master1 data]# kubectl exec readiness-tcp -- service nginx stop
-command terminated with exit code 137
+kubectl exec readiness-tcp -- service nginx stop
 ```
 ### One can observe that pod restarted 1 time.
 ```
+kubectl get pods/readiness-tcp
+```
+#### For your references.
+```
+[root@master1 data]# kubectl get pods/readiness-tcp 
+NAME           READY   STATUS    RESTARTS   AGE
+readiness-tcp   1/1     Running   0          105s
+
+[root@master1 data]# kubectl exec readiness-tcp -- service nginx stop
+command terminated with exit code 137
+
 [root@master1 data]# kubectl get pods/readiness-tcp 
 NAME           READY   STATUS    RESTARTS     AGE
 readiness-tcp   1/1     Running   1 (4s ago)   115s
