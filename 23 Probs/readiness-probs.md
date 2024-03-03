@@ -51,9 +51,7 @@ kubectl create configmap healthz --from-file=healthz
 ```
 kubectl create configmap nginx-conf --from-file=default.conf
 ```
-```
-kubectl apply -f readiness-http.yaml 
-```
+
 
 ### Create a pod yaml file.
 ```yaml
