@@ -323,23 +323,3 @@ kubectl get pods/readiness-rpc
 ```
 
 
-### Below is the reference for you.
-```
-[root@master1 data]# kubectl get pods/readiness-rpc 
-NAME           READY   STATUS    RESTARTS   AGE
-readiness-rpc   1/1     Running   0          7s
-[root@master1 data]# kubectl exec readiness-rpc -- service nginx reload
-Reloading nginx: nginx.
-[root@master1 data]# kubectl get pods/readiness-rpc 
-NAME           READY   STATUS    RESTARTS      AGE
-readiness-rpc   1/1     Running   1 (12s ago)   43s
-[root@master1 data]# kubectl exec readiness-rpc -- service nginx stop
-command terminated with exit code 137
-[root@master1 data]# kubectl get pods/readiness-rpc 
-NAME           READY   STATUS      RESTARTS      AGE
-readiness-rpc   0/1     Completed   1 (22s ago)   53s
-[root@master1 data]# kubectl get pods/readiness-rpc 
-NAME           READY   STATUS    RESTARTS      AGE
-readiness-rpc   1/1     Running   2 (16s ago)   65s
-[root@master1 data]# 
-```
