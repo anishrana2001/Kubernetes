@@ -122,6 +122,8 @@ kubectl exec readiness-http -- service nginx stop
 NAME            READY   STATUS             RESTARTS        AGE
 readiness-http   1/1     Running            3 (59s ago)     137m
 ```
+#
+#
 
 ## 2. command (exec)   
 
@@ -195,6 +197,8 @@ NAME            READY   STATUS    RESTARTS        AGE
 readiness-exec   1/1     Running   1 (25s ago)     100s
 ```
 
+#
+#
 
 ## 3. TCP (tcpSocket)
 ### A third type of readiness probe uses a TCP socket. With this configuration, the kubelet will attempt to open a socket to your container on the specified port. If it can establish a connection, it means that container is healthy, if not then container is not healthy.
@@ -254,6 +258,9 @@ NAME           READY   STATUS    RESTARTS     AGE
 readiness-tcp   1/1     Running   1 (4s ago)   115s
 [root@master1 data]#
 ```
+
+#
+#
 
 ## 4. gRPC 
 
