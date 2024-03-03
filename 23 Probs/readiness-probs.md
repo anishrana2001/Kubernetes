@@ -187,7 +187,7 @@ Events:
 
 ```
 
-### You will observe that pod is restarted. If this is the case, then we have completed this task. Let's check.
+### You will observe that pod is restarted. The reason behind is that, in the command we mentioned that "touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600". It means, first it create a file and then after 30 seconds, it delete this file. In the probs check, if this file is not present then it restart the pod. If this is the case, then we have completed this task. Let's check.
 
 ```
 [root@master1 data]# kubectl get pods
