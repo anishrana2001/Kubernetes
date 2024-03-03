@@ -322,4 +322,10 @@ kubectl exec readiness-rpc -- service nginx reload
 kubectl get pods/readiness-rpc 
 ```
 
+## Clear the lab.
+```
+kubectl delete -f readiness-http.yaml -f readiness-tcp.yaml -f readiness-exec.yaml -f readiness-rpc.yaml
+rm -rf readiness-http.yaml readiness-tcp.yaml readiness-exec.yaml readiness-rpc.yaml
+```
+
 
