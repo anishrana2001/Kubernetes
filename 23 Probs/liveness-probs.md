@@ -104,16 +104,18 @@ kubectl describe pods/liveness-http
 ```
 
 ### Use the "-w" (watch) option to see the progress of this pod. Actually, we are going to stop the nginx service and will observe the behavior of this pod. It should restart the pod again. 
+```
+kubectl get pods/readiness-http -w
+```
 ### Now, open the 2nd terminal and login into this pod.
-```
-kubectl exec -it liveness-http -- /bin/bash
-```
+
 ### Stop the nginx service.
 ```
-service nginx stop
+kubectl exec readiness-http -- service nginx stop
 ```
 ### In the first terminal, we should see that our pod must restart. IF this is the case then we have done the lab for liveness HTTP probs successfully .
 
+#### For your references.
 ```
 [root@master1 data]# kubectl get pods
 NAME            READY   STATUS             RESTARTS        AGE
@@ -157,12 +159,19 @@ kubectl apply -f liveness-exec.yaml
 ```
 ### We must see, our pod is in running state.
 ```
+kubectl get pods
+```
+#### For your references.
+```
 [root@master1 data]# kubectl get pods
 NAME            READY   STATUS    RESTARTS        AGE
 liveness-exec   1/1     Running   0               27s
 ```
 ### describe this pod.
-
+```
+kubectl describe pod/liveness-exec | tail
+```
+#### For your references.
 ```
 [root@master1 data]# kubectl describe pod/liveness-exec | tail
 Events:
@@ -179,7 +188,7 @@ Events:
 
 ```
 
-### You will observe that pod is restarted. If this is the case, then we have completed this task. Let's check.
+### You will observe that pod is restarted. The reason behind is that in the command we mentioned that "touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600". It means, first it create a file and then after 30 seconds, it delete this file. In the probs check, if this file is not present then it restart the pod. If this is the case, then we have completed this task. Let's check.
 
 ```
 [root@master1 data]# kubectl get pods
@@ -232,16 +241,30 @@ kubectl create -f liveness-tcp.yaml
 ```
 ### Check the status of this pod. Please notice the "RESTART" column. It should be 0.
 ```
+kubectl get pods/readiness-tcp
+```
+
+#### For your references.
+```
 [root@master1 data]# kubectl get pods/liveness-tcp 
 NAME           READY   STATUS    RESTARTS   AGE
 liveness-tcp   1/1     Running   0          105s
 ```
 ### Stop the NGINX service once. We should see that our pod will be restarted and working again.
 ```
+kubectl exec liveness-tcp -- service nginx stop
+```
+
+#### For your references.
+```
 [root@master1 data]# kubectl exec liveness-tcp -- service nginx stop
 command terminated with exit code 137
 ```
 ### One can observe that pod restarted 1 time.
+```
+kubectl get pods/readiness-tcp
+```
+#### For your references.
 ```
 [root@master1 data]# kubectl get pods/liveness-tcp 
 NAME           READY   STATUS    RESTARTS     AGE
