@@ -122,7 +122,7 @@ NAME            READY   STATUS             RESTARTS        AGE
 liveness-http   1/1     Running            3 (59s ago)     137m
 ```
 
-## Let's move forward towards liveness command probs.
+## 2. command (exec)   
 
 ### Create the pod yaml file.
 ```yaml
@@ -188,7 +188,9 @@ liveness-exec   1/1     Running   1 (25s ago)     100s
 ```
 
 
-## Define a TCP liveness probe
+## 3. TCP (tcpSocket)
+### A third type of liveness probe uses a TCP socket. With this configuration, the kubelet will attempt to open a socket to your container on the specified port. If it can establish a connection, it means that container is healthy, if not then container is not healthy.
+
 ### We can use the liveness-http config file as we have already created the configMaps. 
 ```yaml
 cat <<EOF>> liveness-tcp.yaml
@@ -210,7 +212,7 @@ spec:
     livenessProbe:                   # Liveness probs config start
       tcpSocket:                     # tcpSocket
         port: 80                     # Our nginx service is running on port 80, so this liveness probs can reach to port 80.
-      initialDelaySeconds: 2         # First attempt will start after 2 seconds.
+      initialDelaySeconds: 2         # Once the container starts, it will wati for 2 second and then it send the request. 
       periodSeconds: 10              # Retry afer 10 seconds.
       failureThreshold: 3            # After 3 failures a container is classified as failed.
   volumes:
@@ -226,19 +228,95 @@ EOF
 ```
 kubectl create -f liveness-tcp.yaml
 ```
-### Check the status of this pod.
+### Check the status of this pod. Please notice the "RESTART" column. It should be 0.
 ```
 [root@master1 data]# kubectl get pods/liveness-tcp 
 NAME           READY   STATUS    RESTARTS   AGE
 liveness-tcp   1/1     Running   0          105s
-
+```
+### Stop the NGINX service once. We should see that our pod will be restarted and working again.
+```
 [root@master1 data]# kubectl exec liveness-tcp -- service nginx stop
 command terminated with exit code 137
-
+```
+### One can observe that pod restarted 1 time.
+```
 [root@master1 data]# kubectl get pods/liveness-tcp 
 NAME           READY   STATUS    RESTARTS     AGE
 liveness-tcp   1/1     Running   1 (4s ago)   115s
 [root@master1 data]#
 ```
-### One can observe that pod restarted 1 time.
 
+## 4. gRPC 
+
+### Official link of gRPC is "https://github.com/grpc/grpc/blob/master/doc/health-checking.md"
+### In this, we check directly the service is running on the configured port. For that reason, we can use the liveness-http config and modify it as per our requirement. 
+```yaml
+cat <<EOF>> liveness-rpc.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-rpc
+spec:
+  containers:
+  - name: liveness
+    image: nginx
+    volumeMounts:
+        - name: config
+          mountPath: /etc/nginx/conf.d/
+        - name: healthz
+          mountPath: /usr/share/nginx/html/   
+    livenessProbe:                  # Liveness probs config start
+      grpc:                         # grpc config start.
+        port: 80                    # In this example, the liveness probe sends a gRPC request to port 80 of the container.
+      initialDelaySeconds: 2        # Once the container starts, it will wati for 2 second and then it send the request. 
+      periodSeconds: 10             # Retry afer 10 seconds.
+      failureThreshold: 3           # After 3 failures a container is classified as failed.
+  volumes:
+  - name: config
+    configMap:
+      name: nginx-conf
+  - name: healthz
+    configMap:
+      name: healthz
+EOF
+```
+### Create the pod.
+```
+kubectl apply -f liveness-rpc.yaml
+```
+### Check the pod status.
+```
+kubectl get pods/liveness-rpc
+```
+### If we reload the service, we will observe pod is restarted.
+```
+kubectl exec liveness-rpc -- service nginx reload
+```
+```
+kubectl get pods/liveness-rpc 
+```
+
+
+### Below is the reference for you.
+```
+[root@master1 data]# kubectl get pods/liveness-rpc 
+NAME           READY   STATUS    RESTARTS   AGE
+liveness-rpc   1/1     Running   0          7s
+[root@master1 data]# kubectl exec liveness-rpc -- service nginx reload
+Reloading nginx: nginx.
+[root@master1 data]# kubectl get pods/liveness-rpc 
+NAME           READY   STATUS    RESTARTS      AGE
+liveness-rpc   1/1     Running   1 (12s ago)   43s
+[root@master1 data]# kubectl exec liveness-rpc -- service nginx stop
+command terminated with exit code 137
+[root@master1 data]# kubectl get pods/liveness-rpc 
+NAME           READY   STATUS      RESTARTS      AGE
+liveness-rpc   0/1     Completed   1 (22s ago)   53s
+[root@master1 data]# kubectl get pods/liveness-rpc 
+NAME           READY   STATUS    RESTARTS      AGE
+liveness-rpc   1/1     Running   2 (16s ago)   65s
+[root@master1 data]# 
+```
