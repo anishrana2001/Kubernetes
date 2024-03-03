@@ -106,13 +106,14 @@ kubectl describe pods/readiness-http
 ```
 
 ### Use the "-w" (watch) option to see the progress of this pod. Actually, we are going to stop the nginx service and will observe the behavior of this pod. It should restart the pod again. 
+
+```
+kubectl get pods/readiness-http -w
+```
 ### Now, open the 2nd terminal and login into this pod.
-```
-kubectl exec -it readiness-http -- /bin/bash
-```
 ### Stop the nginx service.
 ```
-service nginx stop
+kubectl exec readiness-http -- service nginx stop
 ```
 ### In the first terminal, we should see that our pod must restart. IF this is the case then we have done the lab for readiness HTTP probs successfully .
 
