@@ -158,12 +158,19 @@ kubectl apply -f readiness-exec.yaml
 ```
 ### We must see, our pod is in running state.
 ```
+kubectl get pods
+```
+#### For your references.
+```
 [root@master1 data]# kubectl get pods
 NAME            READY   STATUS    RESTARTS        AGE
 readiness-exec   1/1     Running   0               27s
 ```
 ### describe this pod.
-
+```
+kubectl describe pod/readiness-exec | tail
+```
+#### For your references.
 ```
 [root@master1 data]# kubectl describe pod/readiness-exec | tail
 Events:
