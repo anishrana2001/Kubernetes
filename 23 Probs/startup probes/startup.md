@@ -1,4 +1,7 @@
 
+#We can employ readiness and liveness probes for our containers but what if we have a container that hosts an application, such as a legacy application, which needs a considerable amount of time just to start up? In such a case, we do not have a faulty application, we just have a slow starting application. Employing a liveness probe would put it in a loop where the container is restarted before completing the start up process each time.
+#
+#
 # Startup probs can be defined by 4 types. If checks fails then pos must be restarted.
 # 1. HTTP (httpGet)
 # 2. command (exec)
@@ -71,6 +74,12 @@ spec:
           mountPath: /etc/nginx/conf.d/
         - name: healthz
           mountPath: /usr/share/nginx/html/
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 80
+      failureThreshold: 2
+      periodSeconds: 10
     startupProbe:
       httpGet:
         path: /healthz
@@ -90,3 +99,23 @@ EOF
 ```
 kubectl apply -f startup-http.yaml
 ```
+
+### Check the status of startup pod
+
+```
+kubectl get pods/startup
+```
+### Now, execute the below command with "-w" option. This time, we are going to stop the nginx service and will observe the behaviour of our startup pod.
+```
+kubectl get pods startup -w
+```
+
+### Open the another terminal, and stop the nginx service.
+
+```
+kubectl exec startup  -- service nginx stop
+```
+
+
+You can configure the startup probes in the same way what we have done for liveness or readiness probes.
+
