@@ -350,5 +350,6 @@ liveness-rpc   1/1     Running   2 (16s ago)   65s
 ## Clear the Lab.
 ```
 kubectl delete -f liveness-http.yaml -f liveness-tcp.yaml -f liveness-exec.yaml -f liveness-rpc.yaml
-rm -rf liveness-http.yaml liveness-tcp.yaml liveness-exec.yaml liveness-rpc.yaml
+kubectl delete configmaps nginx-conf healthz
+rm -rf liveness-http.yaml liveness-tcp.yaml liveness-exec.yaml liveness-rpc.yaml healthz default.conf
 ```
