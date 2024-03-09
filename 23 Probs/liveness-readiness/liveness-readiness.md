@@ -48,7 +48,7 @@ kind: Pod
 metadata:
   labels:
     test: readiness
-  name: live-readi
+  name: live-readi-http
 spec:
   containers:
   - name: live-readi-container
@@ -88,13 +88,23 @@ kubectl apply -f liveness-readiness-http.yaml
 ## Check the pod status
 
 ```
-kubectl get pods/live-readi
+kubectl get pods/live-readi-http
 ```
 
 ```
-kubectl describe pods/live-readi | tail
+kubectl describe pods/live-readi-http | tail
 ```
+### Use the "-w" (watch) option to see the progress of this pod. Actually, we are going to stop the nginx service and will observe the behavior of this pod. It should restart the pod again. 
+```
+kubectl get pods/live-readi-http  -w
+```
+### Now, open the 2nd terminal and login into this pod.
 
+### Stop the nginx service.
+```
+kubectl exec live-readi-http -- service nginx stop
+```
+### In the first terminal, we should see that our pod must restart. IF this is the case then we have done the lab for live-readi HTTP probs successfully .
 ## Clear the Lab.
 ```
 kubectl delete -f  liveness-readiness-http.yaml
