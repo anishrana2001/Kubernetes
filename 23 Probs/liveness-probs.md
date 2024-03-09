@@ -105,13 +105,13 @@ kubectl describe pods/liveness-http
 
 ### Use the "-w" (watch) option to see the progress of this pod. Actually, we are going to stop the nginx service and will observe the behavior of this pod. It should restart the pod again. 
 ```
-kubectl get pods/readiness-http -w
+kubectl get pods/liveness-http  -w
 ```
 ### Now, open the 2nd terminal and login into this pod.
 
 ### Stop the nginx service.
 ```
-kubectl exec readiness-http -- service nginx stop
+kubectl exec liveness-http -- service nginx stop
 ```
 ### In the first terminal, we should see that our pod must restart. IF this is the case then we have done the lab for liveness HTTP probs successfully .
 
@@ -241,7 +241,7 @@ kubectl create -f liveness-tcp.yaml
 ```
 ### Check the status of this pod. Please notice the "RESTART" column. It should be 0.
 ```
-kubectl get pods/readiness-tcp
+kubectl get pods/liveness-tcp
 ```
 
 #### For your references.
@@ -262,7 +262,7 @@ command terminated with exit code 137
 ```
 ### One can observe that pod restarted 1 time.
 ```
-kubectl get pods/readiness-tcp
+kubectl get pods/liveness-tcp
 ```
 #### For your references.
 ```
