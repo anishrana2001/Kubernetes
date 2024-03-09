@@ -96,6 +96,13 @@ kubectl get pods/live-readi
 ```
 
 ```
-kubectl describe pods/live-readi
+kubectl describe pods/live-readi | tail
+```
+
+## Clear the Lab.
+```
+kubectl delete -f  liveness-readiness-http.yaml
+kubectl delete configmaps nginx-conf healthz
+ rm -rf liveness-readiness-http.yaml healthz default.conf
 ```
 
