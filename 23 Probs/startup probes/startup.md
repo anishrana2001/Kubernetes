@@ -1,5 +1,5 @@
 
-#We can employ readiness and liveness probes for our containers but what if we have a container that hosts an application, such as a legacy application, which needs a considerable amount of time just to start up? In such a case, we do not have a faulty application, we just have a slow starting application. Employing a liveness probe would put it in a loop where the container is restarted before completing the start up process each time.
+## We can employ readiness and liveness probes for our containers but what if we have a container that hosts an application, such as a legacy application, which needs a considerable amount of time just to start up? In such a case, we do not have a faulty application, we just have a slow starting application. Employing a liveness probe would put it in a loop where the container is restarted before completing the start up process each time.
 #
 #
 # Startup probs can be defined by 4 types. If checks fails then pos must be restarted.
