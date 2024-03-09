@@ -1,6 +1,40 @@
 # We can also add both the probes in a single manisfest file.
 
-## First, create the configmaps. For this lab, please perform the liveness-probe lab. 
+### Create a NGINX configuration file on local host (master node).
+
+```
+cat <<EOF>> default.conf 
+server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+
+server { 
+       location /healthz {
+        access_log off;
+        return 200;
+		}
+	}
+EOF
+```
+### After that, we can create a page for health check.
+
+```
+cat <<EOF>> healthz 
+Server is up and running fine.
+EOF
+```
+### Create the configmaps.  
 ```
 kubectl create configmap healthz --from-file=healthz
 kubectl create configmap nginx-conf --from-file=default.conf
