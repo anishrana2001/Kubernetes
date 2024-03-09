@@ -53,10 +53,6 @@ spec:
   containers:
   - name: live-readi-container
     image: nginx
-    args:
-    - /bin/sh
-    - -c
-    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600	
     volumeMounts:
         - name: config
           mountPath: /etc/nginx/conf.d/
@@ -70,12 +66,12 @@ spec:
       periodSeconds: 10
       failureThreshold: 1
     readinessProbe:
-      exec:
-        command:
-        - cat
-        - /tmp/healthy
-      initialDelaySeconds: 5
-      periodSeconds: 5
+      httpGet:
+        path: /healthz
+        port: 80
+      initialDelaySeconds: 2
+      periodSeconds: 10
+      failureThreshold: 1
   volumes:
   - name: config
     configMap:
