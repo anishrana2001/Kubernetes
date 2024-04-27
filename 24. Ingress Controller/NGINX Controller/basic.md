@@ -1,0 +1,94 @@
+### Metal-LB configuration
+```
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml
+
+kubectl  -n metallb-system get all
+
+cat <<EOF | kubectl create -f -
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: example
+  namespace: metallb-system
+EOF
+
+cat <<EOF | kubectl create -f -
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.1.100-192.168.1.110
+EOF
+
+```
+
+### Create the deployment - which has our server content.
+
+```
+kubectl create deployment devops-wala --image=nginx --replicas=2 --port=80
+```
+
+### Now, create a new service and assign the above deployment. we can use "kubectl expose" command.
+```
+kubectl expose deployment devops-wala --name=srv-basic-devops-wala
+```
+
+### Check the service. It should be clusterIP. 
+```
+kubectl get service
+```
+
+### Create a Nginx Controller.
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/cloud/deploy.yaml
+```
+
+### Check the pods, all should be in working condition.
+```
+kubectl -n ingress-nginx get deployments.apps 
+```
+
+### We should have a new service called ingress-nginx-controller after creating a NGINX controller.
+```
+kubectl get service ingress-nginx-controller --namespace=ingress-nginx
+```
+
+### I have no public IP @ thus, I am going to create a local DNS entry. Here, I will point my load balancer IP with FQDN.
+```
+echo "192.168.1.100  devops-wala.com" >> /etc/hosts
+```
+
+### You can also check your external IP address, by using below command.
+```
+INGRESS_EXTERNAL_IP=`kubectl get svc --namespace=ingress-nginx ingress-nginx-controller -o jsonpath='{.status.loadBalancer.ingress[0].ip}'`
+echo $INGRESS_EXTERNAL_IP
+```
+
+### It's time to create a Ingress rule (Ingress Resource). Here, we are going to open the FQDN (devops-wala.com) and it should redirect to devops-wala deployment's pods.
+#### Syntax==> kubectl create ingress INGRESS-RESOURCE-NAME --rule host/path=svcname:svcport[,tls[=secret]]
+
+```
+kubectl create ingress devops-wala1 --class=nginx --rule devops-wala.com/=srv-basic-devops-wala:80
+```
+
+### We can also describe this ingress resources.
+```
+kubectl describe ingress/devops-wala1
+```
+
+### Let's try to open the website. FQDN
+```
+curl devops-wala.com
+```
+
+
+Clear the LAB
+```
+kubectl delete ingress/devops-wala1 service/srv-basic-devops-wala deployments.apps/devops-wala
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/cloud/deploy.yaml
+```
+
