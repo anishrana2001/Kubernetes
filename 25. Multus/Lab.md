@@ -77,7 +77,7 @@ metadata:
   name: macvlan-conf
 spec:
   config: '{
-      "cniVersion": "0.3.0",
+      "cniVersion": "0.3.1",
       "type": "macvlan",
       "master": "enp0s3",
       "mode": "bridge",
