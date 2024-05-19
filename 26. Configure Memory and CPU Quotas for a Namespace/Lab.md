@@ -95,7 +95,7 @@ EOF
 ```
 kubectl -n ns-quota1 get resourcequota mem-cpu-demo  -o yaml
 ```
-## A need and clean way to check.
+## A neat and clean way to check.
 ```
 kubectl -n ns-quota1 get resourcequota mem-cpu-demo -o jsonpath='{ .status.used }' | jq .
 ```
