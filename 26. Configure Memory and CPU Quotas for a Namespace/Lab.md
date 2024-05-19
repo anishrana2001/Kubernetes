@@ -4,7 +4,7 @@
 #### Requests and limits
 
 ####  Requests: It means minimum amount of resource it can consume (request). Kubernetes Schedular will check the node if it can create a pod with this minimum resource?
-#### .
+#### 
 ####  Limits: It means, maximum amount of request container can demand. The kubelet (and container runtime) enforce the limit. 
 #### If application inside the container demands more resources (example allowed amount of memory), then the system kernel terminates the process that attempted the allocation, with an out of memory (OOM) error.
 #### 
