@@ -13,7 +13,7 @@
 ```
 kubectl create namespace ns-quota1
 ```
-## After that, we neend to create a ResourceQuota inside the newly created Namespace "ns-quota1". In this manifest file, we have mentioned the requests and limit values under the spec.hard section.
+## After that, we need to create a ResourceQuota inside the newly created Namespace "ns-quota1". In this manifest file, we have mentioned the requests and limit values under the spec.hard section.
 ```
 cat <<EOF | kubectl create -f -
 apiVersion: v1
@@ -100,7 +100,7 @@ kubectl -n ns-quota1 get resourcequota mem-cpu-demo  -o yaml
 kubectl -n ns-quota1 get resourcequota mem-cpu-demo -o jsonpath='{ .status.used }' | jq .
 ```
 
-## If we again creae a POD with excede value, it should give the error message. Let's try.
+## If we again create a POD with exceed resources then it should generate an error message. Let's try.
 ```
 cat <<EOF | kubectl create -f -
 apiVersion: v1
