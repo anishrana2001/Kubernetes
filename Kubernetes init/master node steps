@@ -42,7 +42,7 @@ echo "Your system CPU are $CPU"
 ### Preparation for Docker installation #########
 modprobe br_netfilter
 lsmod | grep br_netfilter
-
+echo "1"  > /proc/sys/net/ipv6/conf/default/forwarding
 echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 sysctl -a | grep net.bridge.bridge-nf-call-iptables
 ######################
