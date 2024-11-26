@@ -1,34 +1,44 @@
 ### Disable SELINUX ####
-
+```
 cat /etc/sysconfig/selinux | grep SELINUX=
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 cat /etc/sysconfig/selinux | grep SELINUX=
 setenforce 0
+```
 ######################
 
 
 ### Make DNS local entries ### Change it as per your requirement #####
+```
 cat <<EOF>>  /etc/hosts
 
 192.168.1.31  master1
 192.168.1.32  workernode1
 192.168.1.33  workernode2
 EOF
+```
 ######################
 
 ### Check the connectivity of your cluster nodes #########
+```
 ping -c 2 workernode1
+```
+```
 ping -c 2 workernode2
+```
 ######################
 
 
 ### Disable the Firewall ########
+```
 systemctl stop firewalld.service
 systemctl disable firewalld
 systemctl status firewalld
+```
 ######################
 
 ### Kubernetes prerequisite #######
+```
 RAM=`cat /proc/meminfo | grep MemTotal | awk '{print ($2 / 1024) / 1024 ,"GiB"}'`
 CPU=`cat /proc/cpuinfo | grep processor`
 
@@ -36,20 +46,24 @@ sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 swapoff -a
 echo "Your system RAM is $RAM"
 echo "Your system CPU are $CPU"
+```
 ######################
 
 
 ### Preparation for Docker installation #########
+```
 modprobe br_netfilter
 lsmod | grep br_netfilter
 echo "1"  > /proc/sys/net/ipv6/conf/default/forwarding
 echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
 sysctl -a | grep net.bridge.bridge-nf-call-iptables
+```
 ######################
 
 
 
 ### Docker installation steps #######
+```
 sudo yum -y remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine buildah
 yum install -y yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -59,12 +73,15 @@ sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.t
 systemctl start docker
 systemctl enable docker
 docker run hello-world
+```
+
 ######################
 
 
 
 
 ### Kubernetes installation steps #####
+```
 sudo cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -79,18 +96,27 @@ enabled=1
 gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
 EOF
+```
 
-
+### Its time to install the kubelet kubeadm and kubectl
+```
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable kubelet
 systemctl start kubelet
+```
 #####################
 
+```
 swapoff -a
 kubeadm init 
-
+```
+```
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
 ### You should now deploy a Pod network to the cluster. ####
+```
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
