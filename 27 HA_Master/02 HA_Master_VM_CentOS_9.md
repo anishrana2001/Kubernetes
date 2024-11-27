@@ -154,6 +154,33 @@ kubectl get nodes
 ```
 kubectl get pods -n kube-system
 ```
+## How to install the ETCD packages, so that we can check at the end for the status of etcd cluster.
+
+```
+etcdctl version
+```
+```
+curl -s https://api.github.com/repos/etcd-io/etcd/releases/latest | grep browser_download_url  | grep linux-amd64  | cut -d '"' -f 4  | wget -qi -
+```
+```
+tar xvf etcd-v*.tar.gz 
+```
+```
+cd etcd-*/
+```
+```
+sudo mv etcd* /usr/local/bin/ 
+```
+```
+cd ~
+```
+```
+ export PATH=/usr/local/bin:$PATH
+```
+```
+etcdctl version
+
+```
 
 ### Once all are good. Switch to 2nd Master node.
 ### Login into first master node "master2: 192.168.1.30"
