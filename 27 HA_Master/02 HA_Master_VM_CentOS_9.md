@@ -168,3 +168,13 @@ scp /tmp/script.sh root@192.168.1.32:/tmp
 ```
 scp /tmp/script.sh root@192.168.1.33:/tmp
 ```
+
+Once all the nodes join the cluster, then execute the following command on both master nodes.
+```
+kubectl get nodes
+```
+
+### Now, observe the etcd pods by executing this command.
+```
+kubectl get pods -n kube-system
+```
