@@ -179,7 +179,14 @@ cd ~
 ```
 ```
 etcdctl version
-
+```
+### Check the members.
+```
+ etcdctl --endpoints 192.168.1.31:2379   --cert=/etc/kubernetes/pki/etcd/server.crt   --key=/etc/kubernetes/pki/etcd/server.key   --cacert=/etc/kubernetes/pki/etcd/ca.crt   member list
+```
+### we can also check, who is leader. This command will inform us more information at the end.
+```
+etcdctl --endpoints 192.168.1.31:2379   --cert=/etc/kubernetes/pki/etcd/server.crt   --key=/etc/kubernetes/pki/etcd/server.key   --cacert=/etc/kubernetes/pki/etcd/ca.crt   endpoint status --cluster --write-out=table
 ```
 
 ### Once all are good. Switch to 2nd Master node.
@@ -204,4 +211,13 @@ kubectl get nodes
 ### Now, observe the etcd pods by executing this command.
 ```
 kubectl get pods -n kube-system
+```
+
+### Check the members.
+```
+ etcdctl --endpoints 192.168.1.31:2379   --cert=/etc/kubernetes/pki/etcd/server.crt   --key=/etc/kubernetes/pki/etcd/server.key   --cacert=/etc/kubernetes/pki/etcd/ca.crt   member list
+```
+### Now, check the leader.
+```
+etcdctl --endpoints 192.168.1.31:2379   --cert=/etc/kubernetes/pki/etcd/server.crt   --key=/etc/kubernetes/pki/etcd/server.key   --cacert=/etc/kubernetes/pki/etcd/ca.crt   endpoint status --cluster --write-out=table
 ```
