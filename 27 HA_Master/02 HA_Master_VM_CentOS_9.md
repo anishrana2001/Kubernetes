@@ -10,6 +10,7 @@ cat <<EOF>>  /etc/hosts
 EOF
 ```
 
+### Login into first master node "master1: 192.168.1.31"
 ```
 ### Adding the repo file for Kubernetes.
 sudo cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
@@ -126,9 +127,44 @@ ip route
 ```
 ip route add default via 192.168.1.0 dev enp0s3
 ```
-
+### Create the cluster.
 ```
 kubeadm init --control-plane-endpoint "loadbalancer:6443" --upload-certs --pod-network-cidr=10.244.0.0/16
 ```
+### 
 
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+### You can now join any number of the control-plane node running the following command on each as root:
+### Check the output.
+### 
+### 
+```
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+```
+### Check the status of node.
+```
+kubectl get nodes
+```
 
+### Check the pods in kube-system namespace
+```
+kubectl get pods -n kube-system
+```
+
+### Once all are good. Switch to 2nd Master node.
+### Login into first master node "master2: 192.168.1.30"
+
+### Execute the below command and then run the script.
+```
+scp root@192.168.1.31:/tmp/script.sh /tmp/
+```
+```
+scp /tmp/script.sh root@192.168.1.32:/tmp
+```
+```
+scp /tmp/script.sh root@192.168.1.33:/tmp
+```
