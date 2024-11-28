@@ -2,6 +2,8 @@
 ### Update the file "/etc/hosts/" on all nodes.
 ```
 cat <<EOF>>  /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.1.30  master2.example.com      master2
 192.168.1.31  master1.example.com      master1
 192.168.1.32  workernode1.example.com  workernode1
@@ -12,8 +14,7 @@ EOF
 
 ### Login into first master node "master1: 192.168.1.31"
 ```
-### Adding the repo file for Kubernetes.
-sudo cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
