@@ -22,7 +22,7 @@ systemctl status firewalld
 ```
 ## Install the Haproxy package.
 ```
-apt-get install haproxy -y
+yum install haproxy -y
 ```
 ### Modify the haproxy configuration file.
 ```
