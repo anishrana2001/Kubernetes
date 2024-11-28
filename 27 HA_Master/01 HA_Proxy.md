@@ -4,6 +4,8 @@ How to install the haproxy for Kubernetes master nodes?
 ```
 >/etc/hosts
 cat <<EOF>>  /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 192.168.1.30  master2.example.com      master2
 192.168.1.31  master1.example.com      master1
 192.168.1.32  workernode1.example.com  workernode1
