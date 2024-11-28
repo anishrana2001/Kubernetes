@@ -99,6 +99,8 @@ sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.t
 echo -e "\033[42mRestarting the docker service and enable it\033[m"
 systemctl start docker
 systemctl enable docker
+systemctl restart containerd
+systemctl enable containerd
 docker run hello-world
 echo ######################
 
