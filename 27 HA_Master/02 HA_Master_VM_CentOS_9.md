@@ -224,3 +224,114 @@ kubectl get pods -n kube-system
 ```
 etcdctl --endpoints 192.168.1.31:2379   --cert=/etc/kubernetes/pki/etcd/server.crt   --key=/etc/kubernetes/pki/etcd/server.key   --cacert=/etc/kubernetes/pki/etcd/ca.crt   endpoint status --cluster --write-out=table
 ```
+
+
+### Please note that if you have 2 master nodes in a cluser and one goes down then your cluster will not be available. Thus,  you have to create 3 master nodes.
+
+### How to remove the node from cluster?
+### On master node.
+### cordon the node, so that no new pod will be created on this cluster.
+```
+kubectl cordon workernode1.example.com
+```
+### Remove the running pods from this node.
+```
+kubectl drain   workernode1.example.com --ignore-daemonsets --delete-emptydir-data
+```
+### Delete the node from this cluster.
+```
+kubectl delete node  workernode1.example.com
+```
+
+### On Workernode1, remove the configuration file from this node.
+```
+yes | kubeadm reset
+```
+
+
+### On master node, perform the post check.
+```
+kubectl get nodes
+```
+
+### login to HAproxy server.
+
+```
+vi /etc/haproxy/haproxy.cfg
+```
+
+```
+server workernode1 192.168.1.32:6443 check           ## Line Added
+```
+### You can also check the syntax of your HAProxy config.
+```
+haproxy -c -f /etc/haproxy/haproxy.cfg
+```
+
+```
+systemctl restart haproxy.service
+```
+```
+systemctl status haproxy.service -l --no-pager
+```
+
+### Once all are ok, then login to workernode1 and run the below command to join the cluster. You will observe that key is expired.
+```
+  kubeadm join loadbalancer:6443 --token 7ch5fx.wa4k7ero1uv3yme7 \
+        --discovery-token-ca-cert-hash sha256:83f1cb68cef22ba1802d6290e126b442a4ddfd4333566d5768917fb2434ed3e3 \
+        --control-plane --certificate-key 0fc812d1ae9c242844c722e3a67bc078adcafd84e0737d197e9d6c82ac5f75b2
+```
+
+### Read these lines.
+### Please note that the certificate-key gives access to cluster sensitive data, keep it secret!
+### As a safeguard, uploaded-certs will be deleted in two hours; If necessary, you can use
+### "kubeadm init phase upload-certs --upload-certs" to reload certs afterward.
+###
+### Login to master node and execute this command.
+```
+kubeadm init phase upload-certs --upload-certs
+```
+
+### Now, again go back to workernode1 node and execute the command with updated key.
+
+
+
+### login to HAproxy server.
+
+```
+vi /etc/haproxy/haproxy.cfg
+```
+```
+frontend stats
+    bind *:8404
+    mode http
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+    stats auth admin:password
+```
+
+#### In this configuration:
+#### 
+#### bind *:8404 specifies the address and port for the stats page.
+#### stats uri /stats sets the URL path to access the stats page.
+#### stats refresh 10s refreshes the stats page every 10 seconds.
+#### stats auth admin:password enables basic authentication with the username admin and password password.
+#### 
+
+### You can also check the syntax of your HAProxy config.
+```
+haproxy -c -f /etc/haproxy/haproxy.cfg
+```
+
+```
+systemctl restart haproxy.service
+```
+```
+systemctl status haproxy.service -l --no-pager
+```
+
+### Open the browser.
+```
+http://192.168.1.34:8404/stats
+```
