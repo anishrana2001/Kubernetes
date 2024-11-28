@@ -130,7 +130,7 @@ ip route add default via 192.168.1.0 dev enp0s3
 ```
 ### Create the cluster.
 ```
-kubeadm init --control-plane-endpoint "loadbalancer:6443" --upload-certs --pod-network-cidr=10.244.0.0/16
+kubeadm init --control-plane-endpoint "loadbalancer:6443" --upload-certs 
 ```
 ### 
 
