@@ -143,6 +143,9 @@ kubectl apply -f dynamic-volume.yaml
 
 ## Check the status of StorageClass and PVC
 ```
+kubectl get sc,pv,pvc
+```
+```
 [root@master1 volume]# kubectl get sc,pv,pvc
 NAME                                     PROVISIONER       RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 storageclass.storage.k8s.io/nfs-client   k8s-sigs.io/nfs   Delete          Immediate           false                  50s
@@ -157,6 +160,9 @@ kubectl apply -f dynamic-deployment.yaml
 ```
 
 ## Again, check the status of StorageClass and PVC. You will observe PV created automatically.
+```
+kubectl get sc,pv,pvc
+```
 ```
 [root@master1 volume]# kubectl get sc,pv,pvc
 NAME                                     PROVISIONER       RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
