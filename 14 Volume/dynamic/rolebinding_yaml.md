@@ -1,3 +1,5 @@
+## Create a file and the use apply -f file name for creating the rolebinding.
+```
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -66,3 +68,4 @@ roleRef:
   kind: Role
   name: leader-locking-nfs-client-provisioner
   apiGroup: rbac.authorization.k8s.io
+```
