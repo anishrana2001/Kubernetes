@@ -8,5 +8,6 @@ metadata:
 provisioner: k8s-sigs.io/nfs   # This name must match deployment's env PROVISIONER_NAME'
 parameters:
   archiveOnDelete: "false"
+allowVolumeExpansion: true
 EOF
 ```
