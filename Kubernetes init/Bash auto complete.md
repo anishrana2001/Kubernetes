@@ -1,5 +1,5 @@
 
-## ** How to autocomplete the commands for kubernetes ? **
+## How to autocomplete the commands for kubernetes ? **
 
 
 ```
