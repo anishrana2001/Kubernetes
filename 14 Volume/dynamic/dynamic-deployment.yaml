@@ -1,3 +1,6 @@
+## Dynamic-deployment 
+```
+cat <<EOF>> dynamic-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,3 +41,5 @@ spec:
           nfs:
             server: 192.168.1.34
             path: /home/nfsshare/
+EOF
+```
