@@ -1,4 +1,4 @@
-## Create a file and the use apply -f file name for creating the rolebinding.
+## Create a file and then use apply -f file name for creating the rolebinding.
 ```
 apiVersion: v1
 kind: ServiceAccount
