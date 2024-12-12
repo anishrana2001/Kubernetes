@@ -1,10 +1,11 @@
 # **How to increase the PVC size**
 ---
-* Prerequicite 
+* Prerequisite
+```html
 1. GIT
 2. Kubernetes Cluster
 3. csi-driver-host path
-
+```
 ---
 ### How to `Install` GIT
 ---
