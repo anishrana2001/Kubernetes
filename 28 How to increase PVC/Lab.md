@@ -12,7 +12,9 @@
 ### First, we will install the `git-all` package and then `clone` the git repository. 
 ```
 dnf install git-all
-mkdir  /data; cd /data ; git clone https://github.com/kubernetes-csi/csi-driver-host-path.git
+mkdir  /data
+cd /data 
+git clone https://github.com/kubernetes-csi/csi-driver-host-path.git
 cd csi-driver-host-path/
 ```
 ### In order to install the `csi-driver-host-path`, we need to set the variable and after that we need to apply some yaml files.
