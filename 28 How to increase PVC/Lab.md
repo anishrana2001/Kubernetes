@@ -50,7 +50,8 @@ kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{range .sp
 deploy/kubernetes-latest/deploy.sh
 ```
 ---
-### Post Check! : 2 Pods must be in running state.
+### **Post Check! : 2 Pods must be in running state.**
+---
 ```
 kubectl get pods | grep csi
 ```
