@@ -104,3 +104,38 @@ kubectl get pvc
 ```
 kubectl describe pvc/csi-pvc 
 ```
+---
+### **How to uninstall the csi-driver-host-path , pods and all**
+---
+
+### You must be on this directory.
+```
+cd /data/csi-driver-host-path
+```
+```
+sh deploy/util/destroy-hostpath.sh
+```
+```
+for i in ./examples/csi-storageclass.yaml ./examples/csi-pvc.yaml ./examples/csi-app.yaml; do kubectl delete -f $i; done
+```
+
+
+```
+SNAPSHOTTER_VERSION=v6.3.3
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${SNAPSHOTTER_VERSION}/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${SNAPSHOTTER_VERSION}/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
+```
+
+
+```
+SNAPSHOTTER_BRANCH=release-6.3
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${SNAPSHOTTER_BRANCH}/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${SNAPSHOTTER_BRANCH}/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${SNAPSHOTTER_BRANCH}/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+```
+
+
+```
+kubectl get sc,pv,pvc
+kubectl get pods -A
+```
