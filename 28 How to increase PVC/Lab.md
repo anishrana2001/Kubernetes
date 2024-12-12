@@ -105,7 +105,7 @@ kubectl get pvc
 kubectl describe pvc/csi-pvc 
 ```
 ---
-### **How to uninstall the csi-driver-host-path , pods and all**
+## **_How to `uninstall` the csi-driver-host-path , pods and all_**
 ---
 
 ### You must be on this directory.
