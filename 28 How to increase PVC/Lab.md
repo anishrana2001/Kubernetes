@@ -93,15 +93,17 @@ kubectl get pod my-csi-app -o  yaml > pod.yaml
 ```
 kubectl delete pod my-csi-app 
 ```
-### Create the pod again.
-```
-kubectl apply -f pod.yaml 
-```
+
 ### Finally, check the PVC size, it should be increased. 
 ```
 kubectl get pvc
 ```
+### Create the pod again.
 ```
+kubectl apply -f pod.yaml 
+```
+```
+kubectl get pvc
 kubectl describe pvc/csi-pvc 
 ```
 ---
