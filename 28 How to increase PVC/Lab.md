@@ -4,7 +4,7 @@
 ```html
 1. GIT
 2. Kubernetes Cluster
-3. csi-driver-host path
+3. csi-driver-host-path installed
 ```
 ---
 ### How to `Install` GIT
