@@ -70,29 +70,11 @@ yum install nfs-utils -y
 ---
 
 
-### **PVs Name**
-- pv-sts-0
-- pv-sts-1
-- pv-sts-2
-
-
-| Attempt | #StorageClass Name | #PV Name | #PVC Name|
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| Name | nfs | pv-sts-0 | pg-pvc-postgres-sts-0 |
-| Name | nfs | pv-sts-1 | pg-pvc-postgres-sts-1 |
-| Name | nfs | pv-sts-2 | pg-pvc-postgres-sts-2 |
-
-| Item              | In Stock | Price |
-| :---------------- | :------: | ----: |
-| Python Hat        |   True   | 23.99 |
-| SQL Hat           |   True   | 23.99 |
-| Codecademy Tee    |  False   | 19.99 |
-| Codecademy Hoodie |  False   | 42.99 |
-
-| Command | Description |
-| --- | --- |
-| git status | List all new or modified files |
-| git diff | Show file differences that haven't been staged |
+| Name              | StorageClass Name | PV Name   | pvc Name              |
+| :---------------- | :---------------: | :-------: | :--------------------:|
+| postgres-sts-0    |   nfs             | pv-sts-0  | pg-pvc-postgres-sts-0 |
+| postgres-sts-1    |   nfs             | pv-sts-1  | pg-pvc-postgres-sts-1 |
+| postgres-sts-2    |  nfs              | pv-sts-2  | pg-pvc-postgres-sts-2 |
 
 
 
