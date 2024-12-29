@@ -77,7 +77,7 @@ yum install nfs-utils -y
 | postgres-sts-2    |  nfs              | pv-sts-2  | pg-pvc-postgres-sts-2 |
 
 ### _PVC NAME_
-## - <claim template name>-<stateful set name>-<stateful set number>
+-  <claim_template_name>-<statefulset_name>-<statefulset_number>
 
 
 
