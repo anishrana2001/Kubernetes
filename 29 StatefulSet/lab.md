@@ -82,6 +82,22 @@ yum install nfs-utils -y
 | Name | nfs | pv-sts-1 | pg-pvc-postgres-sts-1 |
 | Name | nfs | pv-sts-2 | pg-pvc-postgres-sts-2 |
 
+| Item              | In Stock | Price |
+| :---------------- | :------: | ----: |
+| Python Hat        |   True   | 23.99 |
+| SQL Hat           |   True   | 23.99 |
+| Codecademy Tee    |  False   | 19.99 |
+| Codecademy Hoodie |  False   | 42.99 |
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
+
+
+
+
+
 ```yaml
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
