@@ -75,14 +75,11 @@ yum install nfs-utils -y
 - pv-sts-1
 - pv-sts-2
 
+
 | Attempt | #StorageClass Name | #PV Name | #PVC Name|
-
 | :---: | :---: | :---: | :---: | :---: | :---: |
-
 | Name | nfs | pv-sts-0 | pg-pvc-postgres-sts-0 |
-
 | Name | nfs | pv-sts-1 | pg-pvc-postgres-sts-1 |
-
 | Name | nfs | pv-sts-2 | pg-pvc-postgres-sts-2 |
 
 ```yaml
