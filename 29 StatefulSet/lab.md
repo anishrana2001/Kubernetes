@@ -70,13 +70,14 @@ yum install nfs-utils -y
 ---
 
 
-| Name              | StorageClass Name | PV Name   | pvc Name              |
+| POD Name          | StorageClass Name | PV Name   | PVC Name              |
 | :---------------- | :---------------: | :-------: | :--------------------:|
 | postgres-sts-0    |   nfs             | pv-sts-0  | pg-pvc-postgres-sts-0 |
 | postgres-sts-1    |   nfs             | pv-sts-1  | pg-pvc-postgres-sts-1 |
 | postgres-sts-2    |  nfs              | pv-sts-2  | pg-pvc-postgres-sts-2 |
 
-
+### _PVC NAME_
+- <claim template name>-<stateful set name>-<stateful set number>
 
 
 
