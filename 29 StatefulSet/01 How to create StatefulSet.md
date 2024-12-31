@@ -72,9 +72,9 @@ yum install nfs-utils -y
 
 | POD Name          | StorageClass Name | PV Name   | PVC Name              |
 | :---------------- | :---------------: | :-------: | :--------------------:|
-| postgres-sts-0    |   nfs             | pv-sts-0  | pg-pvc-postgres-sts-0 |
-| postgres-sts-1    |   nfs             | pv-sts-1  | pg-pvc-postgres-sts-1 |
-| postgres-sts-2    |  nfs              | pv-sts-2  | pg-pvc-postgres-sts-2 |
+| nginx-sts-0    |   nfs             | pv-sts-0  | pg-pvc-nginx-sts-0 |
+| nginx-sts-1    |   nfs             | pv-sts-1  | pg-pvc-nginx-sts-1 |
+| nginx-sts-2    |  nfs              | pv-sts-2  | pg-pvc-nginx-sts-2 |
 
 ### _PVC NAME_
 -  <claim_template_name>-<statefulset_name>-<statefulset_number>
@@ -153,7 +153,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pg-pvc-postgres-sts-0 # <claim template name>-<stateful set name>-<stateful set number>
+  name: pg-pvc-nginx-sts-0 # <claim template name>-<stateful set name>-<stateful set number>
   namespace: default
 spec:
   storageClassName: nfs # for the NFS
@@ -167,7 +167,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pg-pvc-postgres-sts-1 # <claim template name>-<stateful set name>-<stateful set number>
+  name: pg-pvc-nginx-sts-1 # <claim template name>-<stateful set name>-<stateful set number>
   namespace: default
 spec:
   storageClassName: nfs # for the NFS
@@ -181,7 +181,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pg-pvc-postgres-sts-2 # <claim template name>-<stateful set name>-<stateful set number>
+  name: pg-pvc-nginx-sts-2 # <claim template name>-<stateful set name>-<stateful set number>
   namespace: default
 spec:
   storageClassName: nfs # for the NFS
@@ -201,41 +201,46 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: svc-nginx-sts
   labels:
-    app: postgres
+    app: nginx-sts
 spec:
   ports:
   - port: 80
     name: web
   clusterIP: None
   selector:
-    app: postgres
+    app: nginx-sts
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: postgres-sts
+  name: nginx-sts
 spec:
-  serviceName: "nginx"
+  serviceName: "svc-nginx-sts"
   replicas: 2
   selector:
     matchLabels:
-      app: postgres
+      app: nginx-sts
   template:
     metadata:
       labels:
-        app: postgres
+        app: nginx-sts
     spec:
       containers:
       - name: nginx
-        image: registry.k8s.io/nginx-slim:0.21
+        image: nginx
         ports:
         - containerPort: 80
           name: web
         volumeMounts:
         - name: pg-pvc
           mountPath: /usr/share/nginx/html
+        resources:
+          limits:
+            cpu: "100m"
+          requests:
+            cpu: "50m"
   volumeClaimTemplates:
   - metadata:
       name: pg-pvc
@@ -249,14 +254,10 @@ EOF
 ```
 ### Check the pods
 ```
- kubectl get pods
- ```
-
- ### How to scale up the StatefulSet ?
- ```
- kubectl scale statefulset postgres-sts --replicas=3
- ```
-
+kubectl get pods
 ```
- kubectl get pods
- ```
+
+### How to check the PV,PVC
+```
+kubectl get pv,pvc
+```
