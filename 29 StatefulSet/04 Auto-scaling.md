@@ -1,12 +1,14 @@
 ## Lab for Auto scaling.
+### We will bring the NGINX server web page up and running. After that we will send the traffic to one POD so that it will increase the CPU resources. Finally, HPA will create a new pod.
 
 ## _prerequisite.
-- Configure metric server.
-- StatefulSet Pods are running.
-- Configure HPA.
+---
+- 01 Configure metric server.
+- 02 StatefulSet Pod web page up and running.
+- 03 Configure HPA.
+---
 
-
-### How to configure the metrics server?
+### 01 How to configure the metrics server?
 
 ## Before install the metrics server, let's check if it is already installed or not?
 ```
@@ -55,7 +57,7 @@ kubectl -n kube-system logs pods/metrics-server-75bf97fcc9-hghhm  (new pod)
 kubectl top pod -A
 ```
 
-### Modify the NGINX configuration file so that we can see the webpage. 
+### 02 Modify the NGINX configuration file so that we can see the webpage. 
 ### Create a file.
 ```
 echo "This is my first website, running on nginx-sts-0 pod" > index.html
@@ -81,7 +83,7 @@ kubectl get pod nginx-sts-0 --template '{{.status.podIP}}' ; echo
 kubectl exec -it nginx-sts-0 -- curl http://POD_IP
 ```
 
-### Create a HorizontalPodAutoscaler (HPA).
+### 03 Create a HorizontalPodAutoscaler (HPA).
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: autoscaling/v2
