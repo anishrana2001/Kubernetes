@@ -4,7 +4,7 @@
 ## Local server IP 192.168.1.30, this server is the part of Kubernetes
 ## Login into the Remote Host "192.168.1.30" 
 ## This server is not the part of Kubernetes cluster.
-
+### $${\textcolor{green}\ Step\ 1.\ Create\ an\ image\ which\ has\ SSH\ Package\.}$$
 ### $${\textcolor{green}\Step\ \1. \Create\ \an \image\ \which\ \has\ \SSH\ \Package\.}$$
 ### $${\textcolor{green}\Step\ 1. \Create\ an \image\ which\ has\ SSH \Package.}$$
 ### $${\textcolor{green}Step 2. Push the image on DockerHub repo.}$$
