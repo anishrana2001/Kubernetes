@@ -1,10 +1,10 @@
 
 # How to perform SSH from POD to remote server?
-
+---
 > ## 💡Note: Local server IP 192.168.1.30, this server is the part of Kubernetes
 > ## Remote Host "192.168.1.30", this server is not the part of Kubernetes cluster.
 
-
+---
 
 ### <mark> Step 1. Create an image which has SSH Package.</mark>
 ### <mark> Step 2. Push the image on DockerHub repo.</mark>
