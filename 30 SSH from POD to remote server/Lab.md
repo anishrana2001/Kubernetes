@@ -1,6 +1,6 @@
-- [] # **How to perform SSH from POD to remote server?**
+-  **How to perform SSH from POD to remote server?**
 ---
-- [] >  💡**Note**:
+-  >  💡**Note**:
 > ### Local server IP 192.168.1.30, this server is the part of Kubernetes 
 >  ### Remote Host "192.168.1.30", this server is not the part of Kubernetes cluster.
 
@@ -19,19 +19,23 @@
 >> ### 1. ".ssh" directory must be created on a Remote server.
 >> ### 2. Local server must be updated.
 
-> ### `Solution:`
----
+
 ### `Prerequise: 1`
 ### Check the remote server, `.ssh` directory.
 ```
 ls -ltr /home/arana/.ssh/
 ```
 
-### Prerequise 2: 
-### Now, login into the local server .i.e. 192.168.1.30
+### `Prerequise: 2`
+### Now, login into the local server .i.e. `192.168.1.30`
 ```
 yum update -y
 ```
+
+> ### `Solution:`
+---
+
+### Login into the local server .i.e. `192.168.1.30`
 ### <mark> Step 1. Create an image which has SSH Package.</mark>
 ```
 
