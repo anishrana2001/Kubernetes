@@ -5,6 +5,8 @@
 ## Login into the Remote Host "192.168.1.30" 
 ## This server is not the part of Kubernetes cluster.
 
+<p style='color:red'>Step 1. Create an image which has SSH Package.</p>
+
 [!NOTE]
 ### $${\textcolor{green}Step 1. Create an image which has SSH Package.}$$
 ### $${\textcolor{green}Step 2. Push the image on DockerHub repo.}$$
