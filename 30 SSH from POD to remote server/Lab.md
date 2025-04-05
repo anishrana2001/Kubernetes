@@ -4,17 +4,18 @@
 >  💡**Note**:
 > ### Local server IP 192.168.1.30, this server is the part of Kubernetes 
 >  ### Remote Host "192.168.1.30", this server is not the part of Kubernetes cluster.
-
 ---
 
+### Below are the Steps, that need to be done.
+---
 ### <mark> Step 1. Create an image which has SSH Package.</mark>
 ### <mark> Step 2. Push the image on DockerHub repo.</mark>
 ### <mark> Step 3. Create a pod with using our own customized image.</mark>
 ### <mark> Step 4. Create a RSA Key and copy the public key on a remote server.</mark>
 ### <mark> Step 5. Execute the "ssh" command, and it should not ask for a password.</mark>
+---
 
-
-### Prerequise: 🙂
+> ## Prerequise: 🙂
 ### 1. ".ssh" directory must be created on a Remote server.
 ### 2. Local server must be updated.
 
@@ -30,7 +31,7 @@ ls -ltr /home/arana/.ssh/
 ```
 yum update -y
 ```
-### Step 1. Create an image which has SSH Package.
+### <mark> Step 1. Create an image which has SSH Package.</mark>
 ```
 
 cat <<EOF>> Dockerfile
@@ -96,7 +97,7 @@ ssh arana@192.168.1.30
 ```
 docker image ls
 ```
-### Step 2. Push the image on DockerHub repo.
+### <mark> Step 2. Push the image on DockerHub repo.</mark>
 #### Login into the Docker, so that we can push the image to our repo.
 ```
 docker login
@@ -125,7 +126,7 @@ docker push anishrana2001/ssh-server
 https://hub.docker.com/repositories/anishrana2001
 ```
 
-### Step 3. Create a pod with using our own customized image.
+### <mark> Step 3. Create a pod with using our own customized image.</mark>
 ### Now, its time to create a pod.
 ```
 kubectl run ssh-pod --image=anishrana2001/ssh-server:latest
@@ -142,7 +143,7 @@ kubectl exec -it pods/ssh-pod -- /bin/bash
 ```
 cd /root/.ssh/
 ```
-### Step 4. Create a RSA Key and copy the public key on a remote server.
+### <mark> Step 4. Create a RSA Key and copy the public key on a remote server.</mark>
 #### Generate the Key
 ```
 ssh-keygen -t rsa
@@ -151,7 +152,7 @@ ssh-keygen -t rsa
 ```
 ssh-copy-id arana@192.168.1.30
 ```
-### Step 5. Execute the "ssh" command, and it should not ask for a password.
+### <mark> Step 5. Execute the "ssh" command, and it should not ask for a password.</mark>
 #### Execute the Post checks. 
 ```
 ssh arana@192.168.1.30
