@@ -16,13 +16,13 @@
 
 > ## `Prerequise:` 🙂
 ---
-### 1. ".ssh" directory must be created on a Remote server.
-### 2. Local server must be updated.
+>> ### 1. ".ssh" directory must be created on a Remote server.
+>> ### 2. Local server must be updated.
 
-> ### Solution:
+> ### `Solution:`
 ---
 ### `Prerequise: 1`
-### Check the remote server, ".ssh" directory.
+### Check the remote server, `.ssh` directory.
 ```
 ls -ltr /home/arana/.ssh/
 ```
