@@ -1,6 +1,6 @@
-# **How to perform SSH from POD to remote server?**
+- [] # **How to perform SSH from POD to remote server?**
 ---
->  💡**Note**:
+- [] >  💡**Note**:
 > ### Local server IP 192.168.1.30, this server is the part of Kubernetes 
 >  ### Remote Host "192.168.1.30", this server is not the part of Kubernetes cluster.
 
@@ -13,7 +13,7 @@
 + ### <mark> Step 4. Create a RSA Key and copy the public key on a remote server.</mark>
 + ### <mark> Step 5. Execute the "ssh" command, and it should not ask for a password.</mark>
 
-
+- []
 > ## Prerequise: 🙂
 ---
 ### 1. ".ssh" directory must be created on a Remote server.
