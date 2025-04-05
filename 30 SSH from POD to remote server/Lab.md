@@ -7,11 +7,11 @@
 
 ### Below are the Steps, that need to be done.
 ---
-### <mark> Step 1. Create an image which has SSH Package.</mark>
-### <mark> Step 2. Push the image on DockerHub repo.</mark>
-### <mark> Step 3. Create a pod with using our own customized image.</mark>
-### <mark> Step 4. Create a RSA Key and copy the public key on a remote server.</mark>
-### <mark> Step 5. Execute the "ssh" command, and it should not ask for a password.</mark>
++ ### <mark> Step 1. Create an image which has SSH Package.</mark>
++ ### <mark> Step 2. Push the image on DockerHub repo.</mark>
++ ### <mark> Step 3. Create a pod with using our own customized image.</mark>
++ ### <mark> Step 4. Create a RSA Key and copy the public key on a remote server.</mark>
++ ### <mark> Step 5. Execute the "ssh" command, and it should not ask for a password.</mark>
 
 
 > ## Prerequise: 🙂
