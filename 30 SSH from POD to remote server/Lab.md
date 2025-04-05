@@ -1,7 +1,7 @@
 
 # How to perform SSH from POD to remote server?
 ---
-> ### 💡Note: Local server IP 192.168.1.30, this server is the part of Kubernetes 
+>  💡**Note**: ### Local server IP 192.168.1.30, this server is the part of Kubernetes 
 >  ### Remote Host "192.168.1.30", this server is not the part of Kubernetes cluster.
 
 ---
