@@ -6,11 +6,11 @@
 ## This server is not the part of Kubernetes cluster.
 
 [!NOTE]
-### $${\colorbox{green}Step 1. Create an image which has SSH Package.}$$
-### $${\colorbox{green}Step 2. Push the image on DockerHub repo.}$$
-### $${\colorbox{green}Step 3. Create a pod with using our own customized image.}$$
-### $${\colorbox{green}Step 4. Create a RSA Key and copy the public key on a remote server.}$$
-### $${\colorbox{green}Step 5. Execute the "ssh" command, and it should not ask for a password.}$$
+### $${\textcolor{green}Step 1. Create an image which has SSH Package.}$$
+### $${\textcolor{green}Step 2. Push the image on DockerHub repo.}$$
+### $${\textcolor{green}Step 3. Create a pod with using our own customized image.}$$
+### $${\textcolor{green}Step 4. Create a RSA Key and copy the public key on a remote server.}$$
+### $${\textcolor{green}Step 5. Execute the "ssh" command, and it should not ask for a password.}$$
 
 
 ### Prerequise: 
