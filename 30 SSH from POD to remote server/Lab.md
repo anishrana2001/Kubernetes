@@ -6,11 +6,11 @@
 ## This server is not the part of Kubernetes cluster.
 
 
-### Step 1. Create an image which has SSH Package.
+### <span style="color: blue;">Step 1. Create an image which has SSH Package.
 ### Step 2. Push the image on DockerHub repo.
 ### Step 3. Create a pod with using our own customized image.
 ### Step 4. Create a RSA Key and copy the public key on a remote server.
-### Step 5. Execute the "ssh" command, and it should not ask for a password.
+### Step 5. Execute the "ssh" command, and it should not ask for a password.</span>
 
 
 ### Prerequise: 
