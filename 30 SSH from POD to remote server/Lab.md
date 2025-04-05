@@ -2,7 +2,7 @@
 ---
 >  💡**Note**:
 >> ### Local server IP 192.168.1.30, this server is the part of Kubernetes 
->>  ### Remote Host "192.168.1.30", this server is not the part of Kubernetes cluster.
+>>  ### Remote Host "192.168.1.33", this server is not the part of Kubernetes cluster.
 
 
 ### Below are the Steps, that need to be done.
