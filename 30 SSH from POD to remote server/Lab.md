@@ -13,13 +13,15 @@
 ### <mark> Step 3. Create a pod with using our own customized image.</mark>
 ### <mark> Step 4. Create a RSA Key and copy the public key on a remote server.</mark>
 ### <mark> Step 5. Execute the "ssh" command, and it should not ask for a password.</mark>
----
+
 
 > ## Prerequise: 🙂
+---
 ### 1. ".ssh" directory must be created on a Remote server.
 ### 2. Local server must be updated.
 
-### Solution:
+> ### Solution:
+---
 ### Prerequise: 1
 ### Check the remote server, ".ssh" directory.
 ```
