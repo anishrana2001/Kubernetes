@@ -4,10 +4,10 @@
 ## Local server IP 192.168.1.30, this server is the part of Kubernetes
 ## Login into the Remote Host "192.168.1.30" 
 ## This server is not the part of Kubernetes cluster.
-### $${\textcolor{green}\ Step\ 1.\ Create\ an\ image\ which\ has\ SSH\ Package\.}$$
-### $${\textcolor{green}\Step\ \1. \Create\ \an \image\ \which\ \has\ \SSH\ \Package\.}$$
-### $${\textcolor{green}\Step\ 1. \Create\ an \image\ which\ has\ SSH \Package.}$$
-### $${\textcolor{green}Step 2. Push the image on DockerHub repo.}$$
+### $${\color{green}\ Step\ 1.\ Create\ an\ image\ which\ has\ SSH\ Package\.}$$
+### $${\color{green}\Step\ \1. \Create\ \an \image\ \which\ \has\ \SSH\ \Package\.}$$
+### $${\color{green}\Step\ 1. \Create\ an \image\ which\ has\ SSH \Package.}$$
+### $${\color{green}Step 2. Push the image on DockerHub repo.}$$
 ### $${\textcolor{green}Step 3. Create a pod with using our own customized image.}$$
 ### $${\textcolor{green}Step 4. Create a RSA Key and copy the public key on a remote server.}$$
 ### $${\textcolor{green}Step 5. Execute the "ssh" command, and it should not ask for a password.}$$
